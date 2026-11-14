@@ -52,7 +52,7 @@ Write the alt text in `src/index.njk`, in each `shot` call (its third argument).
 
 `.github/workflows/site.yml` builds the site and publishes it with GitHub's official Pages actions on GitHub-hosted runners. A push to `main`, or **Actions → Site → Run workflow**, builds, runs `npm run check:deploy`, and only then uploads and deploys. Pull requests only build.
 
-**The deployment check is what keeps unfinished content off the internet.** It fails, and nothing publishes, while the built site still has a placeholder address, name or date, a draft notice, or a `HUMAN-INPUT` marker. Fill in the owner inputs below and the next push deploys.
+**The deployment check is what keeps unfinished content off the internet.** It fails, and nothing publishes, while the built site still has a placeholder address, name or date, or a `HUMAN-INPUT` marker, or, once `indexable` is `true`, a draft notice. Draft pages may be published while the site is not indexable.
 
 - Pages must deploy from **GitHub Actions**: **Settings → Pages → Build and deployment → Source**. Check it there if a run ever fails because Pages isn't enabled.
 - Until a custom domain is attached the site is at <https://mubranch.github.io/TwineWebsite/>, and every link carries the `/TwineWebsite/` prefix from `url`.
@@ -81,16 +81,24 @@ Put the address in `email` in `src/_data/site.js`.
 
 ## Before the site goes public
 
-- [ ] `src/_data/site.js`: fill in `email`, `developer` and `policyDate` (each marked `HUMAN-INPUT`). Change `url` when a custom domain is attached.
-- [ ] Read `src/privacy.md` against the app, then delete `draft: true` from its front matter. Check especially the Apple analytics paragraph, the iCloud deletion wording, the note about a Mac's data folders and the children sentence. While `draft: true` is there the page says it's a draft, is marked `noindex`, is left out of the sitemap, and blocks deployment.
+- [x] `src/_data/site.js`: `email`, `developer` and `policyDate` are filled in. Change `url` when a custom domain is attached.
+- [ ] Read `src/privacy.md` against the app, then delete `draft: true` from its front matter. Check especially the Apple analytics paragraph, the iCloud deletion wording, the note about a Mac's data folders and the children sentence. While `draft: true` is there the page says it's a draft and is marked `noindex`. It blocks the switch below: the deploy check fails if `indexable` is `true` while a draft notice remains.
 - [ ] Add the screenshots above.
 - [ ] Check `macOS` and `iOS` in `site.js` against the app's minimum OS versions.
 - [ ] In the Twine app, set `privacyPolicy`, `supportURL` and `contactEmail` in `AppLinks.swift` to `<site url>/privacy`, `<site url>/support` and `mailto:<email>`. Use the same two addresses in App Store Connect, with the home page as the marketing URL.
 - [ ] Leave analytics off. The Content-Security-Policy would block a script anyway.
 
+## Not indexable yet
+
+`indexable: false` in `src/_data/site.js` keeps the whole site out of search results. Every page gets `<meta name="robots" content="noindex, nofollow">`, `robots.txt` has no `Sitemap` line, and no `sitemap.xml` is built. GitHub Pages can't send an `X-Robots-Tag` header, so the meta tag is the mechanism.
+
+`robots.txt` deliberately doesn't `Disallow` anything: a crawler blocked by `robots.txt` never fetches the page, so it never sees the `noindex` tag, and the address can still be listed from links elsewhere. Choose `noindex`, not `Disallow`, to stay out of search.
+
 ## When Twine launches
 
-Set `appStoreUrl` in `src/_data/site.js`. The "Coming soon" status in the header, hero and closing panel becomes a download button.
+1. Set `appStoreUrl` in `src/_data/site.js`. The "Coming soon" status in the header, hero and closing panel becomes a download button.
+2. Review the privacy policy and delete `draft: true` from `src/privacy.md`.
+3. Set `indexable: true`. The `noindex` tags go, `sitemap.xml` is built and `robots.txt` lists it. Then, in Google Search Console and Bing Webmaster Tools, submit the sitemap.
 
 ## Notes
 

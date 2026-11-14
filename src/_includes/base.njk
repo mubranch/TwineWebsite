@@ -10,7 +10,9 @@
   <title>{{ title }}</title>
   <meta name="description" content="{{ summary }}">
   <link rel="canonical" href="{{ address }}">
-  {%- if draft or noindex %}
+  {%- if not site.indexable %}
+  <meta name="robots" content="noindex, nofollow">
+  {%- elif draft or noindex %}
   <meta name="robots" content="noindex">
   {%- endif %}
   <meta property="og:type" content="website">
@@ -33,6 +35,9 @@
       <a class="brand" href="/"><img src="/icon-64.png" alt="" width="32" height="32"><span>Twine</span></a>
       <ul class="nav-links" role="list">
         <li><a href="/#features">Features</a></li>
+        {%- if site.pricing %}
+        <li><a href="/#pricing">Pricing</a></li>
+        {%- endif %}
         <li><a href="/docs"{% if nav == "docs" %} aria-current="page"{% endif %}>Docs</a></li>
         <li>{% if site.appStoreUrl %}<a class="button button-small" href="{{ site.appStoreUrl }}">Download</a>{% else %}<span class="status status-small">Coming soon</span>{% endif %}</li>
       </ul>

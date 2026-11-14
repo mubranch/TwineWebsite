@@ -1,15 +1,17 @@
 // Fails the deployment while the built site still has placeholders or a draft page, so they can't go live by accident.
 import { readdirSync, readFileSync } from "node:fs";
 import { extname, join } from "node:path";
+import site from "../src/_data/site.js";
 
 const OUTPUT = "_site";
 const TEXT = new Set([".html", ".xml", ".txt", ".css", ".svg", ".json"]);
 const blocked = [
   [/\.invalid\b/, "a placeholder address (the email in src/_data/site.js)"],
   [/\[(?:developer name|effective date)\]/, "a placeholder (developer or policyDate in src/_data/site.js)"],
-  [/class="notice"/, "a draft notice (delete draft: true from the page's front matter once it has been reviewed)"],
   [/HUMAN-INPUT/, "a HUMAN-INPUT marker"],
 ];
+// A draft notice is fine while the whole site is noindex, but not once it can be indexed.
+if (site.indexable) blocked.push([/class="notice"/, "a draft notice (delete draft: true from the page's front matter once it has been reviewed)"]);
 
 function* files(directory) {
   for (const entry of readdirSync(directory, { withFileTypes: true })) {

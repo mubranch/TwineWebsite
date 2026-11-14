@@ -433,7 +433,8 @@ h2 {
   font-size: clamp(1.9rem, 3.6vw, 2.9rem);
 }
 
-.copy > p {
+.copy > p,
+.section-head p {
   color: var(--muted);
   font-size: 1.125rem;
 }
@@ -728,6 +729,72 @@ td {
   vertical-align: top;
 }
 
+/* Pricing, only built when pricing is on in src/_data/site.js */
+.pricing {
+  width: min(100% - 2 * var(--gutter), var(--wrap));
+  margin-inline: auto;
+  padding-block: clamp(3.5rem, 9vw, 7rem) 0;
+}
+
+.section-head {
+  display: grid;
+  gap: 1rem;
+  max-width: 40rem;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.plans {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+  max-width: 48rem;
+  margin: 3rem auto 0;
+}
+
+.plan {
+  display: grid;
+  align-content: start;
+  gap: 1rem;
+  padding: 2rem;
+  border-radius: 1.25rem;
+  background: var(--soft);
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+
+.plan-featured {
+  box-shadow: inset 0 0 0 2px var(--accent);
+}
+
+.plan h3 {
+  font-size: 1.25rem;
+}
+
+.price {
+  color: var(--muted);
+}
+
+.plan-note {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.amount {
+  margin-right: 0.3rem;
+  color: var(--ink);
+  font-size: 2.75rem;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+}
+
+.pricing-foot {
+  max-width: 42rem;
+  margin: 1.5rem auto 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  text-align: center;
+}
+
 /* Small screens: stacked copy, a taller crop for the hero visual */
 @media (max-width: 52em) {
   .feature,
@@ -771,5 +838,9 @@ td {
 
   .hero-visual .shot {
     aspect-ratio: 4 / 5;
+  }
+
+  .plans {
+    grid-template-columns: 1fr;
   }
 }

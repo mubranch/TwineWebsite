@@ -4,5 +4,6 @@ eleventyExcludeFromCollections: true
 ---
 User-agent: *
 Allow: /
-
+{% if site.indexable %}
 Sitemap: {{ site.url }}/sitemap.xml
+{% endif %}

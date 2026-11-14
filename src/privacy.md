@@ -3,7 +3,7 @@ layout: page.njk
 title: "Privacy Policy · Twine"
 description: "How Twine handles your highlights, your devices and this website."
 permalink: /privacy.html
-draft: true # HUMAN-INPUT: the owner reviews this policy and fills in src/_data/site.js, then deletes this line. Delete this line afterwards.
+draft: true # HUMAN-INPUT: the owner reviews this policy, then deletes this line.
 ---
 # Privacy Policy
 
@@ -59,6 +59,12 @@ Twine can add your highlights (their text, page title, website and link) to Spot
 **AI context** is optional and off by default. It uses Apple's on-device language model through the Foundation Models framework. Twine gives that model the highlight, the page title and website, and the text around the highlight, on your device. Twine never uses a server-based model for this. The result is saved with the highlight and syncs through iCloud.
 
 **AI Access** is optional, off by default and available on the Mac. When you turn it on, Twine runs a local server that listens only on your Mac. A tool that has the access token can search and read your highlights: their text, page title, website, page address, link and date. It can't change them, and surrounding page text, AI context and colour aren't included. What a tool you connect does with that data is governed by that tool and its provider. Turn AI Access off, or regenerate the token, to cut a tool off.
+
+{% if site.pricing %}
+## Purchases
+
+Twine Pro is an optional one-time purchase, made through the App Store once Twine is available. Apple handles the payment, and we never receive your payment details. Twine checks on your device, using Apple's StoreKit, whether Pro is unlocked, and it doesn't send that anywhere or keep a record of it. Twine has no purchase server. Apple also gives developers aggregated sales figures, which don't identify you.
+{% endif %}
 
 ## What Apple tells us
 

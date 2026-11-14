@@ -102,6 +102,8 @@ title: "Twine: Web Knowledge Base · Safari highlights for AI tools"
   </div>
 </section>
 
+{% if site.pricing %}{% include "draft/pricing.njk" %}{% endif %}
+
 <section class="faq" aria-labelledby="faq-title">
   <h2 id="faq-title">Questions</h2>
   <div class="faq-list">
@@ -137,6 +139,9 @@ title: "Twine: Web Knowledge Base · Safari highlights for AI tools"
       <summary>Which languages and devices does Twine support?</summary>
       <p>Twine is available in English, German, Spanish, French and Russian. It needs a Mac with macOS {{ site.macOS }} and, for the iPhone app, iOS {{ site.iOS }}. This website is in English for now.</p>
     </details>
+    {%- if site.pricing %}
+    {% include "draft/pricing-faq.njk" %}
+    {%- endif %}
     <details>
       <summary>How do I get help?</summary>
       <p>Read the <a href="/docs">docs</a>, or <a href="/support">contact support</a>.</p>

@@ -74,6 +74,10 @@ Twine syncs your highlights through your private iCloud database. There's no Twi
 
 AI Access lets AI tools on your Mac search and read your highlights. It's off until you turn it on, read-only, and reachable only from your Mac. Twine runs a local [Model Context Protocol](https://modelcontextprotocol.io) (MCP) server, so any app that supports MCP servers over HTTP can connect.
 
+{% if site.pricing %}
+AI Access is part of Twine Pro. Until Pro is unlocked, **Settings → AI** shows **Unlock** and **Restore Purchases** in place of the AI Access switch.
+{% endif %}
+
 1. On your Mac, open **Settings → AI → AI Access** and turn on **Allow AI Tools to Read Highlights**.
 2. Twine shows the **Server URL**, `http://127.0.0.1:<port>/mcp`. It starts on port 47631 and reuses the last port it used. If that port is taken, it tries the next ones. Settings always shows the current address.
 3. Add the server to your AI tool with that address and the access token, sent as `Authorization: Bearer <token>`. **Copy Server URL**, **Copy Access Token** and **Copy Connection Settings** put each on your clipboard. The connection settings are JSON, ready to paste into tools that use a config file:
@@ -120,6 +124,10 @@ Highlight text comes from web pages you don't control. Twine tells connected too
 
 Twine can write a short note explaining how a highlight fits into the text around it, using Apple Intelligence on your device. It's off by default.
 
+{% if site.pricing %}
+On-device AI context is part of Twine Pro. Unlock it, or restore an earlier purchase, in the **Twine Pro** section of Settings.
+{% endif %}
+
 - Turn it on in **Settings → AI** on Mac, or **Settings → AI Context** on iPhone.
 - Open a highlight's details to read it. **Refresh** writes it again.
 - It's saved with the highlight and syncs through iCloud. It isn't shared with AI tools through AI Access.
@@ -159,6 +167,12 @@ Settings and the highlight's details name the reason: the device doesn't support
 ### I want to start over
 
 **Settings → Library → Reset Library…** deletes your highlights on every device that uses iCloud and replaces your library with the starter set. It can't be undone.
+
+{% if site.pricing %}
+### Twine Pro isn't unlocked
+
+Open the **Twine Pro** section of Settings and choose **Restore Purchases**. If Pro still doesn't unlock, [contact support](/support).
+{% endif %}
 
 ### Still stuck?
 
