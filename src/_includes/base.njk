@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'">
+  <meta name="referrer" content="no-referrer">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {%- set summary = description or site.description %}
+  {%- set address = site.url + (page.url | replace(".html", "")) %}
+  <title>{{ title }}</title>
+  <meta name="description" content="{{ summary }}">
+  <link rel="canonical" href="{{ address }}">
+  {%- if draft or noindex %}
+  <meta name="robots" content="noindex">
+  {%- endif %}
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="{{ site.name }}">
+  <meta property="og:title" content="{{ title }}">
+  <meta property="og:description" content="{{ summary }}">
+  <meta property="og:url" content="{{ address }}">
+  <meta property="og:image" content="{{ site.url }}/icon.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0c0f14" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="/icon.png" type="image/png">
+  <link rel="apple-touch-icon" href="/icon.png">
+  <link rel="stylesheet" href="/site.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <nav class="nav" aria-label="Main">
+      <a class="brand" href="/"><img src="/icon-64.png" alt="" width="32" height="32"><span>Twine</span></a>
+      <ul class="nav-links" role="list">
+        <li><a href="/#features">Features</a></li>
+        <li><a href="/docs"{% if nav == "docs" %} aria-current="page"{% endif %}>Docs</a></li>
+        <li>{% if site.appStoreUrl %}<a class="button button-small" href="{{ site.appStoreUrl }}">Download</a>{% else %}<span class="status status-small">Coming soon</span>{% endif %}</li>
+      </ul>
+    </nav>
+  </header>
+  <main id="main">
+    {{ content | safe }}
+  </main>
+  <footer class="site-footer">
+    <p>Twine for Mac and iPhone</p>
+    <nav aria-label="Footer">
+      <ul role="list">
+        <li><a href="/docs">Docs</a></li>
+        <li><a href="/privacy">Privacy</a></li>
+        <li><a href="/support">Support</a></li>
+        <li><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
+      </ul>
+    </nav>
+  </footer>
+</body>
+</html>

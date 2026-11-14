@@ -1,0 +1,9 @@
+---
+layout: base.njk
+---
+<article class="page">
+  {%- if draft %}
+  <p class="notice" role="note"><strong>Draft.</strong> This page is waiting for the developer's review and is not yet in effect.</p>
+  {%- endif %}
+  {{ content | safe }}
+</article>
