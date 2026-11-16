@@ -8,6 +8,14 @@ permalink: /support.html
 
 Questions, bug reports and ideas are welcome. Email [{{ site.email }}](mailto:{{ site.email }}).
 
+## Feedback and feature requests
+
+Have an idea or found a bug in Twine or this website?
+
+<a class="button" href="{{ site.feedbackUrl }}">Send feedback or request a feature</a>
+
+The form opens on GitHub and requires a GitHub account. Submitting it creates a **public issue** in the TwineWebsite repository. Don't include private highlights, access tokens, account details or other sensitive information. For private support, use the email address above instead.
+
 ## Before you write
 
 - **Twine isn't highlighting.** Check that the extension is on and allowed on the site: [Get started](/docs#get-started) and [Twine doesn't highlight](/docs#twine-doesnt-highlight).

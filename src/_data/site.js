@@ -9,6 +9,7 @@ export default {
   url: "https://mubranch.github.io/TwineWebsite",
   // The address people write to; it also goes in AppLinks.swift as a mailto: link.
   email: "mustafa.branch@gmail.com",
+  feedbackUrl: "https://github.com/mubranch/TwineWebsite/issues/new?template=feedback.yml",
   // The person or company that publishes Twine, as the privacy policy names it.
   developer: "Mustafa Branch",
   // The date the privacy policy takes effect.

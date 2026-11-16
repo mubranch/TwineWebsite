@@ -14,6 +14,7 @@ Once published it lives at <https://mubranch.github.io/TwineWebsite/>. Nothing i
 | The header, footer and page head (title, description, social tags, security policy) | `src/_includes/base.njk` |
 | Colours, type and layout | `src/static/site.css` |
 | Screenshots | `src/static/images/` (see [Screenshots](#screenshots)) |
+| Public feedback form | `.github/ISSUE_TEMPLATE/feedback.yml`; its link is `feedbackUrl` in `src/_data/site.js` |
 
 - A page's `title` and `description` are in its front matter.
 - Markdown headings become link targets from their text: `## Connect an AI tool` is `/docs#connect-an-ai-tool`. Other pages link to several of them, so search for an anchor before you rename its heading.
@@ -33,6 +34,12 @@ npm run build      # writes the finished site to _site/ (not committed)
 ```
 
 Needs Node 22 or later. Every link follows the path in `url` in `src/_data/site.js`, which is why the preview is under `/TwineWebsite/`. `npm start` listens on every network interface (Eleventy's default), so stop it when you're done on a network you don't trust.
+
+## Feedback
+
+The header's **Feedback (GitHub)** button and the Support page open a GitHub-hosted issue form for bug reports, feature requests and general feedback. Submission requires GitHub sign-in and creates a public issue in `mubranch/TwineWebsite`; private support stays on email. No backend endpoint, token or on-site form is needed, and the site's Content-Security-Policy stays unchanged.
+
+GitHub recognizes issue forms only after their YAML configuration lands on the repository's default branch (`main`). Keep Issues enabled in the repository settings. A local preview or feature-branch build cannot activate the form: after merging, follow the button while signed in and verify the form fields appear. Submit only when you intend to create a real public issue.
 
 ## Screenshots
 

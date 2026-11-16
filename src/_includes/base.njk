@@ -39,6 +39,7 @@
         <li><a href="/#pricing">Pricing</a></li>
         {%- endif %}
         <li><a href="/docs"{% if nav == "docs" %} aria-current="page"{% endif %}>Docs</a></li>
+        <li><a class="button button-quiet" href="{{ site.feedbackUrl }}">Feedback (GitHub)</a></li>
         <li>{% if site.appStoreUrl %}<a class="button button-small" href="{{ site.appStoreUrl }}">Download</a>{% else %}<span class="status status-small">Coming soon</span>{% endif %}</li>
       </ul>
     </nav>
