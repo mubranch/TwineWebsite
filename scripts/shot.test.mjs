@@ -43,9 +43,9 @@ test("screenshot slots preserve device shells, captures and appearance variants"
 
     writeFileSync("src/static/images/library-duo-light.png", "");
     writeFileSync("src/static/images/library-duo-dark.png", "");
-    const duo = shot("library-duo", "duo", "Library and details", "", false, "Duo", 2796, 2034);
+    const duo = shot("library-duo", "duo", "Library and details", "", false, "Duo", 2000, 1407);
     assert.match(duo, /class="device device-duo"/);
-    assert.match(duo, /width="2796" height="2034"/);
+    assert.match(duo, /width="2000" height="1407"/);
     assert.equal((duo.match(/<img /g) || []).length, 1);
     assert.match(duo, /srcset="\/images\/library-duo-dark.png"/);
     assert.doesNotMatch(duo, /device-phone|device-camera|device-base/);
