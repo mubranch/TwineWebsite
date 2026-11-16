@@ -48,7 +48,7 @@ Keep the voice plainspoken, calm and specific, following the voice definition in
 
 The copy was checked against `mubranch/Twine` main at `0b61156694`. Safari capture is implemented on Mac and iPhone. Chromium and Firefox packaging is merged and Pro-gated, but `BrowserExtensionIdentity.chromeExtensionID` is empty and the app hides browser setup until it is configured. The Pro value proposition and feedback options identify those Mac extensions as **Coming soon**, as requested by the owner. Do not describe them as available or add store links before that release decision. The app and Safari extension target iPhone, not iPad, despite an iPad mention in the beta release notes.
 
-Keep launch switches and the draft privacy policy under owner control. The current privacy draft needs review for website-name lookups as well as favicon requests; it must not be treated as approved merely because the product copy has been updated.
+Keep launch switches and the draft privacy policy under owner control. The owner-approved website-name lookup paragraph is included alongside favicon requests, but the policy still needs a complete owner review; it must not be treated as approved for publication merely because that paragraph or the product copy has been updated.
 
 ## Feedback
 

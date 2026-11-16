@@ -15,7 +15,7 @@ Effective {{ site.policyDate }}
 - Your highlights are stored on your devices and sync through your own private iCloud. {{ site.developer }} ("we") never receive them and can't read them.
 - Twine has no analytics, advertising or tracking, in the app or on this website.
 - AI features are optional. On-device AI context runs on your device. AI Access lets AI tools on your Mac read your highlights only after you turn it on, and those tools handle what they read under their own policies.
-- To show a website's icon, Twine asks that website for it, and the website can see your IP address when that happens.
+- To show a website's icon and name, Twine asks that website for them, and the website can see your IP address when that happens.
 - You can delete your highlights at any time. See [Deleting your data](#deleting-your-data).
 
 ## Who we are
@@ -36,7 +36,7 @@ Twine can't recognise a secret that is part of a page address's path, such as a 
 
 ## Where it is stored
 
-- **On your devices.** Highlights live in a file in the app container that Twine and its Safari extension share. Twine also keeps a few automatic backup copies of that file on the device, so it can recover if the file is damaged, and removes them after up to 30 days. Website icons are cached for up to 30 days, and your settings, such as your shortcut and switches, are stored on the device.
+- **On your devices.** Highlights live in a file in the app container that Twine and its Safari extension share. Twine also keeps a few automatic backup copies of that file on the device, so it can recover if the file is damaged, and removes them after up to 30 days. Website icons are cached for up to 30 days, website names are cached locally, and your settings, such as your shortcut and switches, are stored on the device.
 - **In your private iCloud.** Twine syncs highlights, and AI context if you use it, through CloudKit into your private iCloud database. We have no access to that database, and Apple's terms and privacy policy apply to it. Twine also stores a small record that notes when its starter highlights were added.
 - **In your keychain.** If you use AI Access, its access token stays in your device's keychain and never leaves the device.
 
@@ -49,6 +49,8 @@ Twine marks a highlight in a page with a `mark` element that carries a `data-twi
 ## Website icons
 
 Twine shows each website's icon beside its highlights. To get it, Twine requests `https://<website>/favicon.ico` directly from that website when the website appears in your library, including for the starter highlights that come with Twine. It sends no cookies and no highlight data. The website can see your IP address, the time and the usual HTTP request headers. Icons are cached on your device for up to 30 days. There is no setting to turn this off.
+
+Twine also fetches a highlighted site's home page over HTTPS to read its display name. It reads at most 256 KB, sends no cookies or highlight text, and caches the name on the device. The site can see your IP address and request time. There is no setting to turn this lookup off.
 
 ## Spotlight, Siri and Shortcuts
 
@@ -76,7 +78,7 @@ This website uses no cookies, analytics, or third-party scripts, fonts or images
 
 ## Sharing
 
-We don't sell your data, there are no ads, and we hold no data about you to share. Apple (iCloud and the App Store) and GitHub (this website) are the services involved in running Twine and this site.
+We don't sell your data, there are no ads, and we hold no data about you to share. Apple (iCloud and the App Store) and GitHub (this website) provide sync, purchases and hosting. Websites you highlight also receive the icon and display-name requests described above.
 
 ## Deleting your data
 
