@@ -124,7 +124,7 @@ Current full-resolution measurements, in bytes:
 
 These 16 native-resolution files are 60.8% smaller in total, including the new artwork. Resized candidates are additional files; a visitor does not download the whole set. The optimizer prints a JSON report with each file's size, retained variants and pixel/profile hashes.
 
-Cold-cache browser measurements after scrolling the complete home page, including selected captures, artwork, masks and icons, but excluding HTTP headers and browser-UI favicons:
+Cold-cache Chromium measurements after scrolling the complete home page, including selected captures, artwork, masks and icons, but excluding HTTP headers and browser-UI favicons:
 
 | Viewport and density | Appearance | Previous image bytes | Current image bytes | Reduction |
 | --- | --- | ---: | ---: | ---: |
@@ -133,7 +133,7 @@ Cold-cache browser measurements after scrolling the complete home page, includin
 | 1440px at 1x | Light | 2,813,703 | 764,478 | 72.8% |
 | 1440px at 1x | Dark | 2,953,828 | 824,166 | 72.1% |
 
-These are complete-page totals, not just first-paint savings. The new totals include the real hardware; the previous page had none. The three generated display masks and transparent fallback add 2,612 bytes across the asset set. Browser checks cover both appearances at 320, 390, 768, 1024 and 1440px at 1x and 2x, plus both sides of the 399/400px Air breakpoint; they confirm a single appearance, adequate selected resolution, fitted screens, no overflow and physical device heights of at least 200px. The device-size checks also pass at 12 viewport widths with browser font defaults of 12, 14 and 24px.
+These are complete-page totals, not just first-paint savings. The new totals include the real hardware; the previous page had none. The three generated display masks and transparent fallback add 2,612 bytes across the asset set. Chromium and WebKit checks cover both appearances at 320, 390, 768, 1024 and 1440px at 1x and 2x, plus both sides of the 399/400px Air breakpoint; they confirm a single appearance, adequate selected resolution, fitted screens, no overflow and physical device heights of at least 200px. The Chromium device-size checks also pass at 12 viewport widths with browser font defaults of 12, 14 and 24px.
 
 ### Apple artwork sources and publication
 
