@@ -43,22 +43,24 @@ GitHub recognizes issue forms only after their YAML configuration lands on the r
 
 ## Screenshots
 
-The home page uses static product captures, not recordings or staged chat demos. No product screenshots are included yet: each missing capture has an intentional, labelled slot. Create `src/static/images/` and add a WebP, PNG or JPG with the exact base name below; the next build replaces that slot automatically. All six captures are needed for the complete page.
+The home page uses the supplied light and dark product captures, not recordings or staged chat demos. All six slots are filled. Assets live in `src/static/images/` as `<name>-light.png` and `<name>-dark.png`; the browser chooses the dark version with `prefers-color-scheme: dark`, matching the stylesheet without JavaScript. Images retain their actual proportions, including the portrait-shaped Mac settings window, with explicit dimensions to reserve space before loading.
 
-Use starter or public content only, never private pages. Conceal access tokens, personal account details and notifications. Keep text readable, use the same content and appearance across related captures, and export Mac images at about 2× (1600 to 2400 px wide). Images fit inside their frames without cropping.
+The supplied iPhone Duo composite was split into its two original 1206 × 2622 captures, excluding only the surrounding canvas and gap. This keeps both screens readable when the pair stacks below 30em; no product UI was cropped or invented.
 
-| Page slot | Layout / asset name | Best screen to capture and why |
+| Page slot | Layout / asset name / dimensions | Included screen |
 | --- | --- | --- |
-| Hero | macOS, 16:10 · `hero` | Twine's main library with the website/page sidebar, a populated highlight list and one selected passage's details. This gives the clearest overview of the product and its source-first organization. |
-| Highlight in Safari | macOS, 16:10 · `capture` | Safari on a public article with one or two Twine highlights still visible. It shows the core capture result without needing a recording, keyboard overlay or fleeting Undo message. |
-| Find any passage, first phone | iPhone Duo, 1320 × 2868 · `library` | The iPhone library with several saved highlights, website icons and page titles. Show browsing on the go, not a settings page. |
-| Find any passage, second phone | iPhone Duo, 1320 × 2868 · `library-detail` | Open one of the exact passages visible on the first phone, with its source and **Open in Safari** action visible. Together the pair tells a browse → open → return-to-source story; these are two views of one iPhone workflow, not another platform. |
-| AI tools | macOS, 16:10 · `ai-access` | **Settings → AI → AI Access**, enabled, with local connection controls visible and the access token concealed. This shows Twine's real integration surface without implying a built-in chat or manufacturing an AI answer. |
-| See how a passage fits | iPhone, 1320 × 2868 · `context` | A highlight's details with a completed on-device AI context explanation. Choose a passage with enough surrounding text, and show the result rather than a loading/unavailable state. |
+| Hero | macOS · `hero` · 1960 × 1280 | Main library with its website sidebar, saved passages and selected Wikipedia training-cost highlight, AI context and source: the product overview. |
+| Highlight in Safari | macOS · `capture` · 2200 × 1584 | Wikipedia's large language model article with the training-cost passage highlighted: the saved result, without a fleeting Undo message. |
+| Find any passage, first phone | iPhone Duo · `library` · 1206 × 2622 | All Highlights, with public sources and the search field. |
+| Find any passage, second phone | iPhone Duo · `library-detail` · 1206 × 2622 | The same Wikipedia passage from the list, with AI context, source and action toolbar: browse → open → return to source. |
+| AI tools | macOS · `ai-access` · 1040 × 1436 | AI settings with AI Access enabled and connection controls visible. No access token value is displayed; this is Twine's integration surface, not a built-in chat. |
+| See how a passage fits | iPhone · `context` · 1206 × 2622 | The highlight's details with its completed on-device AI context explanation and source. |
 
-`hero-mobile` is optional: a portrait (4:5) crop of the **same Mac library view**, with the selected passage and its source still visible. It replaces `hero` below 40em. Keep the same subject so the shared alt text stays accurate; don't substitute an iPhone here. All other slots keep their captures at every width, and the iPhone Duo stacks below 30em so each phone stays readable.
+For replacements, use starter or public content only; conceal access tokens, personal account details and notifications. Keep light/dark dimensions and subjects matched, and update the alt text and width/height in the corresponding `shot` call in `src/index.njk`.
 
-Each `shot` call in `src/index.njk` supplies its base name, frame (`mac` or `phone`), alt text, missing-capture brief, eager-loading flag and visible caption. Update the alt text (third argument) to match the actual capture when adding it. The two Duo images load independently, so adding one never hides the other missing capture.
+The shortcode also accepts unthemed `<name>.webp`, `.png` or `.jpg` as a fallback, and shows a labelled placeholder if neither a light nor an unthemed capture exists. Optional `<name>-mobile-light` (or `<name>-mobile`) and `<name>-mobile-dark` variants replace the main capture below 40em. If only a light mobile crop exists, dark mode keeps the full dark capture instead of showing the light crop. Mobile variants must retain the same subject for the shared alt text; none are currently needed.
+
+Each `shot` call supplies its base name, frame (`mac` or `phone`), alt text, missing-capture brief, eager-loading flag, visible caption, width and height. The hero loads eagerly; other captures load lazily. The two Duo captures remain independent images.
 
 ## Publishing
 
@@ -95,7 +97,7 @@ Put the address in `email` in `src/_data/site.js`.
 
 - [x] `src/_data/site.js`: `email`, `developer` and `policyDate` are filled in. Change `url` when a custom domain is attached.
 - [ ] Read `src/privacy.md` against the app, then delete `draft: true` from its front matter. Check especially the Apple analytics paragraph, the iCloud deletion wording, the note about a Mac's data folders and the children sentence. While `draft: true` is there the page says it's a draft and is marked `noindex`. It blocks the switch below: the deploy check fails if `indexable` is `true` while a draft notice remains.
-- [ ] Add the screenshots above.
+- [x] Add the screenshots above in light and dark appearances.
 - [ ] Check `macOS` and `iOS` in `site.js` against the app's minimum OS versions.
 - [ ] In the Twine app, set `privacyPolicy`, `supportURL` and `contactEmail` in `AppLinks.swift` to `<site url>/privacy`, `<site url>/support` and `mailto:<email>`. Use the same two addresses in App Store Connect, with the home page as the marketing URL.
 - [ ] Leave analytics off. The Content-Security-Policy would block a script anyway.

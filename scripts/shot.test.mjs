@@ -15,7 +15,7 @@ configure({
   },
 });
 
-test("screenshot slots handle missing, paired and supplied captures", () => {
+test("screenshot slots handle missing, paired, mobile and appearance variants", () => {
   const original = process.cwd();
   const directory = mkdtempSync(join(tmpdir(), "twine-shots-"));
   try {
@@ -41,13 +41,29 @@ test("screenshot slots handle missing, paired and supplied captures", () => {
 
     writeFileSync("src/static/images/hero.webp", "");
     writeFileSync("src/static/images/hero-mobile.png", "");
-    const hero = shot("hero", "mac", "Mac library", "", true, "macOS <Library>");
-    assert.match(hero, /class="shot shot-mac shot-has-mobile"/);
+    const hero = shot("hero", "mac", "Mac library", "", true, "macOS <Library>", 1960, 1280);
+    assert.match(hero, /class="shot shot-mac"/);
+    assert.match(hero, /class="shot-screen shot-populated"/);
     assert.match(hero, /<picture><source media="\(max-width: 40em\)" srcset="\/images\/hero-mobile.png">/);
     assert.match(hero, /src="\/images\/hero.webp"/);
     assert.match(hero, /fetchpriority="high"/);
+    assert.match(hero, /width="1960" height="1280"/);
     assert.doesNotMatch(hero, /loading="lazy"/);
     assert.match(hero, /<figcaption>macOS &lt;Library><\/figcaption>/);
+
+    writeFileSync("src/static/images/hero-light.png", "");
+    writeFileSync("src/static/images/hero-dark.png", "");
+    const themed = shot("hero", "mac", "Mac library", "");
+    assert.match(themed, /<img src="\/images\/hero-light.png"/);
+    assert.match(themed, /<source media="\(prefers-color-scheme: dark\)" srcset="\/images\/hero-dark.png">/);
+    assert.ok(themed.indexOf("hero-dark.png") < themed.indexOf("hero-mobile.png"), "Dark desktop capture must precede a light-only mobile crop");
+
+    writeFileSync("src/static/images/hero-mobile-light.png", "");
+    writeFileSync("src/static/images/hero-mobile-dark.webp", "");
+    const themedMobile = shot("hero", "mac", "Mac library", "");
+    assert.match(themedMobile, /<source media="\(max-width: 40em\) and \(prefers-color-scheme: dark\)" srcset="\/images\/hero-mobile-dark.webp">/);
+    assert.ok(themedMobile.indexOf("hero-mobile-dark.webp") < themedMobile.indexOf("hero-dark.png"));
+    assert.match(themedMobile, /<source media="\(max-width: 40em\)" srcset="\/images\/hero-mobile-light.png">/);
   } finally {
     process.chdir(original);
     rmSync(directory, { recursive: true, force: true });
