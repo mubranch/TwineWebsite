@@ -8,12 +8,12 @@ title: "Twine: Web Knowledge Base · Safari highlights for AI tools"
     <p class="lede">Twine stores and catalogs the passages you highlight in Safari, each with its source. Your library syncs through your private iCloud, and AI tools you connect on your Mac can search and read it.</p>
     <div class="actions">
       {% if site.appStoreUrl %}<a class="button" href="{{ site.appStoreUrl }}">Download for Mac</a>{% else %}<p class="status">Coming soon for Mac</p>{% endif %}
-      <a class="button button-quiet" href="#features">See how it works</a>
+      <a class="button button-quiet" href="#features">Explore the app</a>
     </div>
     <p class="fineprint">Requires macOS {{ site.macOS }}. The iPhone app needs iOS {{ site.iOS }}.</p>
   </div>
   <div class="hero-visual">
-    {% shot "hero", "mac", "The Twine library on a Mac: highlights from several websites, grouped by page, with one highlight open in the details pane.", "The Twine library window on a Mac: sidebar of websites and pages, a list of highlights, the details pane open on one. Starter or public text only, nothing private. Optional hero-mobile image (4:5) for phones.", true %}
+    {% shot "hero", "mac", "The Twine library on a Mac: highlights from several websites, grouped by page, with one highlight open in the details pane.", "The Twine library with its website sidebar, highlight list and one passage open in the details pane. Use starter or public content.", true, "macOS · Your library, with every source in reach" %}
   </div>
 </section>
 
@@ -30,7 +30,7 @@ title: "Twine: Web Knowledge Base · Safari highlights for AI tools"
       </ul>
     </div>
     <div class="media">
-      {% shot "capture", "mac", "A Safari window showing an article with one highlighted passage and Twine's Undo message at the bottom of the page.", "Safari on a public article with one highlighted passage and Twine's Undo message visible." %}
+      {% shot "capture", "mac", "Safari on a Mac showing a public article with a passage highlighted by Twine.", "Safari on a public article with one or two saved Twine highlights. No transient messages or recording needed.", false, "macOS · Save a passage in Safari" %}
     </div>
   </section>
 
@@ -45,8 +45,9 @@ title: "Twine: Web Knowledge Base · Safari highlights for AI tools"
         <li>Shows up in Spotlight and opens from Shortcuts</li>
       </ul>
     </div>
-    <div class="media">
-      {% shot "library", "phone", "The Twine library on an iPhone, listing highlights with their website icons and page titles.", "The library on an iPhone: a list of highlights with website icons and page titles. Starter or public content only." %}
+    <div class="media shot-duo" role="group" aria-label="iPhone Duo: browse the library, then open a highlight">
+      {% shot "library", "phone", "The Twine library on an iPhone, listing highlights with their website icons and page titles.", "The iPhone library with several saved passages, website icons and page titles. Use starter or public content.", false, "iPhone Duo · Browse your highlights" %}
+      {% shot "library-detail", "phone", "An iPhone showing the details of a highlight from the adjacent library, with its source and Open in Safari action.", "Open one of the passages shown in the paired library capture. Keep the text, source and Open in Safari action visible.", false, "iPhone Duo · Return to the source" %}
     </div>
   </section>
 
@@ -67,7 +68,7 @@ title: "Twine: Web Knowledge Base · Safari highlights for AI tools"
       <p class="note">Example requests for a connected AI tool, not a built-in Twine chat. Responses depend on your tool and the highlights you've saved.</p>
     </div>
     <div class="media">
-      {% shot "ai-access", "mac", "An AI tool on a Mac answering a question from Twine highlights, with links back to the pages.", "An AI tool answering from Twine highlights, with source links, beside Twine's AI Access settings. Public content only." %}
+      {% shot "ai-access", "mac", "Twine's AI Access settings on a Mac, showing the read-only local connection controls with the access token concealed.", "Twine Settings > AI > AI Access, with the local server enabled and connection controls visible. Keep access tokens concealed; no chat response needed.", false, "macOS · Connect the AI tools you choose" %}
     </div>
   </section>
 
@@ -82,7 +83,7 @@ title: "Twine: Web Knowledge Base · Safari highlights for AI tools"
       </ul>
     </div>
     <div class="media">
-      {% shot "context", "mac", "The details of a highlight in Twine, with a short on-device explanation of how it fits into the text around it.", "The details pane of one highlight with the AI context section showing a written explanation." %}
+      {% shot "context", "phone", "A highlight's details on an iPhone, with a saved on-device AI context explanation below the passage.", "An iPhone highlight detail with a completed AI context explanation. Use a public passage with enough surrounding text; avoid loading or unavailable states.", false, "iPhone · Read a passage in context" %}
     </div>
   </section>
 </div>

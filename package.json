@@ -5,6 +5,7 @@
   "scripts": {
     "start": "eleventy --serve",
     "build": "eleventy",
+    "test": "node --test scripts/*.test.mjs",
     "check:deploy": "node scripts/check-deploy.mjs"
   },
   "dependencies": {

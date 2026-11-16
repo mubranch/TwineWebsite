@@ -26,18 +26,19 @@ export default function (eleventyConfig) {
     });
   });
 
-  // {% shot "name", "mac" or "phone", "alt text", "what the screenshot must show", true for the first image on the page %}
+  // {% shot "name", "mac" or "phone", "alt text", "capture brief", eager, "caption" %}
   // Shows src/static/images/<name>.webp, .png or .jpg once it exists (and <name>-mobile.* on small screens),
   // and a labelled placeholder until then.
-  eleventyConfig.addShortcode("shot", (name, shape, alt, needs, eager = false) => {
+  eleventyConfig.addShortcode("shot", (name, shape, alt, needs, eager = false, caption = "") => {
     const file = imageFile(name);
+    const credit = caption ? `<figcaption>${escapeHtml(caption)}</figcaption>` : "";
     if (!file) {
-      return `<figure class="shot shot-${shape} shot-placeholder" role="img" aria-label="Screenshot placeholder: ${escapeHtml(needs)}"><p><strong>Screenshot needed: ${name}</strong>${escapeHtml(needs)}</p></figure>`;
+      return `<figure class="shot shot-${shape}"><div class="shot-screen shot-placeholder" role="img" aria-label="Screenshot placeholder: ${escapeHtml(needs)}"><p><strong>Screenshot needed: ${escapeHtml(name)}</strong>${escapeHtml(needs)}</p></div>${credit}</figure>`;
     }
     const mobile = imageFile(`${name}-mobile`);
     const image = `<img src="/images/${file}" alt="${escapeHtml(alt)}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`;
     const picture = mobile ? `<picture><source media="(max-width: 40em)" srcset="/images/${mobile}">${image}</picture>` : image;
-    return `<figure class="shot shot-${shape}">${picture}</figure>`;
+    return `<figure class="shot shot-${shape}${mobile ? " shot-has-mobile" : ""}"><div class="shot-screen">${picture}</div>${credit}</figure>`;
   });
 
   return {
