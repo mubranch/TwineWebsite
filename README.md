@@ -23,11 +23,12 @@ Once published it lives at <https://mubranch.github.io/TwineWebsite/>. Nothing i
 
 ## Preview
 
-GitHub Pages has no per-pull-request previews, so preview on your machine. A pull request only checks that the site builds.
+GitHub Pages has no per-pull-request previews, so preview on your machine. A pull request runs the screenshot rendering tests and checks that the site builds.
 
 ```sh
 npm install
 npm start          # http://localhost:8080/TwineWebsite/ and reloads as you save
+npm test           # checks screenshot placeholders, supplied files and mobile variants
 npm run build      # writes the finished site to _site/ (not committed)
 ```
 
@@ -35,22 +36,26 @@ Needs Node 22 or later. Every link follows the path in `url` in `src/_data/site.
 
 ## Screenshots
 
-Until a file exists, the page shows a labelled placeholder. Add a PNG or WebP with exactly one of these names to `src/static/images/` and the next build uses it. Use starter or public content only, never private pages, and export at about 2× (1600 to 2400 px wide for the Mac shots).
+The home page uses static product captures, not recordings or staged chat demos. No product screenshots are included yet: each missing capture has an intentional, labelled slot. Create `src/static/images/` and add a WebP, PNG or JPG with the exact base name below; the next build replaces that slot automatically. All six captures are needed for the complete page.
 
-| Name | Shape | It should show |
+Use starter or public content only, never private pages. Conceal access tokens, personal account details and notifications. Keep text readable, use the same content and appearance across related captures, and export Mac images at about 2× (1600 to 2400 px wide). Images fit inside their frames without cropping.
+
+| Page slot | Layout / asset name | Best screen to capture and why |
 | --- | --- | --- |
-| `hero` | Mac window, 16:10 | The library: a sidebar of websites and pages, a list of highlights, and the details pane open on one |
-| `hero-mobile` (optional) | 4:5 | A tighter crop of that window, or an iPhone, shown instead of `hero` on phones |
-| `capture` | Mac window, 16:10 | Safari on a public article with one highlighted passage and Twine's Undo message |
-| `library` | iPhone, 1320 × 2868 | The library list with website icons and page titles |
-| `ai-access` | Mac window, 16:10 | An AI tool answering from Twine highlights, with source links, beside the AI Access settings |
-| `context` | Mac window, 16:10 | A highlight's details with the AI context section filled in |
+| Hero | macOS, 16:10 · `hero` | Twine's main library with the website/page sidebar, a populated highlight list and one selected passage's details. This gives the clearest overview of the product and its source-first organization. |
+| Highlight in Safari | macOS, 16:10 · `capture` | Safari on a public article with one or two Twine highlights still visible. It shows the core capture result without needing a recording, keyboard overlay or fleeting Undo message. |
+| Find any passage, first phone | iPhone Duo, 1320 × 2868 · `library` | The iPhone library with several saved highlights, website icons and page titles. Show browsing on the go, not a settings page. |
+| Find any passage, second phone | iPhone Duo, 1320 × 2868 · `library-detail` | Open one of the exact passages visible on the first phone, with its source and **Open in Safari** action visible. Together the pair tells a browse → open → return-to-source story; these are two views of one iPhone workflow, not another platform. |
+| AI tools | macOS, 16:10 · `ai-access` | **Settings → AI → AI Access**, enabled, with local connection controls visible and the access token concealed. This shows Twine's real integration surface without implying a built-in chat or manufacturing an AI answer. |
+| See how a passage fits | iPhone, 1320 × 2868 · `context` | A highlight's details with a completed on-device AI context explanation. Choose a passage with enough surrounding text, and show the result rather than a loading/unavailable state. |
 
-Write the alt text in `src/index.njk`, in each `shot` call (its third argument).
+`hero-mobile` is optional: a portrait (4:5) crop of the **same Mac library view**, with the selected passage and its source still visible. It replaces `hero` below 40em. Keep the same subject so the shared alt text stays accurate; don't substitute an iPhone here. All other slots keep their captures at every width, and the iPhone Duo stacks below 30em so each phone stays readable.
+
+Each `shot` call in `src/index.njk` supplies its base name, frame (`mac` or `phone`), alt text, missing-capture brief, eager-loading flag and visible caption. Update the alt text (third argument) to match the actual capture when adding it. The two Duo images load independently, so adding one never hides the other missing capture.
 
 ## Publishing
 
-`.github/workflows/site.yml` builds the site and publishes it with GitHub's official Pages actions on GitHub-hosted runners. A push to `main`, or **Actions → Site → Run workflow**, builds, runs `npm run check:deploy`, and only then uploads and deploys. Pull requests only build.
+`.github/workflows/site.yml` tests and builds the site and publishes it with GitHub's official Pages actions on GitHub-hosted runners. A push to `main`, or **Actions → Site → Run workflow**, tests, builds, runs `npm run check:deploy`, and only then uploads and deploys. Pull requests test and build without deploying.
 
 **The deployment check is what keeps unfinished content off the internet.** It fails, and nothing publishes, while the built site still has a placeholder address, name or date, or a `HUMAN-INPUT` marker, or, once `indexable` is `true`, a draft notice. Draft pages may be published while the site is not indexable.
 
