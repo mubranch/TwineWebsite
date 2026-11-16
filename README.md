@@ -13,8 +13,8 @@ Once published it lives at <https://mubranch.github.io/TwineWebsite/>. Nothing i
 | Contact email, developer name, policy date, site address, launch switch | `src/_data/site.js` |
 | The header, footer and page head (title, description, social tags, security policy) | `src/_includes/base.njk` |
 | Colours, type and layout | `src/static/site.css` |
-| App branding and the bottom banner's extension icon | `src/static/icon.png`, `src/static/icon-64.png`, `src/static/icon-extension.png` (see [Branding](#branding)) |
-| Screenshots | `src/static/images/` (see [Screenshots](#screenshots)) |
+| App branding and the bottom banner's extension icon | `src/static/icon.png`, `src/static/icon-64.webp`, `src/static/icon-extension.webp` (see [Branding](#branding)) |
+| Screenshots and official device renders | `src/static/images/`, `src/static/devices/` (see [Screenshots](#screenshots)) |
 | Public feedback form | `.github/ISSUE_TEMPLATE/feedback.yml`; its link is `feedbackUrl` in `src/_data/site.js` |
 
 - A page's `title` and `description` are in its front matter.
@@ -30,7 +30,7 @@ GitHub Pages has no per-pull-request previews, so preview on your machine. A pul
 ```sh
 npm install
 npm start          # http://localhost:8080/TwineWebsite/ and reloads as you save
-npm test           # checks screenshot placeholders, supplied files and mobile variants
+npm test           # checks screenshot placeholders, official frames and responsive appearance sources
 npm run build      # writes the finished site to _site/ (not committed)
 ```
 
@@ -38,7 +38,7 @@ Needs Node 22 or later. Every link follows the path in `url` in `src/_data/site.
 
 ## Branding
 
-Use the blue Twine app logo for site branding: `icon.png` (256 × 256) supplies the favicon, touch icon and social image, while `icon-64.png` (64 × 64) supplies the header. Resize proportionally from the supplied app artwork and retain its transparency. The bottom yellow banner intentionally keeps the black extension icon in `icon-extension.png`; do not replace that separate asset with the app logo.
+Use the blue Twine app logo for site branding: `icon.png` (256 × 256) supplies the favicon, touch icon and social image, while `icon-64.webp` (64 × 64) supplies the header. Resize proportionally from the supplied app artwork and retain its transparency. The bottom yellow banner intentionally keeps the black extension icon in `icon-extension.webp`; do not replace that separate asset with the app logo. The WebP versions retain the original PNG pixels, alpha and color profiles.
 
 App icon URLs in `src/_includes/base.njk` carry a cache version (`v=blue-app`) so cached extension artwork is not reused as app branding. Bump that version when replacing the app artwork again.
 
@@ -58,25 +58,96 @@ GitHub recognizes issue forms only after their YAML configuration lands on the r
 
 ## Screenshots
 
-The home page uses the supplied light and dark product captures, not recordings or staged chat demos. All five slots are filled. Assets live in `src/static/images/` as `<name>-light.png` and `<name>-dark.png`; the browser chooses the dark version with `prefers-color-scheme: dark`, matching the stylesheet without JavaScript. Images retain their actual proportions, including the portrait-shaped Mac settings window, with explicit dimensions to reserve space before loading.
+The home page uses the supplied light and dark product captures, not recordings or staged chat demos. All five slots are filled. Full-resolution, lossless assets live in `src/static/images/` as `<name>-light.webp` and `<name>-dark.webp`. A `picture` element chooses the appearance with `prefers-color-scheme: dark`; `srcset` chooses one suitable resolution without downloading both appearances. Explicit dimensions reserve space before loading.
 
-Device shells are stylized CSS illustrations, not exact or official hardware replicas: MacBook-inspired frames for wide Mac captures, an iPhone 18s-inspired portrait frame, and one open Duo frame. The portrait Mac settings capture stays in a compact window frame rather than being letterboxed inside a laptop. Only the hardware bezel surrounds each image; the screen takes its size from the capture, with no fixed-aspect letterboxing or stretching.
+The CSS-drawn hardware has been replaced with the official Apple PNG artwork, encoded losslessly with its transparency intact: iPhone 18 Pro in Black, iPhone Duo in Night Sky with its Inner Open Landscape display, and one 13-inch MacBook Air M5 in Silver for both wide Mac slots. The iPhone 18 pack is the source, not an unofficial "18s" illustration. The portrait Mac settings capture keeps its existing compact window treatment.
 
-The Duo presentation uses the supplied authentic 2000 × 1407 landscape capture in each appearance, unchanged. Each is one continuous screen with the library and selected highlight's details visible together within the outer device frame. No gap, hinge, divider or separate inner frames are added; the app's own column separator remains part of the capture. The earlier joined panels, top/bottom composite and portrait iPhone pair are not used. The other slots retain their existing light/dark captures.
+The iPhone capture exactly matches its 1206 × 2622 display opening. The Duo uses the supplied authentic 2000 × 1407 capture as one continuous screen; it matches the artwork's 2853 × 2007 opening within subpixel resize-rounding precision. No center gap, hinge, divider or joined panels are added. Display masks follow the real artwork's alpha opening, including its rounded corners and camera cutouts.
+
+The owner approved fitting the existing 1960 × 1280 Mac captures to the Air's 2560 × 1664 screen: the displayed height is reduced by **0.46875%** relative to uniform width scaling. No source pixels are changed and no `cover` cropping or letterboxing is used. This exception is limited to the existing `hero` and `capture` dimensions; new mismatched captures fail the build. Native 2560 × 1664 replacements would remove the correction.
+
+Below **400 CSS px**, the Air artwork is not shown or downloaded: each Mac capture appears alone at its original proportions. Larger browser font defaults raise that breakpoint to 25em. This keeps the physical device from falling below Apple's 200px minimum. At 400px with default text size, the Air's body is over 204px tall. The Duo uses the full viewport width through at least 384px (or 24em with larger browser fonts), keeping its body above 200px even at 320px. Images have no added shadows, glare, transforms or animations; the window treatment is not a hardware illustration.
 
 | Page slot | Layout / asset name / dimensions | Included screen |
 | --- | --- | --- |
-| Hero | MacBook-style · `hero` · 1960 × 1280 | Main library with its website sidebar, saved passages and selected Wikipedia training-cost highlight, AI context and source: the product overview. |
-| Highlight in Safari | MacBook-style · `capture` · 1960 × 1280 | Wikipedia's large language model article with the training-cost passage highlighted: the saved result, without a fleeting Undo message. |
-| Find any passage | Open Duo · `library-duo` · 2000 × 1407 | One authentic landscape capture showing All Highlights on the left and the selected passage's details on the right. |
+| Hero | MacBook Air M5 · `hero` · 1960 × 1280 | Main library with its website sidebar, saved passages and selected Wikipedia training-cost highlight, AI context and source: the product overview. |
+| Highlight in Safari | MacBook Air M5 · `capture` · 1960 × 1280 | Wikipedia's large language model article with the training-cost passage highlighted: the saved result, without a fleeting Undo message. |
+| Find the highlight you need | iPhone Duo · `library-duo` · 2000 × 1407 | One authentic landscape capture showing All Highlights on the left and the selected passage's details on the right. |
 | AI tools | Mac window · `ai-access` · 1040 × 1436 | AI settings with AI Access enabled and connection controls visible. No access token value is displayed; this is Twine's integration surface, not a built-in chat. |
-| See how a passage fits | iPhone-style · `context` · 1206 × 2622 | The highlight's details with its completed on-device AI context explanation and source. |
+| See how a passage fits | iPhone 18 Pro · `context` · 1206 × 2622 | The highlight's details with its completed on-device AI context explanation and source. |
 
 For replacements, use starter or public content only; conceal access tokens, personal account details and notifications. Keep light/dark dimensions and subjects matched, and update the alt text and width/height in the corresponding `shot` call in `src/index.njk`.
 
-The shortcode also accepts unthemed `<name>.webp`, `.png` or `.jpg` as a fallback, and shows a labelled placeholder if neither a light nor an unthemed capture exists. Optional `<name>-mobile-light` (or `<name>-mobile`) and `<name>-mobile-dark` variants replace the main capture below 40em. If only a light mobile crop exists, dark mode keeps the full dark capture instead of showing the light crop. Mobile variants must retain the same subject for the shared alt text; none are currently needed.
+Keep the exact base-name workflow: give replacement originals names such as `hero-light.png` and `hero-dark.png`, then run the optimizer below. It writes the matching WebP files automatically. The shortcode also accepts unthemed `<name>.webp`, `.png` or `.jpg` and shows a labelled, device-free placeholder when a capture is missing. WebP takes precedence, so regenerate it after replacing an original.
 
-Each `shot` call supplies its base name, frame (`mac`, `phone`, `duo` or `window`), alt text, missing-capture brief, eager-loading flag, visible caption, width and height. The hero loads eagerly; other captures load lazily. Decorative camera and laptop-base elements are hidden from assistive technology.
+Optional `<name>-mobile-light` (or `<name>-mobile`) and `<name>-mobile-dark` captures still replace the main capture below 40em. Dark mode does not fall back to a light-only mobile variant. Such captures must retain the same subject, proportions and hardware fit; no alternate crops are used by the current site.
+
+Each `shot` call supplies its base name, frame (`mac`, `phone`, `duo` or `window`), alt text, missing-capture brief, eager-loading flag, caption, width and height. Dimensions must match the actual capture and are required for a hardware frame. The hero is eager with high fetch priority; below-fold captures, renders and the closing icon are lazy. Device artwork has empty alt text; the single product capture retains its descriptive alt text.
+
+### Regenerate lossless images
+
+Only asset regeneration needs Python 3 and Pillow with WebP support; normal builds and CI do not install image-processing dependencies. Keep originals in a separate input folder, not in the published `src/static` tree.
+
+```sh
+python3 scripts/optimize-images.py /path/to/captures
+python3 -m unittest discover -s scripts -p '*_test.py'
+npm test
+npm run build
+npm run check:deploy
+```
+
+Individual source paths also work. Every full-resolution output is decoded and compared against the original's RGBA bytes, including RGB under transparent pixels, and its ICC profile is preserved. The script fails if either differs. Unsupported bit depth, animation, EXIF rotation or explicit gamma/chromaticity without an ICC profile is rejected before writing. No lossy or near-lossless encoding is used. The compatibility favicon/touch/social PNG is retained when a new lossless PNG would be larger.
+
+Smaller 480, 960 and 1440px-wide candidates are resized with Lanczos, then encoded losslessly against that resized bitmap. They are not claimed to be pixel-identical to the full-resolution original; the native, pixel-identical file is always the largest candidate. Downscaling UI can create more colors and cost more bytes than the native image, so the script discards a candidate whenever a larger one is cheaper. Do not recreate those discarded files by hand.
+
+Current full-resolution measurements, in bytes:
+
+| Asset | Original PNG | Lossless served file |
+| --- | ---: | ---: |
+| Hero, light | 525,888 | 199,988 |
+| Hero, dark | 575,244 | 221,244 |
+| Safari, light | 424,381 | 128,528 |
+| Safari, dark | 413,875 | 128,072 |
+| Duo, light | 1,234,818 | 458,134 |
+| Duo, dark | 1,323,003 | 520,016 |
+| AI Access, light | 224,966 | 63,340 |
+| AI Access, dark | 241,552 | 61,618 |
+| iPhone context, light | 359,561 | 88,054 |
+| iPhone context, dark | 356,065 | 82,840 |
+| Header app icon | 5,149 | 3,972 |
+| Closing extension icon | 38,940 | 18,658 |
+| Favicon, touch and social PNG | 32,655 | 32,655 |
+| iPhone 18 Pro artwork | 447,742 | 229,014 |
+| iPhone Duo artwork | 795,922 | 425,538 |
+| MacBook Air M5 artwork | 539,634 | 294,118 |
+| **Total** | **7,539,395** | **2,955,789** |
+
+These 16 native-resolution files are 60.8% smaller in total, including the new artwork. Resized candidates are additional files; a visitor does not download the whole set. The optimizer prints a JSON report with each file's size, retained variants and pixel/profile hashes.
+
+Cold-cache browser measurements after scrolling the complete home page, including selected captures, artwork, masks and icons, but excluding HTTP headers and browser-UI favicons:
+
+| Viewport and density | Appearance | Previous image bytes | Current image bytes | Reduction |
+| --- | --- | ---: | ---: | ---: |
+| 390px at 2x | Light | 2,813,703 | 852,648 | 69.7% |
+| 390px at 2x | Dark | 2,953,828 | 895,972 | 69.7% |
+| 1440px at 1x | Light | 2,813,703 | 764,478 | 72.8% |
+| 1440px at 1x | Dark | 2,953,828 | 824,166 | 72.1% |
+
+These are complete-page totals, not just first-paint savings. The new totals include the real hardware; the previous page had none. The three generated display masks and transparent fallback add 2,612 bytes across the asset set. Browser checks cover both appearances at 320, 390, 768, 1024 and 1440px at 1x and 2x, plus both sides of the 399/400px Air breakpoint; they confirm a single appearance, adequate selected resolution, fitted screens, no overflow and physical device heights of at least 200px. The device-size checks also pass at 12 viewport widths with browser font defaults of 12, 14 and 24px.
+
+### Apple artwork sources and publication
+
+The owner accepted Apple's terms. Obtain the PNG originals through [Apple Design Resources](https://developer.apple.com/design/resources/#product-bezels):
+
+- [iPhone 18 pack](https://devimages-cdn.apple.com/design/resources/download/Bezel-iPhone-18.dmg): `iPhone 18 Pro - Black - Portrait.png`, renamed `bezel-iphone-18-pro.png`.
+- [iPhone Duo pack](https://devimages-cdn.apple.com/design/resources/download/Bezel-iPhone-Duo.dmg): `iPhone Duo - Night Sky - Inner Open Landscape.png`, renamed `bezel-iphone-duo.png`.
+- [MacBook Air M5 pack](https://devimages-cdn.apple.com/design/resources/download/Bezel-MacBook-Air-M5.dmg): `MacBook Air M5 13-inch Silver.png`, renamed `bezel-macbook-air-m5.png`.
+
+Process those renamed PNGs with the same optimizer. It also derives the small display-opening masks and the transparent fallback used to avoid a hidden Mac image download. Commit only the optimized assets used by the site, never DMGs or PSDs. This is proprietary Apple artwork, not a general-purpose asset library; do not extract or redistribute it as stock artwork.
+
+Follow the bundled Apple licenses and [Marketing Resources and Identity Guidelines](https://developer.apple.com/app-store/marketing/guidelines/). Keep the whole supplied image, including its transparent margins; do not crop, rotate, mirror or add effects. Show real app content, not a blank screen. Use full network/Wi-Fi and battery indicators in supplied captures; do not paint them into a screenshot. A desktop presentation needs the app's Dock icon and matching menu titles. Current captures show the app or page, not a staged desktop. When grouping devices, maintain their relative physical scale.
+
+The footer includes one international trademark credit using [Apple's trademark list](https://www.apple.com/legal/intellectual-property/trademark/appletmlist.html), with separate attribution for unregistered marks and Cisco's iOS mark. Apple's marketing artwork terms cover App Store promotion, while Twine is still marked Coming soon: the owner must resolve publication eligibility before shipping the artwork. A local preview is not deployment authorization.
 
 ## Publishing
 

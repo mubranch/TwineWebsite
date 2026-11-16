@@ -200,6 +200,12 @@ img {
   font-size: 0.95rem;
 }
 
+.site-footer .legal {
+  flex-basis: 100%;
+  font-size: 0.75rem;
+  line-height: 1.6;
+}
+
 /* Buttons and the "Coming soon" status, which is deliberately not a button */
 .button {
   display: inline-flex;
@@ -357,7 +363,7 @@ img {
   margin: clamp(2rem, 5vw, 3.5rem) auto 0;
 }
 
-/* Stylized device shells; screenshots determine their own screen proportions. */
+/* Official device artwork stays whole; the portrait Mac capture uses a window. */
 .shot {
   min-width: 0;
   width: 100%;
@@ -366,97 +372,88 @@ img {
 .shot-screen {
   position: relative;
   width: 100%;
-  overflow: hidden;
   background: var(--soft);
 }
 
 .device {
   position: relative;
-  padding: clamp(0.3rem, 0.8vw, 0.65rem);
-  border: 1px solid #676b73;
+  border: 1px solid var(--line);
   border-radius: 1.1rem;
-  background: #17191e;
-  box-shadow: var(--shadow), inset 0 0 0 2px #30333b;
+  background: var(--soft);
+  overflow: hidden;
 }
 
 .device .shot-screen {
   border-radius: 0.6rem;
 }
 
-.device-mac {
-  --base-height: clamp(0.5rem, 1.2vw, 1rem);
-  width: 90%;
-  margin: 0 auto var(--base-height);
-  padding-top: clamp(0.65rem, 1.5vw, 1.2rem);
-  border-radius: 0.9rem 0.9rem 0.25rem 0.25rem;
+.device-render {
+  border: 0;
+  border-radius: 0;
+  background: none;
+  overflow: visible;
+  box-shadow: none;
 }
 
-.device-mac .shot-screen {
-  border-radius: 0.25rem;
-}
-
-.device-camera {
+.device-render .shot-screen {
   position: absolute;
-  top: clamp(0.2rem, 0.5vw, 0.4rem);
-  left: 50%;
-  width: 0.25rem;
-  height: 0.25rem;
-  border-radius: 50%;
-  background: #050608;
-  box-shadow: inset 0 0 0 1px #3e4655;
-  transform: translateX(-50%);
+  border-radius: 0;
+  background: none;
+  mask-size: 100% 100%;
+  mask-repeat: no-repeat;
 }
 
-.device-base {
-  position: absolute;
-  bottom: calc(-1 * var(--base-height));
-  left: -5.5%;
-  width: 111%;
-  height: var(--base-height);
-  border: 1px solid #888c94;
-  border-radius: 0 0 45% 45%;
-  background: linear-gradient(#d5d7dc, #777c86);
+.device-render.device-phone .shot-screen {
+  top: calc(69 / 2760 * 100%);
+  left: calc(72 / 1350 * 100%);
+  width: calc(1206 / 1350 * 100%);
+  mask-image: url("devices/bezel-iphone-18-pro-mask.webp");
 }
 
-.device-base::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 42%;
-  width: 16%;
-  height: 35%;
-  border-radius: 0 0 0.3rem 0.3rem;
-  background: #777c86;
+.device-render.device-duo .shot-screen {
+  top: calc(120 / 2247 * 100%);
+  left: calc(120 / 3093 * 100%);
+  width: calc(2853 / 3093 * 100%);
+  mask-image: url("devices/bezel-iphone-duo-mask.webp");
 }
 
-.device-phone {
-  padding-top: 1rem;
-  border-radius: 2.2rem;
+.device-render.device-mac .shot-screen {
+  top: calc(288 / 2240 * 100%);
+  left: calc(420 / 3400 * 100%);
+  width: calc(2560 / 3400 * 100%);
+  height: calc(1664 / 2240 * 100%);
+  mask-image: url("devices/bezel-macbook-air-m5-mask.webp");
 }
 
-.device-phone .shot-screen {
-  border-radius: 1.6rem;
+/* The owner's approved 0.46875% height correction applies only inside the Air. */
+.device-mac.device-render .shot-screen picture,
+.device-mac.device-render .shot-screen img {
+  height: 100%;
+  object-fit: fill;
 }
 
-.device-phone .device-camera {
-  top: 0.25rem;
-  width: 22%;
-  height: 0.35rem;
-  border-radius: 999px;
+.device-art {
+  position: relative;
+  pointer-events: none;
 }
 
-.device-duo {
-  border-radius: 1.4rem;
+.device-phone .device-art {
+  aspect-ratio: 1350 / 2760;
 }
 
-.device-duo .shot-screen {
-  border-radius: 0.9rem;
+.device-duo .device-art {
+  aspect-ratio: 3093 / 2247;
+}
+
+.device-mac .device-art {
+  aspect-ratio: 3400 / 2240;
 }
 
 .device-window {
   padding: 0;
   border-color: var(--line);
   background: var(--soft);
+  box-shadow: var(--shadow), inset 0 0 0 2px #30333b;
 }
 
 .device-window .shot-screen {
@@ -470,6 +467,11 @@ img {
   height: auto;
   object-fit: contain;
   object-position: top;
+}
+
+.shot .device-art img {
+  height: 100%;
+  object-fit: fill;
 }
 
 .shot-phone {
@@ -489,6 +491,33 @@ img {
   line-height: 1.5;
   text-align: center;
   text-wrap: balance;
+}
+
+@media (max-width: 384px), (max-width: 24em) {
+  .shot-duo {
+    width: calc(100% + 2 * var(--gutter));
+    margin-inline: calc(-1 * var(--gutter));
+  }
+}
+
+/* Pixel and em guards keep hardware large enough across browser font defaults. */
+@media (width < 400px), (width < 25em) {
+  .device-mac .device-art {
+    display: none;
+  }
+
+  .device-render.device-mac .shot-screen {
+    position: static;
+    width: 100%;
+    height: auto;
+    mask-image: none;
+  }
+
+  .shot .device-mac.device-render .shot-screen picture,
+  .shot .device-mac.device-render .shot-screen img {
+    height: auto;
+    object-fit: contain;
+  }
 }
 
 .shot-screen.shot-placeholder {
