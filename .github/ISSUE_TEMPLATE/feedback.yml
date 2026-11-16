@@ -1,10 +1,11 @@
 name: Feedback or feature request
-description: Share an idea, request a feature or report a bug in Twine or this website.
+description: Share feedback or report a bug in the app, extensions or website, including ideas for upcoming browsers.
 body:
   - type: markdown
     attributes:
       value: |
-        Thanks for helping improve Twine. Submitting this form creates a **public issue**.
+        This form creates a **public issue** for app, extension or website feedback.
+        Options marked **Coming soon** are for upcoming extensions, not available downloads.
         Don't include private highlights, access tokens, account details or other sensitive information.
         For private support, use the email address on the [support page](https://mubranch.github.io/TwineWebsite/support).
   - type: dropdown
@@ -24,6 +25,10 @@ body:
       options:
         - Twine for Mac
         - Twine for iPhone
+        - Safari extension on Mac
+        - Safari extension on iPhone
+        - Chrome or Chromium-based extension on Mac (Coming soon)
+        - Firefox extension on Mac (Coming soon)
         - Twine website
     validations:
       required: true
@@ -42,5 +47,5 @@ body:
   - type: textarea
     id: environment
     attributes:
-      label: Device and version
-      description: For bugs, include your device, OS version, Twine version and browser when relevant. Leave out personal identifiers.
+      label: Device, app and browser versions
+      description: For bugs, include your device, OS and Twine versions. For extension feedback, add the browser name, browser version and extension version if available. Leave out serial numbers, account details and other personal identifiers.

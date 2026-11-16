@@ -1,36 +1,38 @@
 ---
 layout: page.njk
 title: "Support · Twine"
-description: "Contact the developer of Twine and find answers to common questions."
+description: "Get help with Twine on Mac or iPhone, report Safari extension problems, or request a feature."
 permalink: /support.html
 ---
 # Support
 
-Questions, bug reports and ideas are welcome. Email [{{ site.email }}](mailto:{{ site.email }}).
+For private help, email [{{ site.email }}](mailto:{{ site.email }}). For public bug reports and ideas, use the GitHub form below.
 
 ## Feedback and feature requests
 
-Have an idea or found a bug in Twine or this website?
+Report a problem or request a feature for the app, Safari extension or website. You can also share ideas for the Chrome/Chromium and Firefox extensions marked **Coming soon**. Choose the app or extension and device in the form.
 
-<a class="button" href="{{ site.feedbackUrl }}">Send feedback or request a feature</a>
+<a class="button" href="{{ site.feedbackUrl }}">Send feedback on GitHub</a>
 
 The form opens on GitHub and requires a GitHub account. Submitting it creates a **public issue** in the TwineWebsite repository. Don't include private highlights, access tokens, account details or other sensitive information. For private support, use the email address above instead.
 
 ## Before you write
 
-- **Twine isn't highlighting.** Check that the extension is on and allowed on the site: [Get started](/docs#get-started) and [Twine doesn't highlight](/docs#twine-doesnt-highlight).
-- **My highlights aren't on my iPhone.** Twine has to be running on your Mac, and both devices need the same iCloud account: [Highlights from my Mac don't reach my iPhone](/docs#highlights-from-my-mac-dont-reach-my-iphone).
+- **Safari isn't saving a highlight.** Check that the extension is on and allowed on the site. On iPhone, select text before choosing Twine from Safari's page menu: [Get started](/docs#get-started) and [Twine doesn't highlight](/docs#twine-doesnt-highlight).
+- **Highlights aren't syncing.** Use the same Apple Account for iCloud on both devices. Keep Twine running on Mac, and open it on iPhone after highlighting: [Sync with iCloud](/docs#sync-with-icloud).
 - **My AI tool can't connect.** See [Connect an AI tool](/docs#connect-an-ai-tool) and [My AI tool can't connect](/docs#my-ai-tool-cant-connect).
 - **Anything else.** The [docs](/docs) cover the rest.
 
 ## What to include
 
 - What you did, what you expected and what happened.
-- Your Mac or iPhone model and its macOS or iOS version.
+- Whether the problem is in the app or Safari extension, and on Mac or iPhone.
+- Your device model and macOS or iOS version. Leave out serial numbers.
 - Twine's version: **Settings → General → About** on Mac, **Settings → About** on iPhone.
+- For extension feedback, the browser name, browser version and extension version if available.
 - The page address, if the problem is with one page and it isn't private.
 
-Please don't send private highlights or screenshots of pages you'd rather keep to yourself. A description is enough.
+Keep private highlights, access tokens and account details out of reports and screenshots. A description is enough.
 
 ## More
 

@@ -42,9 +42,17 @@ Use the blue Twine app logo for site branding: `icon.png` (256 × 256) supplies 
 
 App icon URLs in `src/_includes/base.njk` carry a cache version (`v=blue-app`) so cached extension artwork is not reused as app branding. Bump that version when replacing the app artwork again.
 
+## Copy and product facts
+
+Keep the voice plainspoken, calm and specific, following the voice definition in Twine's `WebsiteCopy.md`. Use **highlight** for a saved item, **passage** for its quoted text, **library** for the collection, **AI Access** for the Mac's MCP connection, and **AI context** for the on-device feature. **Background** is the label shown above that feature's explanation in highlight details; it is not a second feature.
+
+The copy was checked against `mubranch/Twine` main at `0b61156694`. Safari capture is implemented on Mac and iPhone. Chromium and Firefox packaging is merged and Pro-gated, but `BrowserExtensionIdentity.chromeExtensionID` is empty and the app hides browser setup until it is configured. The Pro value proposition and feedback options identify those Mac extensions as **Coming soon**, as requested by the owner. Do not describe them as available or add store links before that release decision. The app and Safari extension target iPhone, not iPad, despite an iPad mention in the beta release notes.
+
+Keep launch switches and the draft privacy policy under owner control. The current privacy draft needs review for website-name lookups as well as favicon requests; it must not be treated as approved merely because the product copy has been updated.
+
 ## Feedback
 
-The header's **Feedback (GitHub)** button and the Support page open a GitHub-hosted issue form for bug reports, feature requests and general feedback. Submission requires GitHub sign-in and creates a public issue in `mubranch/TwineWebsite`; private support stays on email. No backend endpoint, token or on-site form is needed, and the site's Content-Security-Policy stays unchanged.
+The header's **Feedback (GitHub)** button and the Support page open a GitHub-hosted issue form for bug reports, feature requests and general feedback. Reporters choose the Mac app, iPhone app, Safari extension on Mac or iPhone, upcoming Chrome/Chromium or Firefox extensions on Mac, or the website. Upcoming extensions are explicitly marked **Coming soon**. Extension reports ask for browser and extension versions when available. Submission requires GitHub sign-in and creates a public issue in `mubranch/TwineWebsite`; private support stays on email. No backend endpoint, token or on-site form is needed, and the site's Content-Security-Policy stays unchanged.
 
 GitHub recognizes issue forms only after their YAML configuration lands on the repository's default branch (`main`). Keep Issues enabled in the repository settings. A local preview or feature-branch build cannot activate the form: after merging, follow the button while signed in and verify the form fields appear. Submit only when you intend to create a real public issue.
 
@@ -106,7 +114,7 @@ Put the address in `email` in `src/_data/site.js`.
 - [x] `src/_data/site.js`: `email`, `developer` and `policyDate` are filled in. Change `url` when a custom domain is attached.
 - [ ] Read `src/privacy.md` against the app, then delete `draft: true` from its front matter. Check especially the Apple analytics paragraph, the iCloud deletion wording, the note about a Mac's data folders and the children sentence. While `draft: true` is there the page says it's a draft and is marked `noindex`. It blocks the switch below: the deploy check fails if `indexable` is `true` while a draft notice remains.
 - [x] Add the screenshots above in light and dark appearances.
-- [ ] Check `macOS` and `iOS` in `site.js` against the app's minimum OS versions.
+- [x] Checked `macOS` and `iOS` in `site.js` against Twine main `0b61156694`: `Twine/Twine/Config.xcconfig` and `TwineKit/Package.swift` both require macOS 27 and iOS 27.
 - [ ] In the Twine app, set `privacyPolicy`, `supportURL` and `contactEmail` in `AppLinks.swift` to `<site url>/privacy`, `<site url>/support` and `mailto:<email>`. Use the same two addresses in App Store Connect, with the home page as the marketing URL.
 - [ ] Leave analytics off. The Content-Security-Policy would block a script anyway.
 

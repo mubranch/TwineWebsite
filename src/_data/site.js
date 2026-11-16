@@ -2,7 +2,7 @@
 export default {
   name: "Twine",
   description:
-    "Twine saves the passages you highlight in Safari, with their sources, and lets the AI tools on your Mac search and read them. For Mac and iPhone.",
+    "Save Safari highlights on Mac and iPhone, keep their source links, and sync through your private iCloud. Connect compatible AI tools on your Mac with AI Access.",
 
   // The address the site is served from, with no trailing slash: GitHub Pages' address until a custom domain is attached, then the domain.
   // Its path (/TwineWebsite here) prefixes every link, so a domain of its own needs no path at all.
