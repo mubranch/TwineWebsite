@@ -31,8 +31,11 @@ export default function (eleventyConfig) {
   eleventyConfig.addShortcode("shot", (name, shape, alt, needs, eager = false, caption = "", width, height) => {
     const file = imageFile(`${name}-light`) || imageFile(name);
     const credit = caption ? `<figcaption>${escapeHtml(caption)}</figcaption>` : "";
+    const camera = shape === "mac" || shape === "phone" ? '<span class="device-camera" aria-hidden="true"></span>' : "";
+    const base = shape === "mac" ? '<span class="device-base" aria-hidden="true"></span>' : "";
+    const frame = (screen) => `<figure class="shot shot-${shape}"><div class="device device-${shape}">${camera}${screen}${base}</div>${credit}</figure>`;
     if (!file) {
-      return `<figure class="shot shot-${shape}"><div class="shot-screen shot-placeholder" role="img" aria-label="Screenshot placeholder: ${escapeHtml(needs)}"><p><strong>Screenshot needed: ${escapeHtml(name)}</strong>${escapeHtml(needs)}</p></div>${credit}</figure>`;
+      return frame(`<div class="shot-screen shot-placeholder" role="img" aria-label="Screenshot placeholder: ${escapeHtml(needs)}"><p><strong>Screenshot needed: ${escapeHtml(name)}</strong>${escapeHtml(needs)}</p></div>`);
     }
     const dark = imageFile(`${name}-dark`);
     const mobile = imageFile(`${name}-mobile-light`) || imageFile(`${name}-mobile`);
@@ -45,7 +48,7 @@ export default function (eleventyConfig) {
     const dimensions = width && height ? ` width="${width}" height="${height}"` : "";
     const image = `<img src="/images/${file}" alt="${escapeHtml(alt)}"${dimensions} ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`;
     const picture = sources ? `<picture>${sources}${image}</picture>` : image;
-    return `<figure class="shot shot-${shape}"><div class="shot-screen shot-populated">${picture}</div>${credit}</figure>`;
+    return frame(`<div class="shot-screen shot-populated">${picture}</div>`);
   });
 
   return {

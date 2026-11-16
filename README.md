@@ -43,24 +43,25 @@ GitHub recognizes issue forms only after their YAML configuration lands on the r
 
 ## Screenshots
 
-The home page uses the supplied light and dark product captures, not recordings or staged chat demos. All six slots are filled. Assets live in `src/static/images/` as `<name>-light.png` and `<name>-dark.png`; the browser chooses the dark version with `prefers-color-scheme: dark`, matching the stylesheet without JavaScript. Images retain their actual proportions, including the portrait-shaped Mac settings window, with explicit dimensions to reserve space before loading.
+The home page uses the supplied light and dark product captures, not recordings or staged chat demos. All five slots are filled. Assets live in `src/static/images/` as `<name>-light.png` and `<name>-dark.png`; the browser chooses the dark version with `prefers-color-scheme: dark`, matching the stylesheet without JavaScript. Images retain their actual proportions, including the portrait-shaped Mac settings window, with explicit dimensions to reserve space before loading.
 
-The supplied iPhone Duo composite was split into its two original 1206 × 2622 captures, excluding only the surrounding canvas and gap. This keeps both screens readable when the pair stacks below 30em; no product UI was cropped or invented.
+Device shells are stylized CSS illustrations, not exact or official hardware replicas: MacBook-inspired frames for wide Mac captures, an iPhone 18s-inspired portrait frame, and one open Duo frame. The portrait Mac settings capture stays in a compact window frame rather than being letterboxed inside a laptop. Only the hardware bezel surrounds each image; the screen takes its size from the capture, with no fixed-aspect letterboxing or stretching.
+
+The user-approved Duo presentation places the newer supplied 1398 × 2034 library and detail panels side by side, unchanged, with a 16 px hinge between them. The result is one 2812 × 2034 landscape screenshot in each appearance, not two independently stacked phones. Both panels remain visible together at every viewport width. The earlier top/bottom composite and portrait iPhone pair are not used.
 
 | Page slot | Layout / asset name / dimensions | Included screen |
 | --- | --- | --- |
-| Hero | macOS · `hero` · 1960 × 1280 | Main library with its website sidebar, saved passages and selected Wikipedia training-cost highlight, AI context and source: the product overview. |
-| Highlight in Safari | macOS · `capture` · 2200 × 1584 | Wikipedia's large language model article with the training-cost passage highlighted: the saved result, without a fleeting Undo message. |
-| Find any passage, first phone | iPhone Duo · `library` · 1206 × 2622 | All Highlights, with public sources and the search field. |
-| Find any passage, second phone | iPhone Duo · `library-detail` · 1206 × 2622 | The same Wikipedia passage from the list, with AI context, source and action toolbar: browse → open → return to source. |
-| AI tools | macOS · `ai-access` · 1040 × 1436 | AI settings with AI Access enabled and connection controls visible. No access token value is displayed; this is Twine's integration surface, not a built-in chat. |
-| See how a passage fits | iPhone · `context` · 1206 × 2622 | The highlight's details with its completed on-device AI context explanation and source. |
+| Hero | MacBook-style · `hero` · 1960 × 1280 | Main library with its website sidebar, saved passages and selected Wikipedia training-cost highlight, AI context and source: the product overview. |
+| Highlight in Safari | MacBook-style · `capture` · 2200 × 1584 | Wikipedia's large language model article with the training-cost passage highlighted: the saved result, without a fleeting Undo message. |
+| Find any passage | Open Duo · `library-duo` · 2812 × 2034 | All Highlights on the left and the selected passage's details on the right, within one landscape/open-device presentation. |
+| AI tools | Mac window · `ai-access` · 1040 × 1436 | AI settings with AI Access enabled and connection controls visible. No access token value is displayed; this is Twine's integration surface, not a built-in chat. |
+| See how a passage fits | iPhone-style · `context` · 1206 × 2622 | The highlight's details with its completed on-device AI context explanation and source. |
 
 For replacements, use starter or public content only; conceal access tokens, personal account details and notifications. Keep light/dark dimensions and subjects matched, and update the alt text and width/height in the corresponding `shot` call in `src/index.njk`.
 
 The shortcode also accepts unthemed `<name>.webp`, `.png` or `.jpg` as a fallback, and shows a labelled placeholder if neither a light nor an unthemed capture exists. Optional `<name>-mobile-light` (or `<name>-mobile`) and `<name>-mobile-dark` variants replace the main capture below 40em. If only a light mobile crop exists, dark mode keeps the full dark capture instead of showing the light crop. Mobile variants must retain the same subject for the shared alt text; none are currently needed.
 
-Each `shot` call supplies its base name, frame (`mac` or `phone`), alt text, missing-capture brief, eager-loading flag, visible caption, width and height. The hero loads eagerly; other captures load lazily. The two Duo captures remain independent images.
+Each `shot` call supplies its base name, frame (`mac`, `phone`, `duo` or `window`), alt text, missing-capture brief, eager-loading flag, visible caption, width and height. The hero loads eagerly; other captures load lazily. Decorative camera and laptop-base elements are hidden from assistive technology.
 
 ## Publishing
 

@@ -15,34 +15,46 @@ configure({
   },
 });
 
-test("screenshot slots handle missing, paired, mobile and appearance variants", () => {
+test("screenshot slots preserve device shells, captures and appearance variants", () => {
   const original = process.cwd();
   const directory = mkdtempSync(join(tmpdir(), "twine-shots-"));
   try {
     process.chdir(directory);
     mkdirSync("src/static/images", { recursive: true });
 
-    const missing = shot("library-detail", "phone", "Details", 'Show the source & "Open in Safari".', false, "iPhone Duo · Details");
+    const missing = shot("context", "phone", "Details", 'Show the source & "Open in Safari".', false, "iPhone · Details");
     assert.match(missing, /class="shot shot-phone"/);
+    assert.match(missing, /class="device device-phone"/);
+    assert.match(missing, /class="device-camera" aria-hidden="true"/);
     assert.match(missing, /class="shot-screen shot-placeholder" role="img"/);
-    assert.match(missing, /Screenshot needed: library-detail/);
+    assert.match(missing, /Screenshot needed: context/);
     assert.match(missing, /source &amp; &quot;Open in Safari&quot;/);
-    assert.match(missing, /<figcaption>iPhone Duo · Details<\/figcaption>/);
+    assert.match(missing, /<figcaption>iPhone · Details<\/figcaption>/);
     assert.doesNotMatch(missing, /<img/);
 
     // Only file discovery is under test; these aren't product images.
-    writeFileSync("src/static/images/library.png", "");
-    const library = shot("library", "phone", 'Library & "sources"', "", false, "iPhone Duo · Browse");
-    assert.match(library, /src="\/images\/library.png"/);
-    assert.match(library, /alt="Library &amp; &quot;sources&quot;"/);
-    assert.match(library, /loading="lazy"/);
-    assert.doesNotMatch(library, /shot-placeholder/);
-    assert.match(shot("library-detail", "phone", "", "Details"), /shot-placeholder/);
+    writeFileSync("src/static/images/context.png", "");
+    const context = shot("context", "phone", 'Details & "sources"', "", false, "iPhone · Context");
+    assert.match(context, /src="\/images\/context.png"/);
+    assert.match(context, /alt="Details &amp; &quot;sources&quot;"/);
+    assert.match(context, /loading="lazy"/);
+    assert.doesNotMatch(context, /shot-placeholder/);
+    assert.match(shot("library-duo", "duo", "", "Details"), /shot-placeholder/);
+
+    writeFileSync("src/static/images/library-duo-light.png", "");
+    writeFileSync("src/static/images/library-duo-dark.png", "");
+    const duo = shot("library-duo", "duo", "Library and details", "", false, "Duo", 2812, 2034);
+    assert.match(duo, /class="device device-duo"/);
+    assert.match(duo, /width="2812" height="2034"/);
+    assert.equal((duo.match(/<img /g) || []).length, 1);
+    assert.match(duo, /srcset="\/images\/library-duo-dark.png"/);
+    assert.doesNotMatch(duo, /device-phone|device-camera|device-base/);
 
     writeFileSync("src/static/images/hero.webp", "");
     writeFileSync("src/static/images/hero-mobile.png", "");
     const hero = shot("hero", "mac", "Mac library", "", true, "macOS <Library>", 1960, 1280);
     assert.match(hero, /class="shot shot-mac"/);
+    assert.match(hero, /class="device device-mac"/);
     assert.match(hero, /class="shot-screen shot-populated"/);
     assert.match(hero, /<picture><source media="\(max-width: 40em\)" srcset="\/images\/hero-mobile.png">/);
     assert.match(hero, /src="\/images\/hero.webp"/);
@@ -50,6 +62,10 @@ test("screenshot slots handle missing, paired, mobile and appearance variants", 
     assert.match(hero, /width="1960" height="1280"/);
     assert.doesNotMatch(hero, /loading="lazy"/);
     assert.match(hero, /<figcaption>macOS &lt;Library><\/figcaption>/);
+    assert.match(hero, /<\/picture><\/div><span class="device-base" aria-hidden="true"><\/span>/);
+    const settings = shot("hero", "window", "Mac settings", "");
+    assert.match(settings, /class="device device-window"/);
+    assert.doesNotMatch(settings, /device-camera|device-base/);
 
     writeFileSync("src/static/images/hero-light.png", "");
     writeFileSync("src/static/images/hero-dark.png", "");
