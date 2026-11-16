@@ -47,13 +47,13 @@ The home page uses the supplied light and dark product captures, not recordings 
 
 Device shells are stylized CSS illustrations, not exact or official hardware replicas: MacBook-inspired frames for wide Mac captures, an iPhone 18s-inspired portrait frame, and one open Duo frame. The portrait Mac settings capture stays in a compact window frame rather than being letterboxed inside a laptop. Only the hardware bezel surrounds each image; the screen takes its size from the capture, with no fixed-aspect letterboxing or stretching.
 
-The user-approved Duo presentation places the newer supplied 1398 × 2034 library and detail panels side by side, unchanged, with a 16 px hinge between them. The result is one 2812 × 2034 landscape screenshot in each appearance, not two independently stacked phones. Both panels remain visible together at every viewport width. The earlier top/bottom composite and portrait iPhone pair are not used. The latest screenshot refresh updates the hero, Safari, Duo and iPhone context captures; AI Access retains its existing light/dark pair because no replacement was supplied.
+The Duo presentation places the supplied 1398 × 2034 library and detail panels edge-to-edge, unchanged, as one continuous screen. The result is one 2796 × 2034 landscape screenshot in each appearance, with no center gap, hinge, divider or separate inner frames. Both panels remain visible together at every viewport width within the outer device frame. The earlier top/bottom composite and portrait iPhone pair are not used. The latest screenshot refresh updates the hero, Safari, Duo and iPhone context captures; AI Access retains its existing light/dark pair because no replacement was supplied.
 
 | Page slot | Layout / asset name / dimensions | Included screen |
 | --- | --- | --- |
 | Hero | MacBook-style · `hero` · 1960 × 1280 | Main library with its website sidebar, saved passages and selected Wikipedia training-cost highlight, AI context and source: the product overview. |
 | Highlight in Safari | MacBook-style · `capture` · 1960 × 1280 | Wikipedia's large language model article with the training-cost passage highlighted: the saved result, without a fleeting Undo message. |
-| Find any passage | Open Duo · `library-duo` · 2812 × 2034 | All Highlights on the left and the selected passage's details on the right, within one landscape/open-device presentation. |
+| Find any passage | Open Duo · `library-duo` · 2796 × 2034 | All Highlights on the left and the selected passage's details on the right, joined edge-to-edge as one continuous screen. |
 | AI tools | Mac window · `ai-access` · 1040 × 1436 | AI settings with AI Access enabled and connection controls visible. No access token value is displayed; this is Twine's integration surface, not a built-in chat. |
 | See how a passage fits | iPhone-style · `context` · 1206 × 2622 | The highlight's details with its completed on-device AI context explanation and source. |
 
