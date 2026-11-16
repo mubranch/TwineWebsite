@@ -13,6 +13,7 @@ Once published it lives at <https://mubranch.github.io/TwineWebsite/>. Nothing i
 | Contact email, developer name, policy date, site address, launch switch | `src/_data/site.js` |
 | The header, footer and page head (title, description, social tags, security policy) | `src/_includes/base.njk` |
 | Colours, type and layout | `src/static/site.css` |
+| App branding and the bottom banner's extension icon | `src/static/icon.png`, `src/static/icon-64.png`, `src/static/icon-extension.png` (see [Branding](#branding)) |
 | Screenshots | `src/static/images/` (see [Screenshots](#screenshots)) |
 | Public feedback form | `.github/ISSUE_TEMPLATE/feedback.yml`; its link is `feedbackUrl` in `src/_data/site.js` |
 
@@ -34,6 +35,10 @@ npm run build      # writes the finished site to _site/ (not committed)
 ```
 
 Needs Node 22 or later. Every link follows the path in `url` in `src/_data/site.js`, which is why the preview is under `/TwineWebsite/`. `npm start` listens on every network interface (Eleventy's default), so stop it when you're done on a network you don't trust.
+
+## Branding
+
+Use the blue Twine app logo for site branding: `icon.png` (256 × 256) supplies the favicon, touch icon and social image, while `icon-64.png` (64 × 64) supplies the header. Resize proportionally from the supplied app artwork and retain its transparency. The bottom yellow banner intentionally keeps the black extension icon in `icon-extension.png`; do not replace that separate asset with the app logo.
 
 ## Feedback
 
