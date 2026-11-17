@@ -206,23 +206,29 @@ img {
   line-height: 1.6;
 }
 
-/* Buttons and the "Coming soon" status, which is deliberately not a button */
+/* Download controls stay disabled until a store URL is supplied. */
 .button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   min-height: 3rem;
   padding: 0 1.4rem;
+  border: 0;
   border-radius: 0.75rem;
   background: var(--accent);
   color: var(--on-accent);
+  font: inherit;
   font-weight: 600;
   text-decoration: none;
 }
 
-.button:hover {
+.button:not(:disabled):hover {
   background: var(--accent-hover);
   color: var(--on-accent);
+}
+
+.button:disabled {
+  cursor: not-allowed;
 }
 
 .button-quiet {
@@ -248,7 +254,7 @@ img {
   color: #fff;
 }
 
-.button-dark:hover {
+.button-dark:not(:disabled):hover {
   background: #3b2f00;
   color: #fff;
 }
@@ -315,25 +321,41 @@ img {
   display: block;
 }
 
-/* The highlighter, Twine's one signature: it marks the headline, the list bullets and the closing panel. */
+/* Match Twine's per-line bars without changing the surrounding brand colors. */
 .hl {
-  padding: 0 0.12em;
-  border-radius: 0.2em;
-  background: linear-gradient(transparent 14%, var(--mark) 14% 90%, transparent 90%) no-repeat;
-  color: var(--on-mark);
+  --highlight-ink: #ffe600;
+  padding: 1px 0;
+  border-radius: 3px;
+  background-color: var(--highlight-ink);
+  box-shadow: 0 0 0 1.5px var(--highlight-ink);
+  color: #000;
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
 }
 
+@supports (color: color-mix(in srgb, red 50%, transparent)) {
+  .hl {
+    --highlight-ink: color-mix(in srgb, #ffe600 85%, transparent);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .hl {
+      --highlight-ink: color-mix(in srgb, #ffe600 92%, transparent);
+    }
+  }
+}
+
 @keyframes mark-in {
   from {
-    background-size: 0% 100%;
+    background-color: transparent;
+    color: inherit;
+    box-shadow: none;
   }
 }
 
 @media (prefers-reduced-motion: no-preference) {
   .hl {
-    animation: mark-in 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.25s backwards;
+    animation: mark-in 0.12s ease-out backwards;
   }
 }
 

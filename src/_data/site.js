@@ -15,7 +15,7 @@ export default {
   // The date the privacy policy takes effect.
   policyDate: "14 November 2026",
 
-  // The App Store address. While it is empty, the site says "Coming soon" instead of showing download buttons.
+  // The App Store address. Download buttons are visible but disabled while this is empty.
   appStoreUrl: "",
   // Shows the Free and Pro pricing section and the Pro notes in the docs and privacy policy.
   pricing: true,

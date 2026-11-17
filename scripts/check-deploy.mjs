@@ -24,7 +24,7 @@ export function checkDeployment(config = site, output = "_site") {
   ];
   const launchBlocked = [
     [/class=["'][^"']*\bnotice\b[^"']*["']/i, "a draft notice; approve the policy before removing draft: true"],
-    [/\b(?:coming soon|TBD|TODO|FIXME|lorem ipsum|internal beta)\b/i, "unfinished launch copy"],
+    [/\b(?:coming soon|TBD|TODO|FIXME|lorem ipsum|internal beta|available after App Store approval)\b/i, "unfinished launch copy"],
     [/Screenshot (?:needed|placeholder):/i, "a missing product capture"],
   ];
   if (config.indexable) {

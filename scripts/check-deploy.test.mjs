@@ -31,7 +31,7 @@ test("launch accepts a complete build and rejects unfinished copy or draft notic
     assert.deepEqual(checkDeployment(config, directory), []);
     write("site.css", '/* The Coming soon status is hidden at launch. */');
     assert.deepEqual(checkDeployment(config, directory), [], "CSS comments are not unfinished visible copy");
-    for (const marker of ["HUMAN-INPUT", "TBD", "TODO", "Lorem ipsum", "Coming soon", "internal beta", "Screenshot needed: hero", 'class="notice"', "https://example.invalid/privacy", "[effective date]"]) {
+    for (const marker of ["HUMAN-INPUT", "TBD", "TODO", "Lorem ipsum", "Coming soon", "internal beta", "Available after App Store approval.", "Screenshot needed: hero", 'class="notice"', "https://example.invalid/privacy", "[effective date]"]) {
       write("privacy.html", `<link rel="canonical" href="${site.url}/privacy">${marker}`);
       assert.ok(checkDeployment(config, directory).length, `Must reject ${marker}`);
     }

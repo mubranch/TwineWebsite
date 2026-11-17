@@ -204,7 +204,9 @@ Put the address in `email` in `src/_data/site.js`.
 
 ## App Store badge
 
-The hero is the sole primary badge placement: Apple's guidance says **one badge per layout**. Header and closing downloads remain text links to the same product. With an empty `appStoreUrl`, all three retain their non-clickable Coming soon status.
+The hero marker mirrors Twine's renderer at `a5f51e72` (`Twine/TwineExtension/Resources/content.js`): default yellow `#ffe600`, black text, 85% ink in light appearance and 92% in dark, rounded per-line bars and the same small overhang. Its 120ms fade respects reduced motion. The closing panel and other brand colors are unchanged.
+
+The hero is the sole primary badge placement: Apple's guidance says **one badge per layout**. Header and closing downloads remain text links to the same product. With an empty `appStoreUrl`, all three placements show native disabled download buttons and the hero explains that availability follows App Store approval. No dummy link is used. Setting the real URL enables the links and replaces the hero's text button with the official badge.
 
 `src/static/mac-app-store-badge.svg` is the official preferred black Mac badge linked in Apple's current [Marketing Resources download section](https://developer.apple.com/app-store/marketing/guidelines/), from [this Apple-hosted SVG](https://developer.apple.com/app-store/marketing/guidelines/images/badge-download-on-the-mac-app-store.svg). Only inter-element whitespace was removed (12,064 to 11,596 bytes). Artwork paths, colors, lettering, border and proportions are unchanged; no archive is committed.
 
