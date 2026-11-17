@@ -66,7 +66,7 @@ GitHub recognizes issue forms only after their YAML configuration lands on the r
 
 ## Screenshots
 
-The home page uses the supplied light and dark product captures, not recordings or staged chat demos. All five slots are filled. Full-resolution, lossless assets live in `src/static/images/` as `<name>-light.webp` and `<name>-dark.webp`. A `picture` element chooses the appearance with `prefers-color-scheme: dark`; `srcset` chooses one suitable resolution without downloading both appearances. Explicit dimensions reserve space before loading.
+The home page uses four supplied light and dark product captures, not recordings or staged chat demos. The on-device context section is no longer displayed; its iPhone capture is retained as a product reference and shortcode test fixture. This is a presentation change, not removal of the Pro feature described in pricing, FAQ and docs. Full-resolution, lossless assets live in `src/static/images/` as `<name>-light.webp` and `<name>-dark.webp`. A `picture` element chooses the appearance with `prefers-color-scheme: dark`; `srcset` chooses one suitable resolution without downloading both appearances. Explicit dimensions reserve space before loading.
 
 The CSS-drawn hardware has been replaced with the official Apple PNG artwork, encoded losslessly with its transparency intact: iPhone 18 Pro in Black, iPhone Duo in Night Sky with its Inner Open Landscape display, and one 13-inch MacBook Air M5 in Silver for both wide Mac slots. The iPhone 18 pack is the source, not an unofficial "18s" illustration. The portrait Mac settings capture keeps its existing compact window treatment.
 
@@ -76,15 +76,15 @@ The owner approved fitting the existing 1960 × 1280 Mac captures to the Air's 2
 
 Below **400 CSS px**, the Air artwork is not shown or downloaded: each Mac capture appears alone at its original proportions. Larger browser font defaults raise that breakpoint to 25em. This keeps the physical device from falling below Apple's 200px minimum. At 400px with default text size, the Air's body is over 204px tall. The Duo uses the full viewport width through at least 384px (or 24em with larger browser fonts), keeping its body above 200px even at 320px. Images have no added shadows, glare, transforms or animations; the window treatment is not a hardware illustration.
 
-| Page slot | Layout / asset name / dimensions | Included screen |
+| Page slot or reference | Layout / asset name / dimensions | Included screen |
 | --- | --- | --- |
 | Hero | MacBook Air M5 · `hero` · 1960 × 1280 | Main library with its website sidebar, saved passages and selected Wikipedia training-cost highlight, AI context and source: the product overview. |
 | Highlight where you already read. | MacBook Air M5 · `capture` · 1960 × 1280 | Wikipedia's large language model article with the training-cost passage highlighted: the saved result, without a fleeting Undo message. |
 | Remember three words. Find the whole passage. | iPhone Duo · `library-duo` · 2000 × 1407 | One authentic landscape capture showing Wikipedia highlights on the left and the selected training-cost passage, source and actions on the right. No Background explanation is shown. |
 | Give AI tools access - through a local, read-only connection. | Mac window · `ai-access` · 1040 × 1436 | AI settings with AI Access enabled and connection controls visible. No access token value is displayed; this is Twine's integration surface, not a built-in chat. |
-| Recall why you saved it. | iPhone 18 Pro · `context` · 1206 × 2622 | The highlight's details with its completed on-device AI context explanation and source. |
+| On-device context reference (not displayed on the home page) | iPhone 18 Pro · `context` · 1206 × 2622 | The highlight's details with its completed on-device AI context explanation and source. Retained for product documentation and shortcode tests. |
 
-The Duo's light/dark pair comes from `screenshots/iphone-duo/1-library-details-*.png` in the supplied review package. Its full-resolution WebP files decode to exactly the supplied pixels; the image is not split or composited. The other four slots and every app/extension icon are unchanged. The package's 2560 × 1600 Mac captures do not fit the Air's 2560 × 1664 opening: they would need a new, unapproved 4% height stretch. Keep the existing Mac assets until native 2560 × 1664 replacements are supplied. The existing iPhone context capture also remains in place.
+The Duo's light/dark pair comes from `screenshots/iphone-duo/1-library-details-*.png` in the supplied review package. Its full-resolution WebP files decode to exactly the supplied pixels; the image is not split or composited. The other three displayed captures and every app/extension icon are unchanged. The package's 2560 × 1600 Mac captures do not fit the Air's 2560 × 1664 opening: they would need a new, unapproved 4% height stretch. Keep the existing Mac assets until native 2560 × 1664 replacements are supplied. The existing iPhone context capture remains available as the reference listed above.
 
 For replacements, use starter or public content only; conceal access tokens, personal account details and notifications. Keep light/dark dimensions and subjects matched, and update the alt text and width/height in the corresponding `shot` call in `src/index.njk`.
 
