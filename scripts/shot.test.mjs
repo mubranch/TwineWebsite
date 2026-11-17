@@ -75,9 +75,6 @@ test("screenshot slots preserve captures in official renders and select one resp
     assert.doesNotMatch(hero, /device-camera|device-base/);
     assert.throws(() => shot("hero", "mac", "", "", true, "", 1960, 1200), /provide a new capture/);
     assert.throws(() => shot("hero", "mac", "", "", true, "", 2560, 1600), /provide a new capture/);
-    assert.doesNotThrow(() => shot("hero", "mac", "", "", true, "", 1856, 1214));
-    assert.doesNotThrow(() => shot("capture", "mac", "", "", false, "", 2000, 1299));
-    assert.throws(() => shot("capture", "mac", "", "", false, "", 1856, 1214), /provide a new capture/);
     const settings = shot("hero", "window", "Mac settings", "");
     assert.match(settings, /class="device device-window"/);
     assert.doesNotMatch(settings, /device-camera|device-base/);
@@ -97,6 +94,9 @@ test("screenshot slots preserve captures in official renders and select one resp
     assert.match(capture, /src="\/images\/capture-light.png"/);
     assert.match(capture, /srcset="\/images\/capture-dark.png 1960w"/);
     assert.match(capture, /<figcaption>Mac · Your library, organized by source<\/figcaption>/);
+    assert.doesNotThrow(() => shot("hero", "mac", "", "", true, "", 1856, 1214));
+    assert.doesNotThrow(() => shot("capture", "mac", "", "", false, "", 2000, 1299));
+    assert.throws(() => shot("capture", "mac", "", "", false, "", 1856, 1214), /provide a new capture/);
 
     writeFileSync("src/static/images/hero-mobile-light.png", "");
     writeFileSync("src/static/images/hero-mobile-dark.webp", "");
