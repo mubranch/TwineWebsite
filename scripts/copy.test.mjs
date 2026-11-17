@@ -5,7 +5,7 @@ import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { test } from "node:test";
 
-test("the download launch removes pending copy and activates both plans without enabling indexing", () => {
+test("downloads launch without home-page pricing while retaining pricing FAQs and Pro docs", () => {
   const root = process.cwd();
   const store = "https://apps.apple.com/app/xcode/id497799835";
   for (const appStoreUrl of ["", store]) {
@@ -21,16 +21,17 @@ test("the download launch removes pending copy and activates both plans without 
       execFileSync(process.execPath, [join(directory, "scripts/check-deploy.mjs")], { cwd: directory });
       const home = readFileSync(join(directory, "_site/index.html"), "utf8");
       assert.match(home, /<meta name="robots" content="noindex, nofollow">/);
-      assert.match(home, /href="\/TwineWebsite\/docs#unlock-twine-pro"/);
+      assert.doesNotMatch(home, /\bid="(?:pricing|plan-free|plan-pro)"|href="[^"]*#pricing"/);
+      assert.match(home, /What's the difference between Free and Pro\?/);
       assert.match(readFileSync(join(directory, "_site/docs.html"), "utf8"), /id="unlock-twine-pro"/);
       if (appStoreUrl) {
         assert.doesNotMatch(home, /Coming soon|Pending App Store approval|<button[^>]*disabled/);
-        assert.equal((home.match(new RegExp(`href="${store}"`, "g")) ?? []).length, 4);
+        assert.equal((home.match(new RegExp(`href="${store}"`, "g")) ?? []).length, 3);
         assert.equal((home.match(/class="app-store-badge"/g) ?? []).length, 1);
       } else {
         assert.match(home, /Coming soon to the App Store/);
         assert.match(home, /Pending App Store approval/);
-        assert.equal((home.match(/<button[^>]*disabled/g) ?? []).length, 4);
+        assert.equal((home.match(/<button[^>]*disabled/g) ?? []).length, 3);
         assert.doesNotMatch(home, /href="[^"]*apps\.apple\.com/);
       }
     } finally {

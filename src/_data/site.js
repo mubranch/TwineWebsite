@@ -17,7 +17,7 @@ export default {
 
   // The App Store address. Download buttons are visible but disabled while this is empty.
   appStoreUrl: "",
-  // Shows the Free and Pro pricing section and the Pro notes in the docs and privacy policy.
+  // Keeps pricing FAQs and Pro notes in docs/privacy; home-page plan cards are currently omitted.
   pricing: true,
 
   // Search indexing stays off by owner decision, including after the App Store link is set.

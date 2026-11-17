@@ -1115,7 +1115,7 @@ td {
   vertical-align: top;
 }
 
-/* Pricing, only built when pricing is on in src/_data/site.js */
+/* Reusable pricing presentation; currently omitted from the home page. */
 .pricing {
   width: min(100% - 2 * var(--gutter), var(--wrap));
   margin-inline: auto;
@@ -1276,7 +1276,7 @@ td {
 
   .nav-links {
     display: grid;
-    grid-template-columns: repeat(5, max-content);
+    grid-template-columns: repeat(4, max-content);
     justify-content: space-between;
     gap: 0 0.5rem;
   }
