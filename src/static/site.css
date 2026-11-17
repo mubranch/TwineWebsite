@@ -1272,13 +1272,13 @@ td {
 
   .nav-links {
     display: grid;
-    grid-template-columns: repeat(4, max-content);
+    grid-template-columns: repeat(5, max-content);
     justify-content: space-between;
     gap: 0 0.5rem;
   }
 
   .nav-links a:not(.button) {
-    min-height: 2.5rem;
+    min-height: 2.75rem;
     font-size: 0.8125rem;
   }
 
