@@ -74,9 +74,11 @@ Below **400 CSS px**, the Air artwork is not shown or downloaded: each Mac captu
 | --- | --- | --- |
 | Hero | MacBook Air M5 · `hero` · 1960 × 1280 | Main library with its website sidebar, saved passages and selected Wikipedia training-cost highlight, AI context and source: the product overview. |
 | Add a passage. Keep its source. | MacBook Air M5 · `capture` · 1960 × 1280 | Wikipedia's large language model article with the training-cost passage highlighted: the saved result, without a fleeting Undo message. |
-| Find what you kept. | iPhone Duo · `library-duo` · 2000 × 1407 | One authentic landscape capture showing All Highlights on the left and the selected passage's details on the right. |
+| Find what you kept. | iPhone Duo · `library-duo` · 2000 × 1407 | One authentic landscape capture showing Wikipedia highlights on the left and the selected training-cost passage, source and actions on the right. No Background explanation is shown. |
 | Let AI tools search your saved passages. | Mac window · `ai-access` · 1040 × 1436 | AI settings with AI Access enabled and connection controls visible. No access token value is displayed; this is Twine's integration surface, not a built-in chat. |
 | Keep the passage in context. | iPhone 18 Pro · `context` · 1206 × 2622 | The highlight's details with its completed on-device AI context explanation and source. |
+
+The Duo's light/dark pair comes from `screenshots/iphone-duo/1-library-details-*.png` in the supplied review package. Its full-resolution WebP files decode to exactly the supplied pixels; the image is not split or composited. The other four slots and every app/extension icon are unchanged. The package's 2560 × 1600 Mac captures do not fit the Air's 2560 × 1664 opening: they would need a new, unapproved 4% height stretch. Keep the existing Mac assets until native 2560 × 1664 replacements are supplied. The existing iPhone context capture also remains in place.
 
 For replacements, use starter or public content only; conceal access tokens, personal account details and notifications. Keep light/dark dimensions and subjects matched, and update the alt text and width/height in the corresponding `shot` call in `src/index.njk`.
 
@@ -110,8 +112,8 @@ Current full-resolution measurements, in bytes:
 | Hero, dark | 575,244 | 221,244 |
 | Safari, light | 424,381 | 128,528 |
 | Safari, dark | 413,875 | 128,072 |
-| Duo, light | 1,234,818 | 458,134 |
-| Duo, dark | 1,323,003 | 520,016 |
+| Duo, light | 713,687 | 357,128 |
+| Duo, dark | 682,577 | 347,066 |
 | AI Access, light | 224,966 | 63,340 |
 | AI Access, dark | 241,552 | 61,618 |
 | iPhone context, light | 359,561 | 88,054 |
@@ -122,20 +124,20 @@ Current full-resolution measurements, in bytes:
 | iPhone 18 Pro artwork | 447,742 | 229,014 |
 | iPhone Duo artwork | 795,922 | 425,538 |
 | MacBook Air M5 artwork | 539,634 | 294,118 |
-| **Total** | **7,539,395** | **2,955,789** |
+| **Total** | **6,377,838** | **2,681,833** |
 
-These 16 native-resolution files are 60.8% smaller in total, including the new artwork. Resized candidates are additional files; a visitor does not download the whole set. The optimizer prints a JSON report with each file's size, retained variants and pixel/profile hashes.
+These 16 native-resolution files are 58.0% smaller in total, including the artwork. The refreshed Duo pair uses 704,194 bytes at native resolution, down from 978,150 bytes for the previous pair (28.0% less). Its supplied PNGs total 1,396,264 bytes; the served pair is 49.6% smaller without changing their pixels. Resized candidates are additional files; a visitor does not download the whole set. The optimizer prints a JSON report with each file's size, retained variants and pixel/profile hashes.
 
 Cold-cache Chromium measurements after scrolling the complete home page, including selected captures, artwork, masks and icons, but excluding HTTP headers and browser-UI favicons:
 
-| Viewport and density | Appearance | Previous image bytes | Current image bytes | Reduction |
+| Viewport and density | Appearance | Before Duo refresh | After Duo refresh | Reduction |
 | --- | --- | ---: | ---: | ---: |
-| 390px at 2x | Light | 2,813,703 | 852,648 | 69.7% |
-| 390px at 2x | Dark | 2,953,828 | 895,972 | 69.7% |
-| 1440px at 1x | Light | 2,813,703 | 764,478 | 72.8% |
-| 1440px at 1x | Dark | 2,953,828 | 824,166 | 72.1% |
+| 390px at 2x | Light | 852,648 | 816,572 | 4.2% |
+| 390px at 2x | Dark | 895,972 | 833,866 | 6.9% |
+| 1440px at 1x | Light | 764,478 | 728,402 | 4.7% |
+| 1440px at 1x | Dark | 824,166 | 762,060 | 7.5% |
 
-These are complete-page totals, not just first-paint savings. The new totals include the real hardware; the previous page had none. The three generated display masks and transparent fallback add 2,612 bytes across the asset set. Chromium and WebKit checks cover both appearances at 320, 390, 768, 1024 and 1440px at 1x and 2x, plus both sides of the 399/400px Air breakpoint; they confirm a single appearance, adequate selected resolution, fitted screens, no overflow and physical device heights of at least 200px. The Chromium device-size checks also pass at 12 viewport widths with browser font defaults of 12, 14 and 24px.
+These are complete-page totals, not just first-paint savings. Both columns include the official hardware; only the Duo captures changed between measurements. The three generated display masks and transparent fallback add 2,612 bytes across the asset set. Chromium and WebKit checks cover both appearances at 320, 390, 768, 1024 and 1440px at 1x and 2x, plus both sides of the 399/400px Air breakpoint; they confirm a single appearance, adequate selected resolution, fitted screens, no overflow and physical device heights of at least 200px. The earlier Chromium device-size checks also passed at 12 viewport widths with browser font defaults of 12, 14 and 24px.
 
 ### Apple artwork sources and publication
 
