@@ -319,6 +319,7 @@ img {
 
 .hero h1 .line {
   display: block;
+  margin-bottom: 0.25em;
 }
 
 /* Match Twine's per-line bars without changing the surrounding brand colors. */
