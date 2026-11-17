@@ -486,6 +486,15 @@ img {
   color: var(--muted);
 }
 
+@media (width > 40em) {
+  @supports (grid-template-rows: subgrid) {
+    .proof li {
+      grid-row: span 2;
+      grid-template-rows: subgrid;
+    }
+  }
+}
+
 /* Official device artwork stays whole; the portrait Mac capture uses a window. */
 .shot {
   min-width: 0;
