@@ -50,7 +50,8 @@ export default function (eleventyConfig) {
     const bezel = file && bezels[shape];
     // The owner approved a 0.46875% height correction for the 1960 x 1280 Mac captures; the trimmed Safari hero window needs 0.63%.
     const approvedMacFit = shape === "mac" && ((["hero", "capture"].includes(name) && width === 1960 && height === 1280) ||
-      (name === "hero" && width === 1856 && height === 1214));
+      (name === "hero" && width === 1856 && height === 1214) ||
+      (name === "capture" && width === 2000 && height === 1299));
     if (bezel && (!Number.isFinite(width) || !Number.isFinite(height) || width <= 0 || height <= 0 ||
       (!approvedMacFit && Math.abs(height * bezel.screenWidth / width - bezel.screenHeight) > 0.5))) {
       throw new Error(`Screenshot ${name} needs dimensions matching the official ${shape} screen; provide a new capture instead of cropping or stretching it.`);
@@ -69,7 +70,7 @@ export default function (eleventyConfig) {
     const dark = imageFile(`${name}-dark`);
     const mobile = imageFile(`${name}-mobile-light`) || imageFile(`${name}-mobile`);
     const mobileDark = imageFile(`${name}-mobile-dark`);
-    const sizes = shape === "mac" ? `(max-width: 400px) 92vw, (max-width: 25em) 92vw, ${eager ? "min(49.7rem, 70vw)" : "(max-width: 52em) 70vw, 29.65rem"}`
+    const sizes = shape === "mac" ? `(max-width: 400px) 92vw, (max-width: 25em) 92vw, ${eager ? "min(49.7rem, 70vw)" : "(max-width: 52em) 70vw, 24rem"}`
       : shape === "window" ? "(max-width: 52em) 92vw, 30rem" : figureSizes;
     const sources = [
       mobileDark && `<source media="(max-width: 40em) and (prefers-color-scheme: dark)" srcset="/images/${mobileDark}">`,

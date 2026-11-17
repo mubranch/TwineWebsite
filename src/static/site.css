@@ -774,10 +774,6 @@ h2 {
   row-gap: 2.5rem;
 }
 
-.feature-ai .media-settings .shot {
-  max-width: 21rem;
-}
-
 .ai-details {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
