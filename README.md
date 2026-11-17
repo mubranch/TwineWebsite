@@ -191,7 +191,8 @@ Put the address in `email` in `src/_data/site.js`.
 - [x] `src/_data/site.js`: contact, developer and policy-date fields are populated. Change `url` if a custom domain is attached.
 - [ ] Owner confirms that `mustafa.branch@gmail.com` is the monitored support mailbox and that the stated response expectations are accurate. A populated address is not proof of ownership or delivery.
 - [x] Re-audit the policy against app source, including site-name/icon requests, account-specific sync state, backup/cache retention, token copying, on-device context and StoreKit.
-- [ ] Owner approves the separately supplied proposed policy, its effective date and children/support-retention wording, then removes `draft: true`. The approved display-name lookup paragraph must remain verbatim. Source review is not policy approval.
+- [x] Stage the audited policy and remove `draft: true` locally, as requested for App Review. Keep the approved display-name lookup paragraph verbatim.
+- [ ] Owner approves the changed policy, effective date and children/support-retention wording before publication. Removing the draft marker removes the automated owner-review gate; source review and a passing deploy check are not legal approval.
 - [ ] Owner confirms App Store Connect privacy answers against the final binary, Apple's collection definition and any optional support/diagnostic submissions. The manifests alone do not verify a "Data Not Collected" label.
 - [x] Add the screenshots above in light and dark appearances.
 - [x] Recheck `macOS` and `iOS` against `Twine/Twine/Config.xcconfig` at `a5f51e72`: both require version 27.
@@ -222,9 +223,9 @@ The badge is 48px tall with at least 12px clear space on every side, exceeding t
 
 ### Owner review comes first
 
-The preparation commit leaves `appStoreUrl: ""`, `indexable: false`, `pricing: true` and the draft policy unchanged. The separately supplied **`app-review-policy.patch`** proposes the final policy and removes its draft marker; it is not approved text. After owner sign-off, it can be committed and published while the site is still noindex, so Apple has a final live policy before the app is released.
+The staged branch leaves `appStoreUrl: ""`, `indexable: false` and `pricing: true`. A separate policy commit removes the draft marker locally, as requested for App Review, and contains the audited wording for owner review. **Do not publish that legal text without sign-off.** Its review diff is also supplied as `app-review-policy.patch`; do not reapply it to a branch that already contains the policy commit. After approval, it can be published while the site remains noindex, so Apple has a final live policy before the app is released. Global prelaunch noindex is intentional; it is not a remaining policy-draft marker.
 
-The separate **`app-review-indexing.patch`** turns indexing on for public launch. Alternatively, **`app-review-activation.patch`** combines the policy and indexing changes; use either the combined patch or the two component patches, not both. None supplies an App Store URL or changes pricing or the policy date. Review the patches, settle the checklist above and apply only the approved changes. Never publish the indexing activation alone: the deployment check intentionally rejects it until the real store link is set.
+The separate **`app-review-indexing.patch`** turns indexing on for public launch; `app-review-activation.patch` is the same indexing-only activation now that the policy is staged in its own commit. Apply either file, not both. It supplies no App Store URL and changes neither pricing nor the policy date. Review the activation, settle the checklist above and apply only the approved changes. Never publish the indexing activation alone: the deployment check intentionally rejects it until the real store link is set.
 
 ### The final link change
 

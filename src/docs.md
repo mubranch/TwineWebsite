@@ -94,7 +94,7 @@ Twine syncs your highlights through your private iCloud database. There's no Twi
 AI Access lets compatible AI tools on your Mac search and read your highlights. It's off until you turn it on, read-only, and reachable only from your Mac. Twine runs a local [Model Context Protocol](https://modelcontextprotocol.io) (MCP) server. Your tool needs support for local MCP servers over HTTP and bearer-token authentication.
 
 {% if site.pricing %}
-AI Access is part of Twine Pro. Until Pro is unlocked, **Settings → AI** shows **Unlock** and **Restore Purchases** in place of the AI Access switch.{% if not site.appStoreUrl %} The current internal beta does not offer the Pro purchase yet.{% endif %}
+AI Access is part of Twine Pro. Until Pro is unlocked, **Settings → AI** shows **Unlock** and **Restore Purchases** in place of the AI Access switch.
 {% endif %}
 
 1. On your Mac, open **Settings → AI → AI Access** and turn on **Allow AI Tools to Read Highlights**.
@@ -193,7 +193,7 @@ Settings and the highlight's **Background** section explain the reason: the devi
 {% if site.pricing %}
 ### Twine Pro isn't unlocked
 
-If you've already bought Pro, open the **Twine Pro** section of Settings and choose **Restore Purchases**.{% if not site.appStoreUrl %} The current internal beta does not offer the purchase yet.{% endif %} For a purchase that won't restore, [contact support](/support).
+If you've already bought Pro, open the **Twine Pro** section of Settings and choose **Restore Purchases**. For a purchase that won't restore, [contact support](/support).
 {% endif %}
 
 ### Still stuck?
