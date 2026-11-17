@@ -12,7 +12,7 @@ socialDescription: "Highlight in Safari. Find it later. Keep it private. Twine f
       {% if site.appStoreUrl %}<a class="app-store-badge" href="{{ site.appStoreUrl | escape }}" aria-label="Download for Mac — Free on the Mac App Store"><img src="/mac-app-store-badge.svg" width="156" height="40" alt=""></a>{% else %}<button class="button" type="button" disabled>Coming soon to the App Store</button>{% endif %}
       <a class="button button-quiet" href="#features">See how Twine works</a>
     </div>
-    <p class="fineprint" id="requirements">{% if site.appStoreUrl %}Free to use. Pro is $4.99 once — no subscription.{% else %}Pending App Store approval. Free to use; Pro is $4.99 once.{% endif %} Requires macOS {{ site.macOS }} on Mac and iOS {{ site.iOS }} on iPhone.</p>
+    <p class="fineprint" id="requirements"><span>{% if site.appStoreUrl %}Free to use. <span class="price-summary">Pro is $4.99 once — no subscription.</span>{% else %}Pending App Store approval. <span class="price-summary">Free to use; Pro is $4.99 once.</span>{% endif %}</span><span>Requires macOS {{ site.macOS }} on Mac and iOS {{ site.iOS }} on iPhone.</span></p>
   </div>
   <div class="hero-visual">
     {% shot "hero", "mac", "Twine on a Mac with a website sidebar, a highlight list and a selected Wikipedia passage about language model training costs, with its AI context and source.", "The Twine library with its website sidebar, highlight list and one passage open in the details pane. Use starter or public content.", true, "Mac · Your library, organized by source", 1960, 1280 %}
@@ -64,11 +64,16 @@ socialDescription: "Highlight in Safari. Find it later. Keep it private. Twine f
     </div>
   </section>
 
-  <section class="feature" aria-labelledby="ai-title">
+  <section class="feature feature-ai" aria-labelledby="ai-title">
     <div class="copy">
       <p class="eyebrow">Twine Pro</p>
       <h2 id="ai-title">Give your AI tools your reading — through a local, read-only connection.</h2>
       <p>Your AI assistant knows the internet. It doesn't know what <em>you</em> found worth keeping. AI Access lets a compatible AI tool on your Mac search and read your highlights, each with its source link, so its answers can draw on what you've actually read.</p>
+    </div>
+    <div class="media media-settings">
+      {% shot "ai-access", "window", "Twine's AI settings on a Mac with AI Access enabled, a local server URL and controls to copy connection settings or regenerate the token; no token value is displayed.", "Twine Settings > AI > AI Access, with the local server enabled and connection controls visible. Keep access tokens concealed; no chat response needed.", false, "Mac · Read-only access for connected AI tools", 1040, 1436 %}
+    </div>
+    <div class="ai-details">
       <ul class="prompts" role="list" aria-label="Example requests">
         <li>“What have I highlighted about pricing strategy? Cite the sources.”</li>
         <li>“Summarize what I saved this week.”</li>
@@ -82,9 +87,6 @@ socialDescription: "Highlight in Safari. Find it later. Keep it private. Twine f
         <li><span><strong>Yours to revoke.</strong> Access uses a token you can replace at any time.</span></li>
       </ul>
       <p class="note">Works with compatible AI tools on your Mac that support local MCP servers over HTTP with a bearer token. Cloud-hosted chat services can't reach it. Twine must be running. AI tools and their provider fees are separate. A connected tool handles what it reads under its own policy; these are example requests, not guaranteed answers.</p>
-    </div>
-    <div class="media media-settings">
-      {% shot "ai-access", "window", "Twine's AI settings on a Mac with AI Access enabled, a local server URL and controls to copy connection settings or regenerate the token; no token value is displayed.", "Twine Settings > AI > AI Access, with the local server enabled and connection controls visible. Keep access tokens concealed; no chat response needed.", false, "Mac · Read-only access for connected AI tools", 1040, 1436 %}
     </div>
   </section>
 
@@ -122,19 +124,21 @@ socialDescription: "Highlight in Safari. Find it later. Keep it private. Twine f
   <div class="section-head">
     <h2 id="comparison-title">Twine asks for neither an account nor a monthly fee.</h2>
   </div>
-  <table>
+  <div class="comparison-table">
+  <table role="table">
     <caption>Twine and what to compare in another highlighter or read-later service</caption>
     <colgroup><col class="comparison-feature"><col class="comparison-twine"><col></colgroup>
-    <thead><tr><th scope="col">Feature</th><th scope="col">Twine</th><th scope="col">What to check in another service</th></tr></thead>
-    <tbody>
-      <tr><th scope="row">Highlights on the live page in Safari, Mac and iPhone</th><td>Yes</td><td>Live-page support on both devices, or a separate reader?</td></tr>
-      <tr><th scope="row">Account required</th><td>No</td><td>Is an account required?</td></tr>
-      <tr><th scope="row">Where your library lives</th><td>Your devices and your private iCloud</td><td>The company's cloud, or storage you control?</td></tr>
-      <tr><th scope="row">Sync</th><td>Free, via iCloud</td><td>Included, or part of a paid tier?</td></tr>
-      <tr><th scope="row">AI access to your highlights</th><td>Local and read-only, on your Mac, with Pro</td><td>A local connection, or a cloud integration?</td></tr>
-      <tr><th scope="row">Price</th><td>Free; Pro $4.99 once</td><td>A subscription or a one-time price?</td></tr>
+    <thead role="rowgroup"><tr role="row"><th role="columnheader" scope="col">Feature</th><th role="columnheader" scope="col">Twine</th><th role="columnheader" scope="col">What to check in another service</th></tr></thead>
+    <tbody role="rowgroup">
+      <tr role="row"><th role="rowheader" scope="row">Highlights on the live page in Safari, Mac and iPhone</th><td role="cell" data-label="Twine">Yes</td><td role="cell" data-label="What to check">Live-page support on both devices, or a separate reader?</td></tr>
+      <tr role="row"><th role="rowheader" scope="row">Account required</th><td role="cell" data-label="Twine">No</td><td role="cell" data-label="What to check">Is an account required?</td></tr>
+      <tr role="row"><th role="rowheader" scope="row">Where your library lives</th><td role="cell" data-label="Twine">Your devices and your private iCloud</td><td role="cell" data-label="What to check">The company's cloud, or storage you control?</td></tr>
+      <tr role="row"><th role="rowheader" scope="row">Sync</th><td role="cell" data-label="Twine">Free, via iCloud</td><td role="cell" data-label="What to check">Included, or part of a paid tier?</td></tr>
+      <tr role="row"><th role="rowheader" scope="row">AI access to your highlights</th><td role="cell" data-label="Twine">Local and read-only, on your Mac, with Pro</td><td role="cell" data-label="What to check">A local connection, or a cloud integration?</td></tr>
+      <tr role="row"><th role="rowheader" scope="row">Price</th><td role="cell" data-label="Twine">Free; Pro $4.99 once</td><td role="cell" data-label="What to check">A subscription or a one-time price?</td></tr>
     </tbody>
   </table>
+  </div>
   <p class="comparison-foot">If you read in Safari and want your highlights to stay yours, Twine is built for exactly that.</p>
 </section>
 
