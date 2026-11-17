@@ -7,7 +7,7 @@ title: "Twine: Your web knowledge base"
     <h1 id="hero-title"><span class="line">Your web knowledge base.</span> <span class="hl">Built from your highlights.</span></h1>
     <p class="lede">Keep Safari highlights and their source links in one searchable library. It syncs between Mac and iPhone through your private iCloud. With Twine Pro, give compatible AI tools on your Mac read-only access.</p>
     <div class="actions">
-      {% if site.appStoreUrl %}<a class="button" href="{{ site.appStoreUrl }}">Download for Mac</a>{% else %}<p class="status">Coming soon for Mac</p>{% endif %}
+      {% if site.appStoreUrl %}<a class="app-store-badge" href="{{ site.appStoreUrl | escape }}" aria-label="Download Twine on the Mac App Store"><img src="/mac-app-store-badge.svg" width="156" height="40" alt=""></a>{% else %}<p class="status">Coming soon for Mac</p>{% endif %}
       <a class="button button-quiet" href="#features">See how Twine works</a>
     </div>
     <p class="fineprint" id="requirements">Requires macOS {{ site.macOS }}. The iPhone app needs iOS {{ site.iOS }}.</p>
@@ -154,6 +154,6 @@ title: "Twine: Your web knowledge base"
     <img src="/icon-extension.webp" alt="" width="88" height="88" loading="lazy" decoding="async">
     <h2 id="closing-title">Start your web knowledge base.</h2>
     <p>Save a passage in Safari. Keep its source. Find it again on Mac or iPhone, or let a connected AI tool on your Mac search your library with Twine Pro.</p>
-    {% if site.appStoreUrl %}<a class="button button-dark" href="{{ site.appStoreUrl }}">Download for Mac</a>{% else %}<p class="status status-on-mark">Coming soon for Mac</p>{% endif %}
+    {% if site.appStoreUrl %}<a class="button button-dark" href="{{ site.appStoreUrl | escape }}">Download for Mac</a>{% else %}<p class="status status-on-mark">Coming soon for Mac</p>{% endif %}
   </div>
 </section>

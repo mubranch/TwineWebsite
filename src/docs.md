@@ -66,7 +66,7 @@ On both devices, a highlight can be up to 5,000 characters, a page can hold 500 
 
 ## Other browsers
 
-**Coming soon:** Twine Pro extensions for Chrome, Chromium-based browsers and Firefox on Mac. They are not available to install yet. Safari highlighting stays part of Free on Mac and iPhone.
+Safari is the supported browser for this release. Chrome, Chromium-based browsers and Firefox extensions aren't available to install. Safari highlighting is part of Free on Mac and iPhone.
 
 ## Your library
 
@@ -87,14 +87,14 @@ Twine syncs your highlights through your private iCloud database. There's no Twi
 - Sign in to iCloud with the same Apple Account on each device.
 - **From Mac:** Safari saves the highlight locally. It reaches iCloud **while Twine is running on your Mac**. Closing the window leaves Twine running. Choose **Quit** from the menu-bar icon to stop it, or turn on **Launch at Login** in **Settings → General** to start it with your Mac.
 - **From iPhone:** open Twine after highlighting in Safari. The extension can't upload to iCloud by itself, and a new highlight waits on that device until you open the app.
-- Deleting a highlight, or choosing **Reset Library**, removes it on your other devices too.
+- Deletions and library resets reach your other devices when Twine syncs. A reset covers highlights already stored on this device; the [privacy policy](/privacy#deleting-your-data) explains the limits.
 
 ## Connect an AI tool
 
 AI Access lets compatible AI tools on your Mac search and read your highlights. It's off until you turn it on, read-only, and reachable only from your Mac. Twine runs a local [Model Context Protocol](https://modelcontextprotocol.io) (MCP) server. Your tool needs support for local MCP servers over HTTP and bearer-token authentication.
 
 {% if site.pricing %}
-AI Access is part of Twine Pro. Until Pro is unlocked, **Settings → AI** shows **Unlock** and **Restore Purchases** in place of the AI Access switch. The current internal beta does not offer the Pro purchase yet.
+AI Access is part of Twine Pro. Until Pro is unlocked, **Settings → AI** shows **Unlock** and **Restore Purchases** in place of the AI Access switch.{% if not site.appStoreUrl %} The current internal beta does not offer the Pro purchase yet.{% endif %}
 {% endif %}
 
 1. On your Mac, open **Settings → AI → AI Access** and turn on **Allow AI Tools to Read Highlights**.
@@ -188,12 +188,12 @@ Settings and the highlight's **Background** section explain the reason: the devi
 
 ### I want to start over
 
-**Settings → Library → Reset Library…** deletes your highlights on every device that uses iCloud and replaces your library with the starter set. It can't be undone.
+**Settings → Library → Reset Library…** replaces your local library with the starter set and queues deletions for the highlights on this device. These changes reach your other devices through iCloud. Highlights that exist only in iCloud and haven't reached this device can return. There is no Undo command; Twine keeps a local recovery copy as described in the [privacy policy](/privacy#deleting-your-data).
 
 {% if site.pricing %}
 ### Twine Pro isn't unlocked
 
-If you've already bought Pro, open the **Twine Pro** section of Settings and choose **Restore Purchases**. The current internal beta does not offer the purchase yet. For a purchase that won't restore, [contact support](/support).
+If you've already bought Pro, open the **Twine Pro** section of Settings and choose **Restore Purchases**.{% if not site.appStoreUrl %} The current internal beta does not offer the purchase yet.{% endif %} For a purchase that won't restore, [contact support](/support).
 {% endif %}
 
 ### Still stuck?

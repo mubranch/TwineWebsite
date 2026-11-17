@@ -19,14 +19,13 @@
     <article class="plan plan-featured" aria-labelledby="plan-pro">
       <h3 id="plan-pro">Pro</h3>
       <p class="price"><span class="amount">$4.99</span> once</p>
-      <p class="plan-note">A one-time purchase when Twine launches. No subscription.</p>
+      <p class="plan-note">{% if site.appStoreUrl %}A one-time in-app purchase.{% else %}A one-time purchase when Twine launches.{% endif %} No subscription.</p>
       <ul class="checks" role="list">
         <li>Everything in Free</li>
         <li>AI Access: let compatible AI tools search and read your highlights</li>
         <li>On-device AI context</li>
-        <li><span><strong>Coming soon:</strong> extensions for Chrome, Chromium-based browsers and Firefox on Mac</span></li>
       </ul>
     </article>
   </div>
-  <p class="pricing-foot">Twine is coming soon. Pro will be bought in the app through the App Store. Prices are in US dollars, and the App Store shows your local price. AI tools, and any fees from their providers, are separate.</p>
+  <p class="pricing-foot">{% if site.appStoreUrl %}Pro is bought in the app through the App Store.{% else %}Twine is coming soon. Pro will be bought in the app through the App Store.{% endif %} Prices are in US dollars, and the App Store shows your local price. AI tools, and any fees from their providers, are separate.</p>
 </section>

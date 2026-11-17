@@ -19,7 +19,7 @@ Once published it lives at <https://mubranch.github.io/TwineWebsite/>. Nothing i
 
 - A page's `title` and `description` are in its front matter.
 - Markdown headings become link targets from their text: `## Connect an AI tool` is `/docs#connect-an-ai-tool`. Other pages link to several of them, so search for an anchor before you rename its heading.
-- `privacy.html` and `support.html` are the addresses for the app and App Store Connect. Keep those file names.
+- Keep the generated `privacy.html` and `support.html` file names. Use their extensionless canonical URLs in the app and App Store Connect, as listed in the [launch runbook](#app-store-connect-urls).
 - If what Twine collects or sends changes, change `src/privacy.md` in the same pull request.
 - Search for `HUMAN-INPUT` to find what still needs the owner.
 
@@ -48,7 +48,7 @@ Keep the voice plainspoken, calm and specific, following the voice definition in
 
 Position Twine as a web knowledge base built from saved passages and source links. Keep that phrase for the main positioning rather than repeating it through the feature copy; use library, highlights, passages and sources for concrete actions.
 
-The copy was checked against `mubranch/Twine` main at `0b61156694`. Safari capture is implemented on Mac and iPhone. Chromium and Firefox packaging is merged and Pro-gated, but `BrowserExtensionIdentity.chromeExtensionID` is empty and the app hides browser setup until it is configured. The Pro value proposition and feedback options identify those Mac extensions as **Coming soon**, as requested by the owner. Do not describe them as available or add store links before that release decision. The app and Safari extension target iPhone, not iPad, despite an iPad mention in the beta release notes.
+The launch copy was rechecked against `mubranch/Twine` main at `a5f51e72e87361f1dba34c8382b68332c5e6d147`. Safari capture is implemented on Mac and iPhone. Chromium and Firefox packaging is merged and Pro-gated, but `BrowserExtensionIdentity.chromeExtensionID` is empty and the app hides browser setup until it is configured. Those extensions are not advertised as a launch benefit; the external feedback form still labels its future-browser options **Coming soon**. Do not describe them as available or add store links before that release decision. The app and Safari extension target iPhone, not iPad.
 
 Keep launch switches and the draft privacy policy under owner control. The owner-approved website-name lookup paragraph is included alongside favicon requests, but the policy still needs a complete owner review; it must not be treated as approved for publication merely because that paragraph or the product copy has been updated.
 
@@ -157,7 +157,9 @@ The footer includes one international trademark credit using [Apple's trademark 
 
 `.github/workflows/site.yml` tests and builds the site and publishes it with GitHub's official Pages actions on GitHub-hosted runners. A push to `main`, or **Actions → Site → Run workflow**, tests, builds, runs `npm run check:deploy`, and only then uploads and deploys. Pull requests test and build without deploying.
 
-**The deployment check is what keeps unfinished content off the internet.** It fails, and nothing publishes, while the built site still has a placeholder address, name or date, or a `HUMAN-INPUT` marker, or, once `indexable` is `true`, a draft notice. Draft pages may be published while the site is not indexable.
+**`npm run check:deploy` is the publication gate.** It always rejects placeholder addresses, owner-name/date placeholders and `HUMAN-INPUT` in built text. With `indexable: true`, it also rejects draft notices, missing screenshot slots, `Coming soon`, `TBD`, `TODO`, `FIXME`, Lorem Ipsum and internal-beta copy in HTML; a missing or invalid App Store product URL; missing/duplicate primary badges; noindex launch pages; wrong canonicals; and missing, stale or incorrect robots/sitemap output. HTML copy checks do not mistake the unused status styles for visible launch copy. These cases have focused tests in `scripts/check-deploy.test.mjs`.
+
+A prelaunch build must stay noindex, with no sitemap or active download badge. A draft policy is permitted in that state, but **is not a final policy suitable for App Review**. The success message distinguishes that state from the fully activated launch checks. These checks cannot approve policy text, verify a mailbox, prove a product is available in the App Store, or verify App Store Connect's privacy answers.
 
 - Pages must deploy from **GitHub Actions**: **Settings → Pages → Build and deployment → Source**. Check it there if a run ever fails because Pages isn't enabled.
 - Until a custom domain is attached the site is at <https://mubranch.github.io/TwineWebsite/>, and every link carries the `/TwineWebsite/` prefix from `url`.
@@ -186,12 +188,27 @@ Put the address in `email` in `src/_data/site.js`.
 
 ## Before the site goes public
 
-- [x] `src/_data/site.js`: `email`, `developer` and `policyDate` are filled in. Change `url` when a custom domain is attached.
-- [ ] Read `src/privacy.md` against the app, then delete `draft: true` from its front matter. Check especially the Apple analytics paragraph, the iCloud deletion wording, the note about a Mac's data folders and the children sentence. While `draft: true` is there the page says it's a draft and is marked `noindex`. It blocks the switch below: the deploy check fails if `indexable` is `true` while a draft notice remains.
+- [x] `src/_data/site.js`: contact, developer and policy-date fields are populated. Change `url` if a custom domain is attached.
+- [ ] Owner confirms that `mustafa.branch@gmail.com` is the monitored support mailbox and that the stated response expectations are accurate. A populated address is not proof of ownership or delivery.
+- [x] Re-audit the policy against app source, including site-name/icon requests, account-specific sync state, backup/cache retention, token copying, on-device context and StoreKit.
+- [ ] Owner approves the separately supplied proposed policy, its effective date and children/support-retention wording, then removes `draft: true`. The approved display-name lookup paragraph must remain verbatim. Source review is not policy approval.
+- [ ] Owner confirms App Store Connect privacy answers against the final binary, Apple's collection definition and any optional support/diagnostic submissions. The manifests alone do not verify a "Data Not Collected" label.
 - [x] Add the screenshots above in light and dark appearances.
-- [x] Checked `macOS` and `iOS` in `site.js` against Twine main `0b61156694`: `Twine/Twine/Config.xcconfig` and `TwineKit/Package.swift` both require macOS 27 and iOS 27.
+- [x] Recheck `macOS` and `iOS` against `Twine/Twine/Config.xcconfig` at `a5f51e72`: both require version 27.
+- [x] Stage the official conditional Mac App Store badge, accessible name, clear space and launch-copy branches.
+- [ ] Owner confirms the marketing-artwork license and that the download link is for an app actually available to download, not only a preorder or unavailable listing. Device-render and badge rights are tied to App Store availability.
+- [ ] Owner confirms whether to show pricing and the actual US Pro price. `pricing: true` is unchanged. The source's local StoreKit configuration says $4.99 and non-consumable, but it does not verify the live IAP price or review status. Prefer hiding pricing at first launch unless those are confirmed; that decision belongs in the reviewed activation changes, not an automatic toggle.
 - [ ] In the Twine app, set `privacyPolicy`, `supportURL` and `contactEmail` in `AppLinks.swift` to `<site url>/privacy`, `<site url>/support` and `mailto:<email>`. Use the same two addresses in App Store Connect, with the home page as the marketing URL.
-- [ ] Leave analytics off. The Content-Security-Policy would block a script anyway.
+- [x] Leave analytics off. No website scripts, tracking cookies or third-party assets are added, and the CSP stays unchanged.
+- [ ] Owner approves search indexing for public launch, and the final linked App Store product and Pro purchase/restore flow are checked on the release build.
+
+## App Store badge
+
+The hero is the sole primary badge placement: Apple's guidance says **one badge per layout**. Header and closing downloads remain text links to the same product. With an empty `appStoreUrl`, all three retain their non-clickable Coming soon status.
+
+`src/static/mac-app-store-badge.svg` is the official preferred black Mac badge linked in Apple's current [Marketing Resources download section](https://developer.apple.com/app-store/marketing/guidelines/), from [this Apple-hosted SVG](https://developer.apple.com/app-store/marketing/guidelines/images/badge-download-on-the-mac-app-store.svg). Only inter-element whitespace was removed (12,064 to 11,596 bytes). Artwork paths, colors, lettering, border and proportions are unchanged; no archive is committed.
+
+The badge is 48px tall with at least 12px clear space on every side, exceeding the 40px minimum and meeting the quarter-height rule. It has an explicit link name, retains the site's keyboard-focus outline and uses the same unaltered black artwork in both appearances. The footer conditionally credits the Apple logo and Mac App Store as well as the existing marks. "Mac App Store" matches the Mac download action; general cross-platform purchase copy uses "App Store".
 
 ## Not indexable yet
 
@@ -201,9 +218,51 @@ Put the address in `email` in `src/_data/site.js`.
 
 ## When Twine launches
 
-1. Set `appStoreUrl` in `src/_data/site.js`. The "Coming soon" status in the header, hero and closing panel becomes a download button.
-2. Review the privacy policy and delete `draft: true` from `src/privacy.md`.
-3. Set `indexable: true`. The `noindex` tags go, `sitemap.xml` is built and `robots.txt` lists it. Then, in Google Search Console and Bing Webmaster Tools, submit the sitemap.
+### Owner review comes first
+
+The preparation commit leaves `appStoreUrl: ""`, `indexable: false`, `pricing: true` and the draft policy unchanged. The separately supplied **`app-review-policy.patch`** proposes the final policy and removes its draft marker; it is not approved text. After owner sign-off, it can be committed and published while the site is still noindex, so Apple has a final live policy before the app is released.
+
+The separate **`app-review-indexing.patch`** turns indexing on for public launch. Alternatively, **`app-review-activation.patch`** combines the policy and indexing changes; use either the combined patch or the two component patches, not both. None supplies an App Store URL or changes pricing or the policy date. Review the patches, settle the checklist above and apply only the approved changes. Never publish the indexing activation alone: the deployment check intentionally rejects it until the real store link is set.
+
+### The final link change
+
+Once the approved launch changes are staged locally, the last site-data edit is **`appStoreUrl` in `src/_data/site.js`**. Paste the real HTTPS `apps.apple.com` product URL. Confirm it opens Twine for the supported platforms and is available to download. Do not commit a rehearsal URL.
+
+```sh
+git fetch origin main
+git merge-base --is-ancestor origin/main HEAD
+git log --oneline origin/main..HEAD  # only reviewed release commits
+npm test && npm run build && npm run check:deploy
+git diff --check
+```
+
+Check the full launch build at 320, 390 and 1440px in light and dark: the official badge, all download links, privacy/support/docs, focus, images and 404; no draft/placeholder copy, overflow, console or CSP errors. Check that the four public canonical pages have no noindex tag, `robots.txt` names the sitemap, and `sitemap.xml` includes those four pages but not 404. The 404 intentionally stays noindex.
+
+Only when authorized, commit the real link and push the approved fast-forward release through the existing Pages flow:
+
+```sh
+git add -- src/_data/site.js
+git commit -m "Set Twine's App Store download link"
+git push origin HEAD:main
+gh run list --workflow site.yml --branch main --limit 1
+gh run watch RUN_ID --exit-status
+```
+
+If main has advanced or the push is rejected, integrate and rerun checks; never force-push. After Pages succeeds, verify the **public** URLs below, badge/product links, policy text, robots/sitemap, all image appearances and icons. Submit the sitemap to search engines at public launch, not merely for App Review.
+
+### App Store Connect URLs
+
+| Field | Exact value |
+| --- | --- |
+| Marketing URL | `https://mubranch.github.io/TwineWebsite/` |
+| Support URL | `https://mubranch.github.io/TwineWebsite/support` |
+| Privacy Policy URL | `https://mubranch.github.io/TwineWebsite/privacy` |
+| Developer contact | `mailto:mustafa.branch@gmail.com` (owner must confirm the mailbox) |
+| Optional terms | Apple's [standard EULA](https://www.apple.com/legal/internet-services/itunes/dev/stdeula/) applies if no custom EULA is supplied; this one-time IAP is not a subscription. Owner confirms any additional terms. |
+
+Use the exact same privacy/support/mailto values in the app's `Twine/Twine/Settings/AppLinks.swift`. At source revision `a5f51e72`, those three values still point at `example.invalid`; this website does not fix them. The app needs its own change and rebuilt release.
+
+Before submission, check the final live policy, monitored support contact, accurate shipped features, final app-side links, App Store privacy answers, IAP attachment/approval and purchase restoration on a device. A website preview does not verify the submitted binary, App Store Connect configuration, CloudKit production schema or clean-install behavior.
 
 ## Notes
 

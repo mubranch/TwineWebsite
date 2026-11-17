@@ -347,9 +347,23 @@ img {
 .actions {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   justify-content: center;
   gap: 0.75rem;
   margin-top: 0.5rem;
+}
+
+.app-store-badge {
+  display: inline-flex;
+  justify-content: center;
+  padding: 12px;
+}
+
+.app-store-badge img {
+  width: auto;
+  height: 48px;
+  max-width: none;
+  aspect-ratio: 156.10054 / 40;
 }
 
 .fineprint,

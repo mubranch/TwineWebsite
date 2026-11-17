@@ -8,9 +8,11 @@ permalink: /support.html
 
 For private help, email [{{ site.email }}](mailto:{{ site.email }}). For public bug reports and ideas, use the GitHub form below.
 
+{{ site.developer }}, Twine's developer, handles email support. There is no live chat or guaranteed response time.
+
 ## Feedback and feature requests
 
-Report a problem or request a feature for the app, Safari extension or website. You can also share ideas for the Chrome/Chromium and Firefox extensions marked **Coming soon**. Choose the app or extension and device in the form.
+Report a problem or request a feature for the app, Safari extension or website. Choose the app or extension and device in the form.
 
 <a class="button" href="{{ site.feedbackUrl }}">Send feedback on GitHub</a>
 
