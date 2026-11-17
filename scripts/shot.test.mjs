@@ -86,6 +86,15 @@ test("screenshot slots preserve captures in official renders and select one resp
     assert.match(themed, /<source media="\(prefers-color-scheme: dark\)" srcset="\/images\/hero-dark.png 1960w"/);
     assert.ok(themed.indexOf("hero-dark.png") < themed.indexOf("hero-mobile.png"), "Dark desktop capture must precede a light-only mobile crop");
 
+    writeFileSync("src/static/images/capture-light.png", "");
+    writeFileSync("src/static/images/capture-dark.png", "");
+    const capture = shot("capture", "mac", "Twine library and selected passage", "A Mac library capture", false, "Mac · Your library, organized by source", 1960, 1280);
+    assert.match(capture, /class="device device-mac device-render"/);
+    assert.match(capture, /loading="lazy"/);
+    assert.match(capture, /src="\/images\/capture-light.png"/);
+    assert.match(capture, /srcset="\/images\/capture-dark.png 1960w"/);
+    assert.match(capture, /<figcaption>Mac · Your library, organized by source<\/figcaption>/);
+
     writeFileSync("src/static/images/hero-mobile-light.png", "");
     writeFileSync("src/static/images/hero-mobile-dark.webp", "");
     const themedMobile = shot("hero", "mac", "Mac library", "", false, "", 1960, 1280);
