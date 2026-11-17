@@ -7,12 +7,12 @@ export default {
   // The address the site is served from, with no trailing slash: GitHub Pages' address until a custom domain is attached, then the domain.
   // Its path (/TwineWebsite here) prefixes every link, so a domain of its own needs no path at all.
   url: "https://mubranch.github.io/TwineWebsite",
-  // The address people write to; it also goes in AppLinks.swift as a mailto: link.
+  // Owner-confirmed support mailbox; also used in AppLinks.swift as a mailto: link.
   email: "mustafa.branch@gmail.com",
   feedbackUrl: "https://github.com/mubranch/TwineWebsite/issues/new?template=feedback.yml",
   // The person or company that publishes Twine, as the privacy policy names it.
   developer: "Mustafa Branch",
-  // The date the privacy policy takes effect.
+  // Owner-confirmed date the privacy policy takes effect.
   policyDate: "14 November 2026",
 
   // The App Store address. Download buttons are visible but disabled while this is empty.
@@ -20,8 +20,8 @@ export default {
   // Shows the Free and Pro pricing section and the Pro notes in the docs and privacy policy.
   pricing: true,
 
-  // The launch switch. While false, every page carries a robots noindex, nofollow tag and there is no sitemap.
-  // Set it to true at launch (see "When Twine launches" in README.md).
+  // Search indexing stays off by owner decision, including after the App Store link is set.
+  // While false, every page carries a robots noindex, nofollow tag and there is no sitemap.
   indexable: false,
 
   // Minimum OS versions: keep them the same as the app's.

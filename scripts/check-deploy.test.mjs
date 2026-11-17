@@ -20,7 +20,7 @@ function fixture(run) {
   write("robots.txt", `User-agent: *\nAllow: /\nSitemap: ${site.url}/sitemap.xml\n`);
   write("sitemap.xml", ["index", "docs", "privacy", "support"].map((page) => `<loc>${site.url}/${page === "index" ? "" : page}</loc>`).join("\n"));
   try {
-    run({ directory, write, home });
+    run({ directory, write, home, html });
   } finally {
     rmSync(directory, { recursive: true, force: true });
   }
@@ -38,12 +38,11 @@ test("launch accepts a complete build and rejects unfinished copy or draft notic
   });
 });
 
-test("launch rejects incomplete activation, invalid store URLs and stale or missing indexing output", () => {
+test("launch rejects invalid store URLs and stale or missing indexing output", () => {
   fixture(({ directory, write, home }) => {
     for (const appStoreUrl of ["", "http://apps.apple.com/app/id497799835", "https://example.com/app/id497799835", "https://apps.apple.com/", "not a URL"]) {
       assert.ok(checkDeployment({ ...config, appStoreUrl }, directory).length, appStoreUrl);
     }
-    assert.match(checkDeployment({ ...config, indexable: false }, directory).join("\n"), /activation is missing/);
     write("index.html", `${home}<meta name="robots" content="noindex">`);
     assert.match(checkDeployment(config, directory).join("\n"), /still noindex/);
     write("index.html", home.replace("app-store-badge", "missing-badge"));
@@ -55,6 +54,27 @@ test("launch rejects incomplete activation, invalid store URLs and stale or miss
     assert.match(checkDeployment(config, directory).join("\n"), /sitemap.xml/);
     rmSync(join(directory, "sitemap.xml"));
     assert.match(checkDeployment(config, directory).join("\n"), /missing from launch build/);
+  });
+});
+
+test("downloads can launch with indexing off without bypassing policy and placeholder checks", () => {
+  fixture(({ directory, write, home, html }) => {
+    const noindex = '<meta name="robots" content="noindex, nofollow">';
+    for (const page of ["index", "docs", "privacy", "support"]) write(`${page}.html`, `${html(page)}${noindex}`);
+    write("index.html", `${home}${noindex}`);
+    write("robots.txt", "User-agent: *\nAllow: /\n");
+    rmSync(join(directory, "sitemap.xml"));
+    const privateLaunch = { ...config, indexable: false };
+    assert.deepEqual(checkDeployment(privateLaunch, directory), []);
+    for (const marker of ['class="notice"', "HUMAN-INPUT", "Coming soon", "TBD", "Screenshot needed: hero"]) {
+      write("privacy.html", `${html("privacy")}${noindex}${marker}`);
+      assert.ok(checkDeployment(privateLaunch, directory).length, `Must reject ${marker} even when indexing is off`);
+    }
+    write("privacy.html", `${noindex}<link rel="canonical" href="${site.url}/wrong">`);
+    assert.match(checkDeployment(privateLaunch, directory).join("\n"), /canonical URL/);
+    write("privacy.html", `${html("privacy")}${noindex}`);
+    write("sitemap.xml", "<urlset></urlset>");
+    assert.match(checkDeployment(privateLaunch, directory).join("\n"), /unexpected sitemap/);
   });
 });
 

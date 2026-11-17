@@ -50,7 +50,7 @@ Position Twine as a web knowledge base built from saved passages and source link
 
 The launch copy was rechecked against `mubranch/Twine` main at `a5f51e72e87361f1dba34c8382b68332c5e6d147`. Safari capture is implemented on Mac and iPhone. Chromium and Firefox packaging is merged and Pro-gated, but `BrowserExtensionIdentity.chromeExtensionID` is empty and the app hides browser setup until it is configured. Those extensions are not advertised as a launch benefit; the external feedback form still labels its future-browser options **Coming soon**. Do not describe them as available or add store links before that release decision. The app and Safari extension target iPhone, not iPad.
 
-Keep launch switches and the draft privacy policy under owner control. The owner-approved website-name lookup paragraph is included alongside favicon requests, but the policy still needs a complete owner review; it must not be treated as approved for publication merely because that paragraph or the product copy has been updated.
+Keep launch switches and privacy wording under owner control. The owner authorized publication of the staged policy, including the unchanged website-name lookup paragraph alongside favicon requests. Future policy changes still need review; approval of a paragraph or product copy is not approval of unrelated legal wording.
 
 ## Feedback
 
@@ -157,7 +157,7 @@ The footer includes one international trademark credit using [Apple's trademark 
 
 `.github/workflows/site.yml` tests and builds the site and publishes it with GitHub's official Pages actions on GitHub-hosted runners. A push to `main`, or **Actions → Site → Run workflow**, tests, builds, runs `npm run check:deploy`, and only then uploads and deploys. Pull requests test and build without deploying.
 
-**`npm run check:deploy` is the publication gate.** It always rejects placeholder addresses, owner-name/date placeholders and `HUMAN-INPUT` in built text. With `indexable: true`, it also rejects draft notices, missing screenshot slots, `Coming soon`, `TBD`, `TODO`, `FIXME`, Lorem Ipsum and internal-beta copy in HTML; a missing or invalid App Store product URL; missing/duplicate primary badges; noindex launch pages; wrong canonicals; and missing, stale or incorrect robots/sitemap output. HTML copy checks do not mistake the unused status styles for visible launch copy. These cases have focused tests in `scripts/check-deploy.test.mjs`.
+**`npm run check:deploy` is the publication gate.** It always rejects placeholder addresses, owner-name/date placeholders and `HUMAN-INPUT` in built text. Once `appStoreUrl` is set, it also rejects draft notices, missing screenshot slots, `Coming soon`, `TBD`, `TODO`, `FIXME`, Lorem Ipsum and internal-beta copy in HTML, an invalid App Store product URL, missing/duplicate primary badges and wrong canonicals. These download-readiness checks do not depend on search indexing. Robots, sitemap and noindex output must match `indexable`; with the owner's chosen `false`, all pages stay noindex and no sitemap is emitted, even after the download link is set. HTML copy checks do not mistake unused styles for visible launch copy. Focused tests cover these states in `scripts/check-deploy.test.mjs`.
 
 A prelaunch build must stay noindex, with no sitemap or active download badge. A draft policy is permitted in that state, but **is not a final policy suitable for App Review**. The success message distinguishes that state from the fully activated launch checks. These checks cannot approve policy text, verify a mailbox, prove a product is available in the App Store, or verify App Store Connect's privacy answers.
 
@@ -189,19 +189,21 @@ Put the address in `email` in `src/_data/site.js`.
 ## Before the site goes public
 
 - [x] `src/_data/site.js`: contact, developer and policy-date fields are populated. Change `url` if a custom domain is attached.
-- [ ] Owner confirms that `mustafa.branch@gmail.com` is the monitored support mailbox and that the stated response expectations are accurate. A populated address is not proof of ownership or delivery.
+- [x] Owner confirmed `mustafa.branch@gmail.com` as the support mailbox. No test email was sent; the published support expectations are unchanged.
+- [x] Owner confirmed the policy effective date, **14 November 2026**; `policyDate` is unchanged.
 - [x] Re-audit the policy against app source, including site-name/icon requests, account-specific sync state, backup/cache retention, token copying, on-device context and StoreKit.
 - [x] Stage the audited policy and remove `draft: true` locally, as requested for App Review. Keep the approved display-name lookup paragraph verbatim.
-- [ ] Owner approves the changed policy, effective date and children/support-retention wording before publication. Removing the draft marker removes the automated owner-review gate; source review and a passing deploy check are not legal approval.
+- [x] Owner authorized publication of the staged policy after separately confirming the date and mailbox. A passing deploy check alone is not legal approval.
 - [ ] Owner confirms App Store Connect privacy answers against the final binary, Apple's collection definition and any optional support/diagnostic submissions. The manifests alone do not verify a "Data Not Collected" label.
 - [x] Add the screenshots above in light and dark appearances.
 - [x] Recheck `macOS` and `iOS` against `Twine/Twine/Config.xcconfig` at `a5f51e72`: both require version 27.
 - [x] Stage the official conditional Mac App Store badge, accessible name, clear space and launch-copy branches.
 - [ ] Owner confirms the marketing-artwork license and that the download link is for an app actually available to download, not only a preorder or unavailable listing. Device-render and badge rights are tied to App Store availability.
-- [ ] Owner confirms whether to show pricing and the actual US Pro price. `pricing: true` is unchanged. The source's local StoreKit configuration says $4.99 and non-consumable, but it does not verify the live IAP price or review status. Prefer hiding pricing at first launch unless those are confirmed; that decision belongs in the reviewed activation changes, not an automatic toggle.
+- [x] Owner chose to keep the staged pricing: `pricing: true`, showing $4.99 once. This choice does not independently verify the live IAP price or review status; neither the flag nor the displayed price was changed.
 - [ ] In the Twine app, set `privacyPolicy`, `supportURL` and `contactEmail` in `AppLinks.swift` to `<site url>/privacy`, `<site url>/support` and `mailto:<email>`. Use the same two addresses in App Store Connect, with the home page as the marketing URL.
 - [x] Leave analytics off. No website scripts, tracking cookies or third-party assets are added, and the CSP stays unchanged.
-- [ ] Owner approves search indexing for public launch, and the final linked App Store product and Pro purchase/restore flow are checked on the release build.
+- [x] Owner chose to leave search indexing off, including after the App Store link arrives. Keep `indexable: false`; no indexing activation is part of launch.
+- [ ] Check the final linked App Store product and Pro purchase/restore flow on the release build.
 
 ## App Store badge
 
@@ -213,7 +215,7 @@ The hero is the sole primary badge placement: Apple's guidance says **one badge 
 
 The badge is 48px tall with at least 12px clear space on every side, exceeding the 40px minimum and meeting the quarter-height rule. It has an explicit link name, retains the site's keyboard-focus outline and uses the same unaltered black artwork in both appearances. The footer conditionally credits the Apple logo and Mac App Store as well as the existing marks. "Mac App Store" matches the Mac download action; general cross-platform purchase copy uses "App Store".
 
-## Not indexable yet
+## Search indexing stays off
 
 `indexable: false` in `src/_data/site.js` keeps the whole site out of search results. Every page gets `<meta name="robots" content="noindex, nofollow">`, `robots.txt` has no `Sitemap` line, and no `sitemap.xml` is built. GitHub Pages can't send an `X-Robots-Tag` header, so the meta tag is the mechanism.
 
@@ -223,9 +225,9 @@ The badge is 48px tall with at least 12px clear space on every side, exceeding t
 
 ### Owner review comes first
 
-The staged branch leaves `appStoreUrl: ""`, `indexable: false` and `pricing: true`. A separate policy commit removes the draft marker locally, as requested for App Review, and contains the audited wording for owner review. **Do not publish that legal text without sign-off.** Its review diff is also supplied as `app-review-policy.patch`; do not reapply it to a branch that already contains the policy commit. After approval, it can be published while the site remains noindex, so Apple has a final live policy before the app is released. Global prelaunch noindex is intentional; it is not a remaining policy-draft marker.
+The branch leaves `appStoreUrl: ""`, `indexable: false` and `pricing: true`. The owner confirmed the mailbox and **14 November 2026** policy date, kept pricing unchanged, chose to keep search indexing off through launch, and authorized publication of the staged policy. Its review diff is supplied as `app-review-policy.patch`; do not reapply it to a branch that already contains the policy commit. The non-draft policy can be live before the app is released. Global noindex is intentional, including after launch; it is not a policy-draft marker.
 
-The separate **`app-review-indexing.patch`** turns indexing on for public launch; `app-review-activation.patch` is the same indexing-only activation now that the policy is staged in its own commit. Apply either file, not both. It supplies no App Store URL and changes neither pricing nor the policy date. Review the activation, settle the checklist above and apply only the approved changes. Never publish the indexing activation alone: the deployment check intentionally rejects it until the real store link is set.
+There is **no indexing or activation patch to apply**. The previously supplied indexing patches are withdrawn. Adding the download URL must not change `indexable`.
 
 ### The final link change
 
@@ -239,7 +241,7 @@ npm test && npm run build && npm run check:deploy
 git diff --check
 ```
 
-Check the full launch build at 320, 390 and 1440px in light and dark: the official badge, all download links, privacy/support/docs, focus, images and 404; no draft/placeholder copy, overflow, console or CSP errors. Check that the four public canonical pages have no noindex tag, `robots.txt` names the sitemap, and `sitemap.xml` includes those four pages but not 404. The 404 intentionally stays noindex.
+Check the full launch build at 320, 390 and 1440px in light and dark: the official badge, all download links, privacy/support/docs, focus, images and 404; no draft/placeholder copy, overflow, console or CSP errors. Confirm that all pages still have noindex tags, canonical URLs are unchanged, `robots.txt` has no Sitemap line and no `sitemap.xml` is emitted.
 
 Only when authorized, commit the real link and push the approved fast-forward release through the existing Pages flow:
 
@@ -251,7 +253,7 @@ gh run list --workflow site.yml --branch main --limit 1
 gh run watch RUN_ID --exit-status
 ```
 
-If main has advanced or the push is rejected, integrate and rerun checks; never force-push. After Pages succeeds, verify the **public** URLs below, badge/product links, policy text, robots/sitemap, all image appearances and icons. Submit the sitemap to search engines at public launch, not merely for App Review.
+If main has advanced or the push is rejected, integrate and rerun checks; never force-push. After Pages succeeds, verify the **public** URLs below, badge/product links, policy text, noindex/no-sitemap output, all image appearances and icons. Do not submit a sitemap or enable indexing unless the owner explicitly changes that decision.
 
 ### App Store Connect URLs
 
@@ -260,7 +262,7 @@ If main has advanced or the push is rejected, integrate and rerun checks; never 
 | Marketing URL | `https://mubranch.github.io/TwineWebsite/` |
 | Support URL | `https://mubranch.github.io/TwineWebsite/support` |
 | Privacy Policy URL | `https://mubranch.github.io/TwineWebsite/privacy` |
-| Developer contact | `mailto:mustafa.branch@gmail.com` (owner must confirm the mailbox) |
+| Developer contact | `mailto:mustafa.branch@gmail.com` (owner-confirmed mailbox) |
 | Optional terms | Apple's [standard EULA](https://www.apple.com/legal/internet-services/itunes/dev/stdeula/) applies if no custom EULA is supplied; this one-time IAP is not a subscription. Owner confirms any additional terms. |
 
 Use the exact same privacy/support/mailto values in the app's `Twine/Twine/Settings/AppLinks.swift`. At source revision `a5f51e72`, those three values still point at `example.invalid`; this website does not fix them. The app needs its own change and rebuilt release.

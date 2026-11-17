@@ -17,6 +17,7 @@ function* files(directory) {
 
 export function checkDeployment(config = site, output = "_site") {
   const problems = [];
+  const launch = Boolean(config.appStoreUrl) || config.indexable;
   const blocked = [
     [/\.invalid\b/i, "a placeholder address"],
     [/\[(?:developer name|effective date)\]/i, "a developer or policy-date placeholder"],
@@ -27,11 +28,7 @@ export function checkDeployment(config = site, output = "_site") {
     [/\b(?:coming soon|TBD|TODO|FIXME|lorem ipsum|internal beta|available after App Store approval)\b/i, "unfinished launch copy"],
     [/Screenshot (?:needed|placeholder):/i, "a missing product capture"],
   ];
-  if (config.indexable) {
-    if (!config.appStoreUrl) problems.push("src/_data/site.js: launch needs the real appStoreUrl");
-  } else if (config.appStoreUrl) {
-    problems.push("src/_data/site.js: appStoreUrl is set but the reviewed launch activation is missing (indexable is false)");
-  }
+  if (config.indexable && !config.appStoreUrl) problems.push("src/_data/site.js: launch needs the real appStoreUrl");
   if (config.appStoreUrl) {
     let valid = false;
     try {
@@ -47,7 +44,7 @@ export function checkDeployment(config = site, output = "_site") {
   for (const file of files(output)) {
     if (!TEXT.has(extname(file))) continue;
     const text = readFileSync(file, "utf8");
-    const patterns = config.indexable && extname(file) === ".html" ? [...blocked, ...launchBlocked] : blocked;
+    const patterns = launch && extname(file) === ".html" ? [...blocked, ...launchBlocked] : blocked;
     for (const [pattern, meaning] of patterns) {
       if (pattern.test(text)) problems.push(`${file}: ${meaning}`);
     }
@@ -64,17 +61,17 @@ export function checkDeployment(config = site, output = "_site") {
     problems.push("index.html: a download badge is visible without an App Store URL");
   }
   const robots = read("robots.txt");
-  if (config.indexable) {
-    for (const page of PAGES) {
-      const html = read(`${page}.html`);
-      if (/<meta\b[^>]*name="robots"[^>]*content="[^"]*noindex/i.test(html)) {
-        problems.push(`${page}.html: a launch page is still noindex`);
-      }
-      const canonical = `${config.url}/${page === "index" ? "" : page}`;
-      if (!html.includes(`<link rel="canonical" href="${canonical}">`)) {
-        problems.push(`${page}.html: canonical URL must be ${canonical}`);
-      }
+  for (const page of PAGES) {
+    const html = read(`${page}.html`);
+    const noindex = /<meta\b[^>]*name="robots"[^>]*content="[^"]*noindex/i.test(html);
+    if (config.indexable && noindex) problems.push(`${page}.html: an indexable page is still noindex`);
+    if (!config.indexable && !noindex) problems.push(`${page}.html: pages must remain noindex when indexable is false`);
+    const canonical = `${config.url}/${page === "index" ? "" : page}`;
+    if (launch && !html.includes(`<link rel="canonical" href="${canonical}">`)) {
+      problems.push(`${page}.html: canonical URL must be ${canonical}`);
     }
+  }
+  if (config.indexable) {
     if (!robots.includes(`Sitemap: ${config.url}/sitemap.xml`) || /^Disallow:\s*\/\s*$/im.test(robots)) {
       problems.push("robots.txt: launch must allow crawling and advertise the canonical sitemap");
     }
@@ -85,13 +82,8 @@ export function checkDeployment(config = site, output = "_site") {
       if (JSON.stringify(locations) !== JSON.stringify(expected)) problems.push("sitemap.xml: must list exactly the four public canonical pages, without drafts or the 404");
     }
   } else {
-    for (const page of PAGES) {
-      if (!/<meta\b[^>]*name="robots"[^>]*content="[^"]*noindex/i.test(read(`${page}.html`))) {
-        problems.push(`${page}.html: prelaunch pages must remain noindex`);
-      }
-    }
     if (/^Sitemap:/im.test(robots) || existsSync(join(output, "sitemap.xml"))) {
-      problems.push("prelaunch build: unexpected sitemap; remove stale build output and rebuild with indexable: false");
+      problems.push("non-indexable build: unexpected sitemap; remove stale build output and rebuild with indexable: false");
     }
   }
   return problems;
@@ -104,7 +96,8 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
       console.error("Not publishing: the built site has unresolved launch requirements.\n");
       for (const problem of problems) console.error(`  ${problem}`);
       process.exitCode = 1;
-    } else console.log(site.indexable ? "Launch build: download, policy and indexing checks passed." : "Prelaunch build: download remains disabled; a noindex draft policy is allowed.");
+    } else if (site.indexable) console.log("Launch build: download, policy and indexing checks passed.");
+    else console.log(site.appStoreUrl ? "Download-ready build: launch checks passed; search indexing remains off." : "Staged build: downloads disabled; search indexing remains off.");
   } catch (error) {
     console.error(`Can't check _site. Run "npm run build" first. (${error.message})`);
     process.exitCode = 1;
