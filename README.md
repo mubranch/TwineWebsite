@@ -78,11 +78,15 @@ Below **400 CSS px**, the Air artwork is not shown or downloaded: each Mac captu
 
 | Page slot or reference | Layout / asset name / dimensions | Included screen |
 | --- | --- | --- |
-| Hero | MacBook Air M5 · `hero` · 1960 × 1280 | Main library with its website sidebar, saved passages and selected Wikipedia training-cost highlight, AI context and source: the product overview. |
+| Hero | MacBook Air M5 · `hero` · 2560 × 1664 | Safari on a Mac showing Apple Developer documentation with several yellow Twine highlights and the Twine extension toolbar badge. |
 | Mark up the web. | MacBook Air M5 · `capture` · 1960 × 1280 | The Twine library with its website sidebar, highlight list and one selected passage open in the details pane. |
 | Build and maintain your own library. | iPhone Duo · `library-duo` · 2000 × 1407 | One authentic landscape capture showing Wikipedia highlights on the left and the selected training-cost passage, source and actions on the right. No Background explanation is shown. |
 | Give AI tools access - through a local, read-only connection. | Mac window · `ai-access` · 1040 × 1436 | AI settings with AI Access enabled and connection controls visible. No access token value is displayed; this is Twine's integration surface, not a built-in chat. |
 | On-device context reference (not displayed on the home page) | iPhone 18 Pro · `context` · 1206 × 2622 | The highlight's details with its completed on-device AI context explanation and source. Retained for product documentation and shortcode tests. |
+
+The new hero capture is a light/dark pair of the Apple Developer documentation browser page. It remains inside the official MacBook Air M5 frame. The visible Safari window was trimmed to remove only its transparent margin and drop shadow: 1856 × 1214 px light and 1856 × 1215 px dark. It is centered unchanged on a plain light/dark neutral backdrop in the native 2560 × 1664 screen. No window content is cropped or stretched; this adds 0.0% source-pixel stretch/correction. The rounded transparent corners meet the neutral backdrop rather than the bezel. The old Safari article capture is retained under `capture-article-light/dark` asset names for reference but is no longer displayed.
+
+The Apple Developer documentation is Apple-owned third-party content. The owner must confirm rights and marketing-review risk before publication: using it as a product screenshot must not suggest endorsement or association with Apple, and a neutral public page would avoid this concern.
 
 The Duo's light/dark pair comes from `screenshots/iphone-duo/1-library-details-*.png` in the supplied review package. Its full-resolution WebP files decode to exactly the supplied pixels; the image is not split or composited. The other three displayed captures and every app/extension icon are unchanged. The package's 2560 × 1600 Mac captures do not fit the Air's 2560 × 1664 opening: they would need a new, unapproved 4% height stretch. Keep the existing Mac assets until native 2560 × 1664 replacements are supplied. The existing iPhone context capture remains available as the reference listed above.
 

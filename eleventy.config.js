@@ -49,7 +49,8 @@ export default function (eleventyConfig) {
     const credit = caption ? `<figcaption>${escapeHtml(caption)}</figcaption>` : "";
     const bezel = file && bezels[shape];
     // The owner approved a 0.46875% height correction for these existing Mac captures only.
-    const approvedMacFit = shape === "mac" && ["hero", "capture"].includes(name) && width === 1960 && height === 1280;
+    const approvedMacFit = shape === "mac" && ["hero", "capture"].includes(name) &&
+      ((width === 1960 && height === 1280) || (width === 2560 && height === 1664));
     if (bezel && (!Number.isFinite(width) || !Number.isFinite(height) || width <= 0 || height <= 0 ||
       (!approvedMacFit && Math.abs(height * bezel.screenWidth / width - bezel.screenHeight) > 0.5))) {
       throw new Error(`Screenshot ${name} needs dimensions matching the official ${shape} screen; provide a new capture instead of cropping or stretching it.`);

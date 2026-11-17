@@ -108,6 +108,16 @@ test("screenshot slots preserve captures in official renders and select one resp
     const responsive = shot("hero", "mac", "Mac library", "", true, "", 1960, 1280);
     assert.match(responsive, /src="\/images\/hero-light.webp" srcset="\/images\/hero-light-480.webp 480w, \/images\/hero-light-960.webp 960w, \/images\/hero-light.webp 1960w"/);
     assert.doesNotMatch(responsive, /hero-light.png|hero-light-1440/);
+
+    writeFileSync("src/static/images/hero-light.webp", "");
+    writeFileSync("src/static/images/hero-dark.webp", "");
+    const browserHero = shot("hero", "mac", "Safari with Twine highlights", "Apple Developer documentation capture", true, "Mac · Highlighted page in Safari", 2560, 1664);
+    assert.match(browserHero, /class="device device-mac device-render"/);
+    assert.match(browserHero, /fetchpriority="high"/);
+    assert.match(browserHero, /src="\/images\/hero-light.webp"/);
+    assert.match(browserHero, /srcset="\/images\/hero-dark.webp 2560w"/);
+    assert.match(browserHero, /width="2560" height="1664"/);
+    assert.match(browserHero, /<figcaption>Mac · Highlighted page in Safari<\/figcaption>/);
   } finally {
     process.chdir(original);
     rmSync(directory, { recursive: true, force: true });
