@@ -1,27 +1,27 @@
 ---
 layout: base.njk
-title: "Twine: Safari highlights for Mac and iPhone"
+title: "Twine: Your web knowledge base"
 ---
 <section class="hero" aria-labelledby="hero-title">
   <div class="hero-copy">
-    <h1 id="hero-title"><span class="line">Save the web that matters.</span> <span class="hl">Put your highlights to work.</span></h1>
-    <p class="lede">Highlight passages in Safari on Mac or iPhone. Twine keeps their source links, syncs your library through your private iCloud, and lets compatible AI tools on your Mac search what you've saved.</p>
+    <h1 id="hero-title"><span class="line">Your web knowledge base.</span> <span class="hl">Built from your highlights.</span></h1>
+    <p class="lede">Keep Safari highlights and their source links in one searchable library. It syncs between Mac and iPhone through your private iCloud. With Twine Pro, give compatible AI tools on your Mac read-only access.</p>
     <div class="actions">
       {% if site.appStoreUrl %}<a class="button" href="{{ site.appStoreUrl }}">Download for Mac</a>{% else %}<p class="status">Coming soon for Mac</p>{% endif %}
-      <a class="button button-quiet" href="#features">Explore the app</a>
+      <a class="button button-quiet" href="#features">See how Twine works</a>
     </div>
-    <p class="fineprint">Requires macOS {{ site.macOS }}. The iPhone app needs iOS {{ site.iOS }}.</p>
+    <p class="fineprint" id="requirements">Requires macOS {{ site.macOS }}. The iPhone app needs iOS {{ site.iOS }}.</p>
   </div>
   <div class="hero-visual">
-    {% shot "hero", "mac", "Twine on a Mac with a website sidebar, a highlight list and a selected Wikipedia passage about language model training costs, with its AI context and source.", "The Twine library with its website sidebar, highlight list and one passage open in the details pane. Use starter or public content.", true, "Mac · Your library, with every source in reach", 1960, 1280 %}
+    {% shot "hero", "mac", "Twine on a Mac with a website sidebar, a highlight list and a selected Wikipedia passage about language model training costs, with its AI context and source.", "The Twine library with its website sidebar, highlight list and one passage open in the details pane. Use starter or public content.", true, "Mac · Your library, organized by source", 1960, 1280 %}
   </div>
 </section>
 
 <div id="features" class="features">
   <section class="feature" aria-labelledby="capture-title">
     <div class="copy">
-      <h2 id="capture-title">Highlight in Safari. Keep the source.</h2>
-      <p>On Mac, select text and press <kbd>⌃⇧H</kbd>, or turn on auto-highlight. On iPhone, select text and choose Twine from Safari's page menu. Each highlight keeps its page title and a link back.</p>
+      <h2 id="capture-title">Add a passage. Keep its source.</h2>
+      <p>Select text in Safari, then press <kbd>⌃⇧H</kbd> on Mac or choose Twine from the page menu on iPhone. Auto-highlight on Mac saves new selections. Twine keeps the page title and source link.</p>
       <ul class="checks" role="list">
         <li>Saved highlights return when a page's text still matches</li>
         <li>Source links open at the saved passage</li>
@@ -30,14 +30,14 @@ title: "Twine: Safari highlights for Mac and iPhone"
       </ul>
     </div>
     <div class="media">
-      {% shot "capture", "mac", "The training section of Wikipedia's large language model article in Safari, with the passage about model training costs highlighted in yellow.", "Safari on a public article with one or two saved Twine highlights. No transient messages or recording needed.", false, "Mac · Save a passage in Safari", 1960, 1280 %}
+      {% shot "capture", "mac", "The training section of Wikipedia's large language model article in Safari, with the passage about model training costs highlighted in yellow.", "Safari on a public article with one or two saved Twine highlights. No transient messages or recording needed.", false, "Mac · A highlighted passage in Safari", 1960, 1280 %}
     </div>
   </section>
 
   <section class="feature feature-library" aria-labelledby="library-title">
     <div class="copy">
-      <h2 id="library-title">Find the highlight you need.</h2>
-      <p>Browse by website and page, search the words you remember, or narrow by date. Explore the included starter library, then add your own highlights. Copy or share them as plain text or Markdown.</p>
+      <h2 id="library-title">Find what you kept.</h2>
+      <p>Your highlights form one searchable library. Browse by website and page, search the words you remember, or narrow by date. Explore the included starter library, then add your own highlights. Copy passages as text or Markdown when you need them.</p>
       <ul class="checks" role="list">
         <li>Organized by website and page</li>
         <li>Search highlight text, page titles and websites</li>
@@ -46,14 +46,14 @@ title: "Twine: Safari highlights for Mac and iPhone"
       </ul>
     </div>
     <div class="media">
-      {% shot "library-duo", "duo", "Twine on iPhone Duo with its All Highlights library on the left and the selected Wikipedia training-cost passage, background explanation and actions on the right.", "iPhone Duo open in landscape orientation, with the library and selected highlight details visible side by side.", false, "iPhone Duo · Your library and the details, side by side", 2000, 1407 %}
+      {% shot "library-duo", "duo", "Twine on iPhone Duo with its All Highlights library on the left and the selected Wikipedia training-cost passage, background explanation and actions on the right.", "iPhone Duo open in landscape orientation, with the library and selected highlight details visible side by side.", false, "iPhone Duo · Your library, with the passage and its source", 2000, 1407 %}
     </div>
   </section>
 
   <section class="feature" aria-labelledby="ai-title">
     <div class="copy">
-      <h2 id="ai-title">Let your AI tools read your highlights.</h2>
-      <p>AI Access lets a compatible AI tool search your highlights, read the saved passages and link to their sources. Turn it on to run Twine's read-only MCP server on your Mac.</p>
+      <h2 id="ai-title">Let AI tools search your saved passages.</h2>
+      <p>With Twine Pro, turn on AI Access and keep Twine running on your Mac. Connect a compatible AI tool to search your library and read saved passages with their source links. The connection is read-only.</p>
       <ul class="prompts" role="list" aria-label="Example requests">
         <li>Find my highlights about onboarding and group them by theme.</li>
         <li>Compare what my saved sources say about remote work, with links to each page.</li>
@@ -62,19 +62,19 @@ title: "Twine: Safari highlights for Mac and iPhone"
       <ul class="checks" role="list">
         <li>Off until you turn it on, and reachable only from your Mac</li>
         <li>Protected by an access token you can replace at any time</li>
-        <li>Tools can search, read and export your highlights, but never change them</li>
+        <li>Tools can search, read and export highlights, but can't change them through this connection</li>
       </ul>
       <p class="note">Example requests for a connected AI tool, not a built-in Twine chat. Responses depend on your tool and the highlights you've saved.</p>
     </div>
     <div class="media media-settings">
-      {% shot "ai-access", "window", "Twine's AI settings on a Mac with AI Access enabled, a local server URL and controls to copy connection settings or regenerate the token; no token value is displayed.", "Twine Settings > AI > AI Access, with the local server enabled and connection controls visible. Keep access tokens concealed; no chat response needed.", false, "Mac · Connect the AI tools you choose", 1040, 1436 %}
+      {% shot "ai-access", "window", "Twine's AI settings on a Mac with AI Access enabled, a local server URL and controls to copy connection settings or regenerate the token; no token value is displayed.", "Twine Settings > AI > AI Access, with the local server enabled and connection controls visible. Keep access tokens concealed; no chat response needed.", false, "Mac · Read-only access for connected AI tools", 1040, 1436 %}
     </div>
   </section>
 
   <section class="feature" aria-labelledby="context-title">
     <div class="copy">
-      <h2 id="context-title">See how a passage fits.</h2>
-      <p>AI context uses Apple Intelligence on your device to explain how a highlight fits into the surrounding text. Read the explanation under <strong>Background</strong> in the highlight's details.</p>
+      <h2 id="context-title">Keep the passage in context.</h2>
+      <p>Twine Pro's on-device AI context can explain how a highlight fits into the surrounding text. Read it under <strong>Background</strong> in the highlight's details. The explanation stays with the highlight, but isn't included in AI Access.</p>
       <ul class="checks" role="list">
         <li>Off until you turn it on</li>
         <li>Saved with the highlight and synced to your other devices</li>
@@ -82,7 +82,7 @@ title: "Twine: Safari highlights for Mac and iPhone"
       </ul>
     </div>
     <div class="media">
-      {% shot "context", "phone", "An iPhone showing the highlighted Wikipedia training-cost passage, its Background explanation, the Refresh control and the source.", "An iPhone highlight detail with a completed AI context explanation. Use a public passage with enough surrounding text; avoid loading or unavailable states.", false, "iPhone · Read a passage in context", 1206, 2622 %}
+      {% shot "context", "phone", "An iPhone showing the highlighted Wikipedia training-cost passage, its Background explanation, the Refresh control and the source.", "An iPhone highlight detail with a completed AI context explanation. Use a public passage with enough surrounding text; avoid loading or unavailable states.", false, "iPhone · The passage and its on-device explanation", 1206, 2622 %}
     </div>
   </section>
 </div>
@@ -105,7 +105,7 @@ title: "Twine: Safari highlights for Mac and iPhone"
 {% if site.pricing %}{% include "draft/pricing.njk" %}{% endif %}
 
 <section class="faq" aria-labelledby="faq-title">
-  <h2 id="faq-title">Questions</h2>
+  <h2 id="faq-title">Questions about Twine</h2>
   <div class="faq-list">
     <details id="faq-ai-tools">
       <summary>Which AI tools can connect to Twine?</summary>
@@ -137,7 +137,7 @@ title: "Twine: Safari highlights for Mac and iPhone"
     </details>
     <details>
       <summary>Which languages and devices does Twine support?</summary>
-      <p>Twine is available in English, German, Spanish, French and Russian. It needs a Mac with macOS {{ site.macOS }} and, for the iPhone app, iOS {{ site.iOS }}. This website is in English for now.</p>
+      <p>Twine is available in English, German, Spanish, French and Russian, for Mac and iPhone. See the <a href="#requirements">system requirements</a> above. This website is in English for now.</p>
     </details>
     {%- if site.pricing %}
     {% include "draft/pricing-faq.njk" %}
@@ -152,8 +152,8 @@ title: "Twine: Safari highlights for Mac and iPhone"
 <section class="closing" aria-labelledby="closing-title">
   <div class="closing-panel">
     <img src="/icon-extension.webp" alt="" width="88" height="88" loading="lazy" decoding="async">
-    <h2 id="closing-title">Make your next draft start with what you've read.</h2>
-    <p>Save useful passages in Safari on Mac or iPhone. Find the source when you need it, or let a compatible AI tool work with your library.</p>
+    <h2 id="closing-title">Start your web knowledge base.</h2>
+    <p>Save a passage in Safari. Keep its source. Find it again on Mac or iPhone, or let a connected AI tool on your Mac search your library with Twine Pro.</p>
     {% if site.appStoreUrl %}<a class="button button-dark" href="{{ site.appStoreUrl }}">Download for Mac</a>{% else %}<p class="status status-on-mark">Coming soon for Mac</p>{% endif %}
   </div>
 </section>

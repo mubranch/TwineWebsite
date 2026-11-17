@@ -46,6 +46,8 @@ App icon URLs in `src/_includes/base.njk` carry a cache version (`v=blue-app`) s
 
 Keep the voice plainspoken, calm and specific, following the voice definition in Twine's `WebsiteCopy.md`. Use **highlight** for a saved item, **passage** for its quoted text, **library** for the collection, **AI Access** for the Mac's MCP connection, and **AI context** for the on-device feature. **Background** is the label shown above that feature's explanation in highlight details; it is not a second feature.
 
+Position Twine as a web knowledge base built from saved passages and source links. Keep that phrase for the main positioning rather than repeating it through the feature copy; use library, highlights, passages and sources for concrete actions.
+
 The copy was checked against `mubranch/Twine` main at `0b61156694`. Safari capture is implemented on Mac and iPhone. Chromium and Firefox packaging is merged and Pro-gated, but `BrowserExtensionIdentity.chromeExtensionID` is empty and the app hides browser setup until it is configured. The Pro value proposition and feedback options identify those Mac extensions as **Coming soon**, as requested by the owner. Do not describe them as available or add store links before that release decision. The app and Safari extension target iPhone, not iPad, despite an iPad mention in the beta release notes.
 
 Keep launch switches and the draft privacy policy under owner control. The owner-approved website-name lookup paragraph is included alongside favicon requests, but the policy still needs a complete owner review; it must not be treated as approved for publication merely because that paragraph or the product copy has been updated.
@@ -71,10 +73,10 @@ Below **400 CSS px**, the Air artwork is not shown or downloaded: each Mac captu
 | Page slot | Layout / asset name / dimensions | Included screen |
 | --- | --- | --- |
 | Hero | MacBook Air M5 · `hero` · 1960 × 1280 | Main library with its website sidebar, saved passages and selected Wikipedia training-cost highlight, AI context and source: the product overview. |
-| Highlight in Safari | MacBook Air M5 · `capture` · 1960 × 1280 | Wikipedia's large language model article with the training-cost passage highlighted: the saved result, without a fleeting Undo message. |
-| Find the highlight you need | iPhone Duo · `library-duo` · 2000 × 1407 | One authentic landscape capture showing All Highlights on the left and the selected passage's details on the right. |
-| AI tools | Mac window · `ai-access` · 1040 × 1436 | AI settings with AI Access enabled and connection controls visible. No access token value is displayed; this is Twine's integration surface, not a built-in chat. |
-| See how a passage fits | iPhone 18 Pro · `context` · 1206 × 2622 | The highlight's details with its completed on-device AI context explanation and source. |
+| Add a passage. Keep its source. | MacBook Air M5 · `capture` · 1960 × 1280 | Wikipedia's large language model article with the training-cost passage highlighted: the saved result, without a fleeting Undo message. |
+| Find what you kept. | iPhone Duo · `library-duo` · 2000 × 1407 | One authentic landscape capture showing All Highlights on the left and the selected passage's details on the right. |
+| Let AI tools search your saved passages. | Mac window · `ai-access` · 1040 × 1436 | AI settings with AI Access enabled and connection controls visible. No access token value is displayed; this is Twine's integration surface, not a built-in chat. |
+| Keep the passage in context. | iPhone 18 Pro · `context` · 1206 × 2622 | The highlight's details with its completed on-device AI context explanation and source. |
 
 For replacements, use starter or public content only; conceal access tokens, personal account details and notifications. Keep light/dark dimensions and subjects matched, and update the alt text and width/height in the corresponding `shot` call in `src/index.njk`.
 
