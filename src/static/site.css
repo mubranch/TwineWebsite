@@ -206,6 +206,10 @@ img {
   line-height: 1.6;
 }
 
+.site-footer .made-by {
+  flex-basis: 100%;
+}
+
 /* Download controls stay disabled until a store URL is supplied. */
 .button {
   display: inline-flex;
@@ -367,6 +371,14 @@ img {
   line-height: 1.5;
 }
 
+.eyebrow,
+.copy > .eyebrow {
+  color: var(--accent);
+  font-size: 0.875rem;
+  font-weight: 650;
+  letter-spacing: 0.04em;
+}
+
 .actions {
   display: flex;
   flex-wrap: wrap;
@@ -398,6 +410,37 @@ img {
 .hero-visual {
   width: min(100% - 2 * var(--gutter), 66rem);
   margin: clamp(2rem, 5vw, 3.5rem) auto 0;
+}
+
+.proof,
+.comparison {
+  width: min(100% - 2 * var(--gutter), var(--wrap));
+  margin-inline: auto;
+}
+
+.proof {
+  margin-top: clamp(2rem, 5vw, 3.5rem);
+  padding-block: 1.5rem;
+  border-block: 1px solid var(--line);
+}
+
+.proof ul {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.25rem 2rem;
+  padding: 0;
+  list-style: none;
+}
+
+.proof li {
+  display: grid;
+  align-content: start;
+  gap: 0.25rem;
+  font-size: 0.95rem;
+}
+
+.proof span {
+  color: var(--muted);
 }
 
 /* Official device artwork stays whole; the portrait Mac capture uses a window. */
@@ -691,6 +734,60 @@ h2 {
   font-size: clamp(2.2rem, 5vw, 3.6rem);
 }
 
+.band .wrap > div {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.band .more {
+  margin-top: 0;
+}
+
+.comparison {
+  padding-top: clamp(3.5rem, 9vw, 7rem);
+}
+
+.comparison table {
+  table-layout: fixed;
+  margin-top: 2rem;
+  overflow-wrap: anywhere;
+}
+
+.comparison caption {
+  padding-bottom: 1rem;
+  color: var(--muted);
+  text-align: left;
+}
+
+.comparison-feature {
+  width: 34%;
+}
+
+.comparison-twine {
+  width: 30%;
+}
+
+.comparison th,
+.comparison td {
+  padding: clamp(0.4rem, 1.2vw, 0.875rem);
+}
+
+.comparison th[scope="row"] {
+  font-weight: 600;
+}
+
+.comparison td:nth-child(2),
+.comparison th:nth-child(2) {
+  background: var(--soft);
+}
+
+.comparison-foot {
+  max-width: 42rem;
+  margin: 1.5rem auto 0;
+  color: var(--muted);
+  text-align: center;
+}
+
 .more {
   margin-top: 1.75rem;
 }
@@ -965,6 +1062,37 @@ td {
   font-size: 1.25rem;
 }
 
+.plan .button {
+  justify-self: start;
+  max-width: 100%;
+  padding-block: 0.65rem;
+}
+
+.pro-value {
+  display: grid;
+  gap: 1.25rem;
+  max-width: 48rem;
+  margin: 2rem auto 0;
+}
+
+.pro-value h3 {
+  font-size: 1.5rem;
+}
+
+.pro-value ol {
+  padding-left: 1.5rem;
+  color: var(--muted);
+}
+
+.pro-value li + li {
+  margin-top: 1rem;
+}
+
+.pro-value strong {
+  display: block;
+  color: var(--ink);
+}
+
 .price {
   color: var(--muted);
 }
@@ -992,10 +1120,20 @@ td {
 
 /* Small screens: stacked copy; supplied images keep their natural proportions */
 @media (max-width: 52em) {
+  .proof ul {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .feature,
   .band .wrap,
   .faq {
     grid-template-columns: 1fr;
+  }
+
+  @media (max-width: 30em) {
+    .proof ul {
+      grid-template-columns: 1fr;
+    }
   }
 
   .feature:nth-of-type(even) .copy {
@@ -1012,6 +1150,10 @@ td {
 }
 
 @media (max-width: 40em) {
+  html {
+    scroll-padding-top: 11rem;
+  }
+
   .hero-copy {
     justify-items: start;
     text-align: left;

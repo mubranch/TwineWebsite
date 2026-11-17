@@ -19,6 +19,8 @@ Twine needs macOS {{ site.macOS }} on Mac or iOS {{ site.iOS }} on iPhone. The a
 - [Other browsers](#other-browsers)
 - [Your library](#your-library)
 - [Sync with iCloud](#sync-with-icloud)
+{% if site.pricing %}- [Unlock Twine Pro](#unlock-twine-pro)
+{% endif %}
 - [Connect an AI tool](#connect-an-ai-tool)
 - [On-device AI context](#on-device-ai-context)
 - [Troubleshooting](#troubleshooting)
@@ -66,7 +68,7 @@ On both devices, a highlight can be up to 5,000 characters, a page can hold 500 
 
 ## Other browsers
 
-Safari is the supported browser for this release. Chrome, Chromium-based browsers and Firefox extensions aren't available to install. Safari highlighting is part of Free on Mac and iPhone.
+Twine is built for Safari. Chrome, other Chromium browsers, and Firefox aren't supported in this release. Safari highlighting is part of Free on Mac and iPhone.
 
 ## Your library
 
@@ -75,7 +77,7 @@ Open Twine to browse everything you've saved.
 - **Browse** by website and page in the sidebar. The included starter library gives you examples to explore.
 - **Search** the words in your highlights, page titles and websites. Narrow a search by website, page or period: Today, Past Week or Past Month.
 - **Sort** by Newest First, Oldest First, Page Order, Source A to Z or Text A to Z.
-- **Details** show the source, when you added the highlight and its word count, plus **More from This Page**. Open the source in Safari, copy the text or a link, copy as Markdown, share, or delete. If AI context is on, its explanation appears under **Background**.
+- **Details** show the source, when you added the highlight and its word count, plus **More from This Page**. Open the source in Safari, copy the plain text, copy a link, copy as Markdown with the source link, share, or delete. If AI context is on, its explanation appears under **Background**.
 - **Menu bar:** recent highlights appear under Twine's menu-bar icon. Choose how many in **Settings → General**.
 - **Spotlight and Shortcuts:** while **Show Highlights in Spotlight, Siri and Shortcuts** is on, highlights appear in Spotlight and the **Open Highlight** action in Shortcuts opens one. The switch is in **Settings → Library** on Mac and in the Spotlight section of Settings on iPhone.
 - **Spotlight results:** in the same section of Settings, choose whether a result opens in Safari or shows its highlight in Twine.
@@ -88,6 +90,16 @@ Twine syncs your highlights through your private iCloud database. There's no Twi
 - **From Mac:** Safari saves the highlight locally. It reaches iCloud **while Twine is running on your Mac**. Closing the window leaves Twine running. Choose **Quit** from the menu-bar icon to stop it, or turn on **Launch at Login** in **Settings → General** to start it with your Mac.
 - **From iPhone:** open Twine after highlighting in Safari. The extension can't upload to iCloud by itself, and a new highlight waits on that device until you open the app.
 - Deletions and library resets reach your other devices when Twine syncs. A reset covers highlights already stored on this device; the [privacy policy](/privacy#deleting-your-data) explains the limits.
+
+{% if site.pricing %}
+## Unlock Twine Pro
+
+The highlight library, Safari capture, search, sync, Markdown copy, Spotlight and Shortcuts are free. Pro adds AI Access on Mac and on-device AI context.
+
+Open **Twine → Settings → Twine Pro** and choose **Unlock** (or **Unlock for** the displayed price). If you've already bought Pro, choose **Restore Purchases** instead. The website doesn't sell or unlock Pro.
+
+Pro is a $4.99 one-time in-app purchase, not a subscription. That's the US-dollar price; the App Store shows your local price. AI tools and their provider fees are separate.
+{% endif %}
 
 ## Connect an AI tool
 

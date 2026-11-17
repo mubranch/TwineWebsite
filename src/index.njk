@@ -1,34 +1,45 @@
 ---
 layout: base.njk
-title: "Twine: Your web knowledge base"
+title: "Twine — A private highlight library for Safari on Mac and iPhone"
+socialDescription: "Highlight in Safari. Find it later. Keep it private. Twine for Mac and iPhone."
 ---
 <section class="hero" aria-labelledby="hero-title">
   <div class="hero-copy">
-    <h1 id="hero-title"><span class="line">Your web knowledge base.</span> <span class="hl">Built from your highlights.</span></h1>
-    <p class="lede">Keep Safari highlights and their source links in one searchable library. It syncs between Mac and iPhone through your private iCloud. With Twine Pro, give compatible AI tools on your Mac read-only access.</p>
+    <p class="eyebrow">For Safari on Mac and iPhone</p>
+    <h1 id="hero-title"><span class="line">Everything you highlight in Safari,</span> <span class="hl">in one private library.</span></h1>
+    <p class="lede">Select a passage and Twine keeps it with a link back to the exact spot on the page. Search it all later. No account — your library syncs through your private iCloud.</p>
     <div class="actions">
-      {% if site.appStoreUrl %}<a class="app-store-badge" href="{{ site.appStoreUrl | escape }}" aria-label="Download Twine on the Mac App Store"><img src="/mac-app-store-badge.svg" width="156" height="40" alt=""></a>{% else %}<button class="button" type="button" disabled aria-label="Download Twine for Mac, not yet available">Download for Mac</button>{% endif %}
+      {% if site.appStoreUrl %}<a class="app-store-badge" href="{{ site.appStoreUrl | escape }}" aria-label="Download for Mac — Free on the Mac App Store"><img src="/mac-app-store-badge.svg" width="156" height="40" alt=""></a>{% else %}<button class="button" type="button" disabled>Coming soon to the App Store</button>{% endif %}
       <a class="button button-quiet" href="#features">See how Twine works</a>
     </div>
-    {% if not site.appStoreUrl %}<p class="fineprint">Available after App Store approval.</p>{% endif %}
-    <p class="fineprint" id="requirements">Requires macOS {{ site.macOS }}. The iPhone app needs iOS {{ site.iOS }}.</p>
+    <p class="fineprint" id="requirements">{% if site.appStoreUrl %}Free to use. Pro is $4.99 once — no subscription.{% else %}Pending App Store approval. Free to use; Pro is $4.99 once.{% endif %} Requires macOS {{ site.macOS }} on Mac and iOS {{ site.iOS }} on iPhone.</p>
   </div>
   <div class="hero-visual">
     {% shot "hero", "mac", "Twine on a Mac with a website sidebar, a highlight list and a selected Wikipedia passage about language model training costs, with its AI context and source.", "The Twine library with its website sidebar, highlight list and one passage open in the details pane. Use starter or public content.", true, "Mac · Your library, organized by source", 1960, 1280 %}
   </div>
 </section>
 
+<section class="proof" aria-label="Twine at a glance">
+  <ul role="list">
+    <li><strong>No account</strong><span>nothing to sign up for</span></li>
+    <li><strong>Private iCloud sync</strong><span>Mac and iPhone</span></li>
+    <li><strong>No ads, trackers, or developer-run analytics</strong></li>
+    <li><strong>$4.99 once for Pro</strong><span>no subscription</span></li>
+  </ul>
+</section>
+
 <div id="features" class="features">
   <section class="feature" aria-labelledby="capture-title">
     <div class="copy">
-      <h2 id="capture-title">Add a passage. Keep its source.</h2>
-      <p>Select text in Safari, then press <kbd>⌃⇧H</kbd> on Mac or choose Twine from the page menu on iPhone. Auto-highlight on Mac saves new selections. Twine keeps the page title and source link.</p>
+      <h2 id="capture-title">Highlight where you already read.</h2>
+      <p>Twine works inside Safari, on the page itself. There's no separate reader to send articles to and nothing to paste.</p>
       <ul class="checks" role="list">
-        <li>Saved highlights return when a page's text still matches</li>
-        <li>Source links open at the saved passage</li>
-        <li>Option-click to remove on Mac, or double-tap on iPhone</li>
-        <li>Undo a removal from the page</li>
+        <li><span><strong>On Mac:</strong> select text and press <kbd>⌃⇧H</kbd>. Or turn on auto-highlight to save selections as you read.</span></li>
+        <li><span><strong>On iPhone:</strong> select text and tap Twine in Safari's page menu.</span></li>
+        <li><span><strong>Always with its source:</strong> each highlight keeps the page title and a link that opens the page scrolled to the passage.</span></li>
+        <li><span><strong>Still there when you come back:</strong> revisit a page and your highlights reappear, as long as the text and surrounding context still match.</span></li>
       </ul>
+      <p class="note">Changed your mind? Remove a highlight with Option-click on Mac or a double-tap on iPhone, and undo it for a few seconds.</p>
     </div>
     <div class="media">
       {% shot "capture", "mac", "The training section of Wikipedia's large language model article in Safari, with the passage about model training costs highlighted in yellow.", "Safari on a public article with one or two saved Twine highlights. No transient messages or recording needed.", false, "Mac · A highlighted passage in Safari", 1960, 1280 %}
@@ -37,14 +48,16 @@ title: "Twine: Your web knowledge base"
 
   <section class="feature feature-library" aria-labelledby="library-title">
     <div class="copy">
-      <h2 id="library-title">Find what you kept.</h2>
-      <p>Your highlights form one searchable library. Browse by website and page, search the words you remember, or narrow by date. Explore the included starter library, then add your own highlights. Copy passages as text or Markdown when you need them.</p>
+      <h2 id="library-title">Remember three words. Find the whole passage.</h2>
+      <p>Every highlight goes into one library on your Mac and iPhone. Search for the words you remember, browse by website and page, or filter to today, the past week, or the past month.</p>
       <ul class="checks" role="list">
-        <li>Organized by website and page</li>
-        <li>Search highlight text, page titles and websites</li>
-        <li>A shared library on Mac and iPhone through your private iCloud</li>
-        <li>Find highlights in Spotlight or open them from Shortcuts</li>
+        <li><span><strong>Search everything</strong> in your library</span></li>
+        <li><span><strong>Jump back to the source</strong> in one click</span></li>
+        <li><span><strong>Copy as Markdown</strong> with the link, or as plain text, for your notes</span></li>
+        <li><span><strong>Find highlights in Spotlight</strong> and use them in Shortcuts</span></li>
+        <li><span><strong>Recent highlights in the menu bar</strong> on Mac</span></li>
       </ul>
+      <p>All of this is free.</p>
     </div>
     <div class="media">
       {% shot "library-duo", "duo", "Twine on iPhone Duo with Wikipedia highlights on the left and the selected training-cost passage, source and actions on the right.", "iPhone Duo open in landscape orientation, with the library and selected highlight details visible side by side.", false, "iPhone Duo · Wikipedia highlights and the selected passage", 2000, 1407 %}
@@ -53,19 +66,22 @@ title: "Twine: Your web knowledge base"
 
   <section class="feature" aria-labelledby="ai-title">
     <div class="copy">
-      <h2 id="ai-title">Let AI tools search your saved passages.</h2>
-      <p>With Twine Pro, turn on AI Access and keep Twine running on your Mac. Connect a compatible AI tool to search your library and read saved passages with their source links. The connection is read-only.</p>
+      <p class="eyebrow">Twine Pro</p>
+      <h2 id="ai-title">Give your AI tools your reading — through a local, read-only connection.</h2>
+      <p>Your AI assistant knows the internet. It doesn't know what <em>you</em> found worth keeping. AI Access lets a compatible AI tool on your Mac search and read your highlights, each with its source link, so its answers can draw on what you've actually read.</p>
       <ul class="prompts" role="list" aria-label="Example requests">
-        <li>Find my highlights about onboarding and group them by theme.</li>
-        <li>Compare what my saved sources say about remote work, with links to each page.</li>
-        <li>Use my highlights from the past week to outline a research brief, and list the excerpts you used.</li>
+        <li>“What have I highlighted about pricing strategy? Cite the sources.”</li>
+        <li>“Summarize what I saved this week.”</li>
+        <li>“Find the passage I highlighted about sleep and memory, and link me to it.”</li>
+        <li>“Draft an outline from my highlights on urban planning.”</li>
       </ul>
       <ul class="checks" role="list">
-        <li>Off until you turn it on, and reachable only from your Mac</li>
-        <li>Protected by an access token you can replace at any time</li>
-        <li>Tools can search, read and export highlights, but can't change them through this connection</li>
+        <li><span><strong>Local.</strong> Twine runs the connection on your Mac. Your library isn't uploaded to a developer-run server.</span></li>
+        <li><span><strong>Read-only.</strong> AI tools can search and read. They cannot add, edit, or delete through this connection.</span></li>
+        <li><span><strong>Off by default.</strong> Nothing is shared through AI Access until you turn it on.</span></li>
+        <li><span><strong>Yours to revoke.</strong> Access uses a token you can replace at any time.</span></li>
       </ul>
-      <p class="note">Example requests for a connected AI tool, not a built-in Twine chat. Responses depend on your tool and the highlights you've saved.</p>
+      <p class="note">Works with compatible AI tools on your Mac that support local MCP servers over HTTP with a bearer token. Cloud-hosted chat services can't reach it. Twine must be running. AI tools and their provider fees are separate. A connected tool handles what it reads under its own policy; these are example requests, not guaranteed answers.</p>
     </div>
     <div class="media media-settings">
       {% shot "ai-access", "window", "Twine's AI settings on a Mac with AI Access enabled, a local server URL and controls to copy connection settings or regenerate the token; no token value is displayed.", "Twine Settings > AI > AI Access, with the local server enabled and connection controls visible. Keep access tokens concealed; no chat response needed.", false, "Mac · Read-only access for connected AI tools", 1040, 1436 %}
@@ -74,13 +90,10 @@ title: "Twine: Your web knowledge base"
 
   <section class="feature" aria-labelledby="context-title">
     <div class="copy">
-      <h2 id="context-title">Keep the passage in context.</h2>
-      <p>Twine Pro's on-device AI context can explain how a highlight fits into the surrounding text. Read it under <strong>Background</strong> in the highlight's details. The explanation stays with the highlight, but isn't included in AI Access.</p>
-      <ul class="checks" role="list">
-        <li>Off until you turn it on</li>
-        <li>Saved with the highlight and synced to your other devices</li>
-        <li>Writing or refreshing an explanation needs Apple Intelligence</li>
-      </ul>
+      <p class="eyebrow">Twine Pro</p>
+      <h2 id="context-title">Remember why you saved it.</h2>
+      <p>A highlight out of context is easy to misread six months later. With Pro, Twine can add a short note explaining how each passage fits the text around it. The note is written on your device by Apple Intelligence, saved with the highlight, and synced through your iCloud.</p>
+      <p class="note">Off by default. Requires Apple Intelligence and a supported language. Context notes are not shared with AI Access tools.</p>
     </div>
     <div class="media">
       {% shot "context", "phone", "An iPhone showing the highlighted Wikipedia training-cost passage, its Background explanation, the Refresh control and the source.", "An iPhone highlight detail with a completed AI context explanation. Use a public passage with enough surrounding text; avoid loading or unavailable states.", false, "iPhone · The passage and its on-device explanation", 1206, 2622 %}
@@ -90,17 +103,39 @@ title: "Twine: Your web knowledge base"
 
 <section class="band" aria-labelledby="privacy-title">
   <div class="wrap">
-    <h2 id="privacy-title">Your library stays yours.</h2>
+    <h2 id="privacy-title">Twine doesn't send us your library. We built it that way.</h2>
     <div>
+      <p>What you read and what you choose to keep says a lot about you. Twine has no account system and no developer-run library server. Your highlights live on your own devices and in your private iCloud.</p>
       <ul class="checks" role="list">
-        <li>No Twine account to create</li>
-        <li>Highlights live on your devices and sync through your private iCloud. Twine doesn't send your library to the developer.</li>
-        <li>No ads, trackers or developer-run analytics, in the app or on this site.</li>
-        <li>AI Access is off until you turn it on. The connection stays on your Mac; a tool you connect handles what it reads under its own privacy policy.</li>
+        <li><span><strong>No account.</strong> Install and start highlighting.</span></li>
+        <li><span><strong>No developer library server.</strong> Sync runs through your private iCloud database.</span></li>
+        <li>No ads, trackers, or developer-run analytics.</li>
+        <li><span><strong>AI on your terms.</strong> AI Access is local, read-only, and off until you switch it on.</span></li>
       </ul>
+      <p class="note">Highlighted websites receive display-name and icon requests. Optional Apple diagnostics, support messages and public GitHub feedback are covered in the privacy policy. A connected AI tool handles what it reads under its own policy.</p>
       <p class="more"><a class="text-link" href="/privacy">Read the privacy policy</a></p>
     </div>
   </div>
+</section>
+
+<section id="why-twine" class="comparison" aria-labelledby="comparison-title">
+  <div class="section-head">
+    <h2 id="comparison-title">Twine asks for neither an account nor a monthly fee.</h2>
+  </div>
+  <table>
+    <caption>Twine and what to compare in another highlighter or read-later service</caption>
+    <colgroup><col class="comparison-feature"><col class="comparison-twine"><col></colgroup>
+    <thead><tr><th scope="col">Feature</th><th scope="col">Twine</th><th scope="col">What to check in another service</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Highlights on the live page in Safari, Mac and iPhone</th><td>Yes</td><td>Live-page support on both devices, or a separate reader?</td></tr>
+      <tr><th scope="row">Account required</th><td>No</td><td>Is an account required?</td></tr>
+      <tr><th scope="row">Where your library lives</th><td>Your devices and your private iCloud</td><td>The company's cloud, or storage you control?</td></tr>
+      <tr><th scope="row">Sync</th><td>Free, via iCloud</td><td>Included, or part of a paid tier?</td></tr>
+      <tr><th scope="row">AI access to your highlights</th><td>Local and read-only, on your Mac, with Pro</td><td>A local connection, or a cloud integration?</td></tr>
+      <tr><th scope="row">Price</th><td>Free; Pro $4.99 once</td><td>A subscription or a one-time price?</td></tr>
+    </tbody>
+  </table>
+  <p class="comparison-foot">If you read in Safari and want your highlights to stay yours, Twine is built for exactly that.</p>
 </section>
 
 {% if site.pricing %}{% include "draft/pricing.njk" %}{% endif %}
@@ -108,44 +143,52 @@ title: "Twine: Your web knowledge base"
 <section class="faq" aria-labelledby="faq-title">
   <h2 id="faq-title">Questions about Twine</h2>
   <div class="faq-list">
-    <details id="faq-ai-tools">
-      <summary>Which AI tools can connect to Twine?</summary>
-      <p>Use a tool on your Mac that supports local MCP servers over HTTP and bearer-token authentication. Some tools need a connector or a config file. Twine can copy its connection settings as JSON. Cloud-hosted chat services can't reach your Mac directly. Follow the <a href="/docs#connect-an-ai-tool">connection guide</a> to check your setup.</p>
-    </details>
-    <details>
-      <summary>Can an AI tool change my highlights?</summary>
-      <p>No. The connection is read-only. A connected tool can read your whole library, so keep the access token private. Turn AI Access off, or regenerate the token, to cut a tool off.</p>
-    </details>
     <details>
       <summary>Do I need an account? Where does my data live?</summary>
-      <p>There's no Twine account. Your highlights are stored on your devices and sync through your own private iCloud. Twine doesn't send your library to the developer. The <a href="/privacy">privacy policy</a> explains optional support messages and Apple's diagnostic reports.</p>
-    </details>
-    <details id="faq-iphone-sync">
-      <summary>When do Safari highlights sync between my devices?</summary>
-      <p>You can save highlights in Safari on both Mac and iPhone. On iPhone, select text and choose Twine from Safari's page menu. On Mac, Twine uploads highlights while the app is running. Closing its window doesn't quit it. On iPhone, open Twine after highlighting so the new highlights can upload to iCloud. Use the same Apple Account on both devices. The <a href="/docs#sync-with-icloud">sync guide</a> explains the steps.</p>
-    </details>
-    <details id="faq-private-browsing">
-      <summary>Does Twine work in Private Browsing?</summary>
-      <p>No. Twine doesn't save, show or remove highlights in Private Browsing windows.</p>
-    </details>
-    <details>
-      <summary>Does it work on every web page?</summary>
-      <p>Twine needs selectable text and permission to run on the site in Safari. It leaves text fields alone. Highlights return only when the page's text and surrounding context still match, so changed pages may not show every saved highlight.</p>
-    </details>
-    <details>
-      <summary>Do I need Apple Intelligence?</summary>
-      <p>Only to write or refresh an AI context explanation. You can read an explanation that synced from another device without generating it again. Saving highlights, syncing and AI Access don't need Apple Intelligence.</p>
-    </details>
-    <details>
-      <summary>Which languages and devices does Twine support?</summary>
-      <p>Twine is available in English, German, Spanish, French and Russian, for Mac and iPhone. See the <a href="#requirements">system requirements</a> above. This website is in English for now.</p>
+      <p>No account. Your highlights live on your devices and in your private iCloud database. Twine doesn't send your library to the developer. The <a href="/privacy">privacy policy</a> explains website lookups, optional diagnostics, support messages and connected AI tools.</p>
     </details>
     {%- if site.pricing %}
     {% include "draft/pricing-faq.njk" %}
     {%- endif %}
+    <details id="faq-ai-tools">
+      <summary>Which AI tools can connect to Twine?</summary>
+      <p>Use a compatible tool on your Mac that supports local MCP servers over HTTP with bearer-token authentication. Cloud-hosted chat services can't reach Twine, because it only listens on your Mac. Some tools need a connector or config file; see the <a href="/docs#connect-an-ai-tool">connection guide</a>.</p>
+    </details>
+    <details>
+      <summary>Can an AI tool change my highlights?</summary>
+      <p>No. AI Access is read-only. Tools can search, list, read, and export your highlights, but can't add, edit, or delete them through this connection. A tool with the token can read your whole library; turn AI Access off or replace the token to revoke access.</p>
+    </details>
+    <details>
+      <summary>Do I need Apple Intelligence?</summary>
+      <p>Only to write or refresh on-device AI context. You can read a note synced from another device without generating it again. Highlighting, the library, sync, and AI Access all work without it.</p>
+    </details>
+    <details id="faq-iphone-sync">
+      <summary>When do highlights sync between my devices?</summary>
+      <p>On Mac, highlights sync while Twine is running. On iPhone, highlights made in Safari sync the next time you open Twine. Select text and tap Twine in Safari's page menu, then open the app to upload. Use the same Apple Account on both devices; see the <a href="/docs#sync-with-icloud">sync guide</a>.</p>
+    </details>
+    <details id="faq-browsers">
+      <summary>Does Twine work in other browsers?</summary>
+      <p>Twine is built for Safari. Chrome, other Chromium browsers, and Firefox aren't supported in this release.</p>
+    </details>
+    <details id="faq-private-browsing">
+      <summary>Does Twine work in Private Browsing?</summary>
+      <p>No. Twine doesn't save or show highlights in Private Browsing.</p>
+    </details>
+    <details>
+      <summary>Does it work on every web page?</summary>
+      <p>It works on standard web pages with selectable text and permission to run in Safari. Twine leaves text fields alone. If a page's text or surrounding context changes, the highlight may not reappear on the page, but it stays in your library.</p>
+    </details>
+    <details>
+      <summary>Are there limits?</summary>
+      <p>A single highlight can be up to 5,000 characters, with up to 500 highlights per page. Twine saves up to 30 new highlights a minute; auto-highlight on Mac skips selections over 1,000 characters.</p>
+    </details>
+    <details>
+      <summary>Which devices and languages does Twine support?</summary>
+      <p>Mac with macOS {{ site.macOS }} and iPhone with iOS {{ site.iOS }}. Twine is available in English, German, Spanish, French, and Russian. See the <a href="#requirements">system requirements</a>.</p>
+    </details>
     <details>
       <summary>How do I get help?</summary>
-      <p>Read the <a href="/docs">docs</a>, <a href="{{ site.feedbackUrl }}">send app or extension feedback on GitHub</a>, or <a href="/support">contact support</a> privately.</p>
+      <p>Email <a href="mailto:{{ site.email }}">{{ site.email }}</a>. Twine is made by one developer, and you'll hear back from him directly. There is no live chat or guaranteed response time. You can also read the <a href="/docs">docs</a>, <a href="{{ site.feedbackUrl }}">send public feedback on GitHub</a>, or visit <a href="/support">support</a>.</p>
     </details>
   </div>
 </section>
@@ -153,8 +196,8 @@ title: "Twine: Your web knowledge base"
 <section class="closing" aria-labelledby="closing-title">
   <div class="closing-panel">
     <img src="/icon-extension.webp" alt="" width="88" height="88" loading="lazy" decoding="async">
-    <h2 id="closing-title">Start your web knowledge base.</h2>
-    <p>Save a passage in Safari. Keep its source. Find it again on Mac or iPhone, or let a connected AI tool on your Mac search your library with Twine Pro.</p>
-    {% if site.appStoreUrl %}<a class="button button-dark" href="{{ site.appStoreUrl | escape }}">Download for Mac</a>{% else %}<button class="button button-dark" type="button" disabled aria-label="Download Twine for Mac, not yet available">Download for Mac</button>{% endif %}
+    <h2 id="closing-title">Start keeping what you read.</h2>
+    <p>Free on Mac and iPhone. No account. Save your first passage with a shortcut on Mac or Safari's page menu on iPhone.</p>
+    {% if site.appStoreUrl %}<a class="button button-dark" href="{{ site.appStoreUrl | escape }}">Download for Mac — Free</a>{% else %}<button class="button button-dark" type="button" disabled aria-label="Download for Mac — Free, pending App Store approval">Download for Mac — Free</button>{% endif %}
   </div>
 </section>

@@ -8,7 +8,7 @@ Once published it lives at <https://mubranch.github.io/TwineWebsite/>. Nothing i
 
 | To change | Edit |
 | --- | --- |
-| The home page: hero, features, privacy callout, FAQ, closing panel | `src/index.njk` |
+| The home page: hero, proof strip, features, privacy, comparison, FAQ, closing | `src/index.njk` |
 | Docs, Privacy Policy, Support (Markdown) | `src/docs.md`, `src/privacy.md`, `src/support.md` |
 | Contact email, developer name, policy date, site address, launch switch | `src/_data/site.js` |
 | The header, footer and page head (title, description, social tags, security policy) | `src/_includes/base.njk` |
@@ -46,15 +46,19 @@ App icon URLs in `src/_includes/base.njk` carry a cache version (`v=blue-app`) s
 
 Keep the voice plainspoken, calm and specific, following the voice definition in Twine's `WebsiteCopy.md`. Use **highlight** for a saved item, **passage** for its quoted text, **library** for the collection, **AI Access** for the Mac's MCP connection, and **AI context** for the on-device feature. **Background** is the label shown above that feature's explanation in highlight details; it is not a second feature.
 
-Position Twine as a web knowledge base built from saved passages and source links. Keep that phrase for the main positioning rather than repeating it through the feature copy; use library, highlights, passages and sources for concrete actions.
+Position Twine as **a private highlight library for Safari on Mac and iPhone**, following the owner's “Twine — Website Copy” document. Keep its voice and punctuation; the previous web-knowledge-base positioning is superseded. The hero is “Everything you highlight in Safari, in one private library.” Metadata and social text follow the same positioning. The proof strip and comparison table are static, semantic HTML; the comparison offers checks for other services rather than unverified market-wide claims.
 
-The launch copy was rechecked against `mubranch/Twine` main at `a5f51e72e87361f1dba34c8382b68332c5e6d147`. Safari capture is implemented on Mac and iPhone. Chromium and Firefox packaging is merged and Pro-gated, but `BrowserExtensionIdentity.chromeExtensionID` is empty and the app hides browser setup until it is configured. Those extensions are not advertised as a launch benefit; the external feedback form still labels its future-browser options **Coming soon**. Do not describe them as available or add store links before that release decision. The app and Safari extension target iPhone, not iPad.
+Copy claims were rechecked against `mubranch/Twine` main at `79742387a5732591c46d6566f85b8bf2887642b1`. Safari capture works on Mac and iPhone; iPhone uploads pending highlights when Twine opens. Chromium/Firefox packaging exists and is Pro-gated, but `BrowserExtensionIdentity.chromeExtensionID` remains empty and browser setup stays hidden. Home, docs, support and feedback consistently say other browsers aren't supported in this release, without a Coming soon promise. The app targets iPhone, not iPad.
+
+Keep factual limits explicit: 5,000 characters per highlight, 500 highlights per page, 30 new highlights a minute; Mac auto-highlight skips selections over 1,000 characters. Markdown includes the source link; plain text does not. Search supports Today, Past Week and Past Month. Spotlight, Shortcuts and the Mac menu-bar list are free; AI Access and on-device AI context require Pro. AI context isn't returned through AI Access.
+
+Say **no developer-run library server**, not “collects nothing” or “the library never leaves your Mac”: website lookups, optional Apple diagnostics, support and public GitHub feedback are disclosed in the final privacy policy, and a connected AI tool handles what it reads under its own policy. Do not change that policy's meaning as a copy edit. Pro stays $4.99 once, with local currency shown in the App Store; do not promise “no subscription, ever.” The price is owner-confirmed website copy/local StoreKit configuration, not an independent check of App Store Connect.
 
 Keep launch switches and privacy wording under owner control. The owner authorized publication of the staged policy, including the unchanged website-name lookup paragraph alongside favicon requests. Future policy changes still need review; approval of a paragraph or product copy is not approval of unrelated legal wording.
 
 ## Feedback
 
-The header's **Feedback (GitHub)** button and the Support page open a GitHub-hosted issue form for bug reports, feature requests and general feedback. Reporters choose the Mac app, iPhone app, Safari extension on Mac or iPhone, upcoming Chrome/Chromium or Firefox extensions on Mac, or the website. Upcoming extensions are explicitly marked **Coming soon**. Extension reports ask for browser and extension versions when available. Submission requires GitHub sign-in and creates a public issue in `mubranch/TwineWebsite`; private support stays on email. No backend endpoint, token or on-site form is needed, and the site's Content-Security-Policy stays unchanged.
+The footer's **Feedback** link, FAQ and Support page open a GitHub-hosted issue form for bug reports, feature requests and general feedback. Reporters choose the Mac app, iPhone app, Safari extension on either device, the website or another browser that's not supported in this release. Browser requests do not promise availability. Extension reports ask for browser and extension versions when available. Submission requires GitHub sign-in and creates a public issue in `mubranch/TwineWebsite`; private support stays on email. No backend endpoint, token or on-site form is needed, and the CSP stays unchanged.
 
 GitHub recognizes issue forms only after their YAML configuration lands on the repository's default branch (`main`). Keep Issues enabled in the repository settings. A local preview or feature-branch build cannot activate the form: after merging, follow the button while signed in and verify the form fields appear. Submit only when you intend to create a real public issue.
 
@@ -73,10 +77,10 @@ Below **400 CSS px**, the Air artwork is not shown or downloaded: each Mac captu
 | Page slot | Layout / asset name / dimensions | Included screen |
 | --- | --- | --- |
 | Hero | MacBook Air M5 · `hero` · 1960 × 1280 | Main library with its website sidebar, saved passages and selected Wikipedia training-cost highlight, AI context and source: the product overview. |
-| Add a passage. Keep its source. | MacBook Air M5 · `capture` · 1960 × 1280 | Wikipedia's large language model article with the training-cost passage highlighted: the saved result, without a fleeting Undo message. |
-| Find what you kept. | iPhone Duo · `library-duo` · 2000 × 1407 | One authentic landscape capture showing Wikipedia highlights on the left and the selected training-cost passage, source and actions on the right. No Background explanation is shown. |
-| Let AI tools search your saved passages. | Mac window · `ai-access` · 1040 × 1436 | AI settings with AI Access enabled and connection controls visible. No access token value is displayed; this is Twine's integration surface, not a built-in chat. |
-| Keep the passage in context. | iPhone 18 Pro · `context` · 1206 × 2622 | The highlight's details with its completed on-device AI context explanation and source. |
+| Highlight where you already read. | MacBook Air M5 · `capture` · 1960 × 1280 | Wikipedia's large language model article with the training-cost passage highlighted: the saved result, without a fleeting Undo message. |
+| Remember three words. Find the whole passage. | iPhone Duo · `library-duo` · 2000 × 1407 | One authentic landscape capture showing Wikipedia highlights on the left and the selected training-cost passage, source and actions on the right. No Background explanation is shown. |
+| Give your AI tools your reading — through a local, read-only connection. | Mac window · `ai-access` · 1040 × 1436 | AI settings with AI Access enabled and connection controls visible. No access token value is displayed; this is Twine's integration surface, not a built-in chat. |
+| Remember why you saved it. | iPhone 18 Pro · `context` · 1206 × 2622 | The highlight's details with its completed on-device AI context explanation and source. |
 
 The Duo's light/dark pair comes from `screenshots/iphone-duo/1-library-details-*.png` in the supplied review package. Its full-resolution WebP files decode to exactly the supplied pixels; the image is not split or composited. The other four slots and every app/extension icon are unchanged. The package's 2560 × 1600 Mac captures do not fit the Air's 2560 × 1664 opening: they would need a new, unapproved 4% height stretch. Keep the existing Mac assets until native 2560 × 1664 replacements are supplied. The existing iPhone context capture also remains in place.
 

@@ -18,10 +18,13 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="{{ site.name }}">
   <meta property="og:title" content="{{ title }}">
-  <meta property="og:description" content="{{ summary }}">
+  <meta property="og:description" content="{{ socialDescription or summary }}">
   <meta property="og:url" content="{{ address }}">
   <meta property="og:image" content="{{ site.url }}/icon.png?v=blue-app">
   <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="{{ title }}">
+  <meta name="twitter:description" content="{{ socialDescription or summary }}">
+  <meta name="twitter:image" content="{{ site.url }}/icon.png?v=blue-app">
   <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0c0f14" media="(prefers-color-scheme: dark)">
   <link rel="icon" href="/icon.png?v=blue-app" type="image/png">
@@ -35,11 +38,12 @@
       <a class="brand" href="/"><img src="/icon-64.webp?v=blue-app" alt="" width="32" height="32"><span>Twine</span></a>
       <ul class="nav-links" role="list">
         <li><a href="/#features">Features</a></li>
+        <li><a href="/#ai-title">AI Access</a></li>
+        <li><a href="/#privacy-title">Privacy</a></li>
         {%- if site.pricing %}
         <li><a href="/#pricing">Pricing</a></li>
         {%- endif %}
         <li><a href="/docs"{% if nav == "docs" %} aria-current="page"{% endif %}>Docs</a></li>
-        <li><a class="button button-quiet" href="{{ site.feedbackUrl }}">Feedback (GitHub)</a></li>
         <li>{% if site.appStoreUrl %}<a class="button button-small" href="{{ site.appStoreUrl | escape }}" aria-label="Download Twine on the Mac App Store">Download</a>{% else %}<button class="button button-small" type="button" disabled aria-label="Download Twine for Mac, not yet available">Download</button>{% endif %}</li>
       </ul>
     </nav>
@@ -48,15 +52,16 @@
     {{ content | safe }}
   </main>
   <footer class="site-footer">
-    <p>Twine for Mac and iPhone</p>
+    <p>Twine — a private highlight library for Safari on Mac and iPhone.</p>
     <nav aria-label="Footer">
       <ul role="list">
         <li><a href="/docs">Docs</a></li>
         <li><a href="/privacy">Privacy</a></li>
         <li><a href="/support">Support</a></li>
-        <li><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
+        <li><a href="{{ site.feedbackUrl }}">Feedback</a></li>
       </ul>
     </nav>
+    <p class="made-by">Made by {{ site.developer }}.</p>
     <p class="legal">Apple{% if site.appStoreUrl %}, the Apple logo{% endif %}, App Store, CloudKit, iCloud, iPhone, Mac, MacBook Air, macOS, Safari, Siri and Spotlight are trademarks of Apple Inc., registered in the U.S. and other countries. Apple Intelligence and Shortcuts are trademarks of Apple Inc. {% if site.appStoreUrl %}Mac App Store is a service mark of Apple Inc. {% endif %}iOS is a trademark or registered trademark of Cisco in the U.S. and other countries and is used under license.</p>
   </footer>
 </body>

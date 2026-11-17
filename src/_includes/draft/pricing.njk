@@ -1,31 +1,44 @@
 {# Built only when pricing is true in src/_data/site.js. #}
 <section id="pricing" class="pricing" aria-labelledby="pricing-title">
   <div class="section-head">
-    <h2 id="pricing-title">A free library. AI Access with Pro.</h2>
-    <p>Save, search and sync your highlights for free. Twine Pro adds read-only AI Access on your Mac and on-device AI context.</p>
+    <h2 id="pricing-title">Free to keep your highlights. $4.99 once to put them to work.</h2>
   </div>
   <div class="plans">
     <article class="plan" aria-labelledby="plan-free">
       <h3 id="plan-free">Free</h3>
       <p class="price"><span class="amount">$0</span></p>
+      <p class="plan-note">Everything you need to build your library.</p>
       <ul class="checks" role="list">
-        <li>Highlight in Safari on Mac and iPhone, with auto-highlight on Mac</li>
-        <li>A searchable library on Mac and iPhone</li>
-        <li>iCloud sync between your devices</li>
-        <li>Copy and share as text or Markdown</li>
+        <li>Highlighting in Safari on Mac and iPhone</li>
+        <li>Auto-highlight on Mac</li>
+        <li>Searchable library with source links</li>
+        <li>iCloud sync</li>
+        <li>Copy as Markdown or text</li>
         <li>Spotlight and Shortcuts</li>
       </ul>
+      {% if site.appStoreUrl %}<a class="button" href="{{ site.appStoreUrl | escape }}">Download for Mac</a>{% else %}<button class="button" type="button" disabled aria-label="Download for Mac, pending App Store approval">Download for Mac</button>{% endif %}
     </article>
     <article class="plan plan-featured" aria-labelledby="plan-pro">
       <h3 id="plan-pro">Pro</h3>
       <p class="price"><span class="amount">$4.99</span> once</p>
-      <p class="plan-note">A one-time in-app purchase. No subscription.</p>
+      <p class="plan-note">For people who use AI tools and want them to draw on their own reading.</p>
       <ul class="checks" role="list">
         <li>Everything in Free</li>
-        <li>AI Access: let compatible AI tools search and read your highlights</li>
-        <li>On-device AI context</li>
+        <li><span><strong>AI Access:</strong> let compatible AI tools on your Mac search and cite your highlights, locally and read-only</span></li>
+        <li><span><strong>On-device AI context:</strong> a short note on how each passage fits its source</span></li>
+        <li>One-time purchase. No subscription.</li>
       </ul>
+      <a class="button" href="/docs#unlock-twine-pro">Unlock Pro in the app</a>
+      <p class="plan-note">Open Twine → Settings → Twine Pro → Unlock.</p>
     </article>
   </div>
-  <p class="pricing-foot">Pro is bought in the app through the App Store. Prices are in US dollars, and the App Store shows your local price. AI tools, and any fees from their providers, are separate.</p>
+  <div class="pro-value">
+    <h3>Why Pro is worth $4.99</h3>
+    <ol>
+      <li><strong>Your AI gets better at being yours.</strong> Answers can draw on passages you chose, with links to check them.</li>
+      <li><strong>The connection stays on your Mac.</strong> Twine doesn't upload your library to a developer server. What a connected AI tool does with the highlights it reads is up to that tool and its provider.</li>
+      <li><strong>You pay once.</strong> Pro is a one-time purchase, not a monthly or yearly subscription.</li>
+    </ol>
+  </div>
+  <p class="pricing-foot">Pro is an in-app purchase. Prices are in US dollars; the App Store shows your local price. AI tools and their provider fees are separate.</p>
 </section>

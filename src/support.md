@@ -8,11 +8,13 @@ permalink: /support.html
 
 For private help, email [{{ site.email }}](mailto:{{ site.email }}). For public bug reports and ideas, use the GitHub form below.
 
-{{ site.developer }}, Twine's developer, handles email support. There is no live chat or guaranteed response time.
+Twine is made by one developer, {{ site.developer }}, who handles email directly. There is no live chat or guaranteed response time.
 
 ## Feedback and feature requests
 
 Report a problem or request a feature for the app, Safari extension or website. Choose the app or extension and device in the form.
+
+Twine is built for Safari on Mac and iPhone. Chrome, other Chromium browsers, and Firefox aren't supported in this release; you can request support for another browser without a promised release date.
 
 <a class="button" href="{{ site.feedbackUrl }}">Send feedback on GitHub</a>
 
