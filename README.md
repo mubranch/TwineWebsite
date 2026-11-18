@@ -230,13 +230,64 @@ The badge is 48px tall with at least 12px clear space on every side, exceeding t
 
 `robots.txt` deliberately doesn't `Disallow` anything: a crawler blocked by `robots.txt` never fetches the page, so it never sees the `noindex` tag, and the address can still be listed from links elsewhere. Choose `noindex`, not `Disallow`, to stay out of search.
 
+## Machine-readable metadata
+
+Researched on 17 November 2026 from the crawlers' own documentation, llmstxt.org and Google Search Central.
+
+**Shipped now (no effect on crawlers):** every page has a unique title naming Twine and Safari, a 40 to 320 character description, a canonical link, Open Graph and Twitter tags and `lang="en"`; headings, landmarks and alt text are checked in the browser pass. The home title is "Twine — A private highlight library for Safari on Mac and iPhone", which separates this app from other products called Twine. `npm run check:deploy` fails if any page loses these.
+
+**Built only when `indexable: true`:** the crawler-facing files stay out of the staged site, because `llms.txt` is a public file that any agent can fetch whatever the `noindex` tags say.
+
+| Output | File | What it is |
+| --- | --- | --- |
+| llms.txt | `src/llms.11ty.js` | A short factual guide in the llmstxt.org format: summary, one paragraph of facts, links to home, docs, privacy, support and the public feedback form. Every claim repeats copy already on the site or in the policy. |
+| JSON-LD | `src/_data/structured.js`, `base.njk` | One `application/ld+json` block on the home page: `WebSite`, `Person` (the developer) and `SoftwareApplication`. No ratings, reviews, counts or availability claims. `downloadUrl` and a free `Offer` are added only when `appStoreUrl` is set. |
+| describedby link | `base.njk` | `<link rel="describedby" href="/llms.txt" type="text/markdown">` on every page, so a crawler on any page can find the guide. |
+| sitemap, robots | existing | `sitemap.xml` and the `Sitemap:` line, and the `noindex` tags go away, exactly as before. |
+
+The JSON-LD block is data, not script: `type="application/ld+json"` never executes, so the `default-src 'none'` policy does not need to change. `check:deploy` fails if any other script appears, and a staged build has no `<script>` at all. The block was checked with a strict JSON-LD processor (jsonld.js expansion in `safe` mode against the live schema.org context) and by `scripts/metadata.test.mjs`.
+
+**Deliberately not added**
+
+- `FAQPage` markup: Google dropped FAQ rich results for most sites, and a copy of the visible FAQ adds only a second place to drift out of date.
+- Ratings, review counts, price or availability claims: nothing real exists to state yet.
+- Per-page Markdown copies, `llms-full.txt`, hidden text or keyword lists. Google Search Central says Search does not use `llms.txt` and that it neither helps nor hurts rankings; it is kept because other agents read it, and it is small.
+- Any AI-crawler rule in `robots.txt`. Crawler access is the owner's launch decision.
+
+**GitHub Pages note:** on `github.io` the file lives at `/TwineWebsite/llms.txt`, not the host root, so a crawler that only checks the root will miss it. The `describedby` link covers pages that are fetched; a custom domain fixes the root.
+
+### AI crawler options for the owner (not applied)
+
+| Token | Operator and purpose |
+| --- | --- |
+| `OAI-SearchBot` | OpenAI. Surfaces sites in ChatGPT search. |
+| `GPTBot` | OpenAI. Content that may train foundation models. |
+| `ChatGPT-User` | OpenAI. Fetches a page because a user asked; robots.txt may not apply. |
+| `Claude-SearchBot` | Anthropic. Improves search result quality. |
+| `ClaudeBot` | Anthropic. Collects content that may train models. |
+| `Claude-User` | Anthropic. Fetches a page because a user asked. |
+| `PerplexityBot` | Perplexity. Surfaces sites in Perplexity search; not used for training. |
+| `Perplexity-User` | Perplexity. User-requested fetch; generally ignores robots.txt. |
+| `Googlebot` | Google Search, including its AI features. Cannot be separated from Search. |
+| `Google-Extended` | Google. A control token (no separate crawler) for Gemini training and grounding; no effect on Search ranking or inclusion. |
+| `Applebot` | Apple. Powers Siri, Spotlight and Safari search; may also help train Apple models. |
+| `Applebot-Extended` | Apple. Opt-out token for training use only. |
+
+`CCBot` (Common Crawl) is not covered by a primary source in this review, so it is not described here.
+
+1. **Allow search and answer crawlers, block training** (recommended once indexing is on): `Disallow: /` for `GPTBot`, `ClaudeBot`, `Google-Extended` and `Applebot-Extended`; everything else stays allowed. People can still find and cite Twine in ChatGPT, Claude, Perplexity, Google and Apple search, and the site is not used for training.
+2. **Allow all:** no extra rules. Most visibility, no training opt-out.
+3. **Block all AI crawlers:** the same `Disallow: /` groups plus the search and user tokens. Twine will not appear in AI answers; Googlebot would still index it for ordinary Search unless it is blocked too.
+
+Apply a choice by adding the groups to `src/robots.njk` inside the `indexable` branch. Robots rules are requests, not access control, and user-initiated fetchers may ignore them.
+
 ## When Twine launches
 
 ### Owner review comes first
 
 The branch leaves `appStoreUrl: ""`, `indexable: false` and `pricing: true`. The owner confirmed the mailbox and **14 November 2026** policy date, kept pricing unchanged, chose to keep search indexing off through launch, and authorized publication of the staged policy. Its review diff is supplied as `app-review-policy.patch`; do not reapply it to a branch that already contains the policy commit. The non-draft policy can be live before the app is released. Global noindex is intentional, including after launch; it is not a policy-draft marker.
 
-There is **no indexing or activation patch to apply**. The previously supplied indexing patches are withdrawn. Adding the download URL must not change `indexable`.
+**If the owner ever turns `indexable` on** (a separate decision, never part of adding the App Store link), these appear together: `sitemap.xml` and the `Sitemap:` line, no `noindex` tags, `llms.txt` and the `describedby` links, and the home-page JSON-LD. Also decide the AI crawler policy above first, then run `npm run check:deploy` (it validates all of them) and check `/llms.txt` and the JSON-LD on the public site. There is **no indexing or activation patch to apply**. The previously supplied indexing patches are withdrawn. Adding the download URL must not change `indexable`.
 
 ### The final link change
 

@@ -89,9 +89,84 @@ export function checkDeployment(config = site, output = "_site") {
   return problems;
 }
 
+// Machine-readable metadata: every public page describes itself, and the crawler-facing files exist only at launch.
+export function checkMetadata(config = site, output = "_site") {
+  const problems = [];
+  const read = (file) => readFileSync(join(output, file), "utf8");
+  const meta = (html, attribute, name) => html.match(new RegExp(`<meta\\b[^>]*${attribute}="${name}"[^>]*content="([^"]*)"`, "i"))?.[1];
+  const titles = new Map();
+  const descriptions = new Map();
+  for (const page of PAGES) {
+    const file = `${page}.html`;
+    const html = read(file);
+    const title = html.match(/<title>([^<]+)<\/title>/)?.[1]?.trim();
+    const description = meta(html, "name", "description")?.trim();
+    if (!/<html lang="en">/.test(html)) problems.push(`${file}: needs <html lang="en">`);
+    if (!title) problems.push(`${file}: missing title`);
+    else if (titles.has(title)) problems.push(`${file}: title duplicates ${titles.get(title)}`);
+    else titles.set(title, file);
+    if (!description || description.length < 40 || description.length > 320) problems.push(`${file}: needs a meta description of 40 to 320 characters`);
+    else if (descriptions.has(description)) problems.push(`${file}: description duplicates ${descriptions.get(description)}`);
+    else descriptions.set(description, file);
+    for (const [attribute, name] of [["property", "og:title"], ["property", "og:description"], ["property", "og:url"], ["property", "og:image"], ["name", "twitter:card"], ["name", "twitter:title"], ["name", "twitter:description"]]) {
+      if (!meta(html, attribute, name)) problems.push(`${file}: missing ${name}`);
+    }
+    if (!/<link rel="canonical" href="[^"]+">/.test(html)) problems.push(`${file}: missing canonical link`);
+    const blocks = [...html.matchAll(/<script\b[^>]*>/g)].map((match) => match[0]);
+    const describedby = /<link rel="describedby" href="[^"]*\/llms\.txt" type="text\/markdown">/.test(html);
+    if (!config.indexable) {
+      if (blocks.length || describedby) problems.push(`${file}: crawler-facing metadata (JSON-LD or the llms.txt link) must wait for launch`);
+    } else {
+      if (!describedby) problems.push(`${file}: launch pages must link llms.txt with rel="describedby"`);
+      const expected = page === "index" ? 1 : 0;
+      if (blocks.length !== expected || blocks.some((tag) => !/type="application\/ld\+json"/.test(tag))) {
+        problems.push(`${file}: expected ${expected} JSON-LD block and no other script`);
+      }
+    }
+  }
+  const llms = existsSync(join(output, "llms.txt")) ? read("llms.txt") : null;
+  if (!config.indexable) {
+    if (llms !== null) problems.push("llms.txt: must not be published until launch");
+    return problems;
+  }
+  if (llms === null) problems.push("llms.txt: missing from launch build");
+  else {
+    if (!llms.startsWith("# Twine\n")) problems.push('llms.txt: must start with the "# Twine" heading');
+    if (!/^> .+/m.test(llms)) problems.push("llms.txt: needs a summary blockquote");
+    for (const page of PAGES) {
+      const url = `${config.url}/${page === "index" ? "" : page}`;
+      if (!llms.includes(`](${url})`)) problems.push(`llms.txt: must link ${url}`);
+    }
+    for (const [, url] of llms.matchAll(/\]\((https?:[^)]+)\)/g)) {
+      if (!url.startsWith(config.url) && url !== config.feedbackUrl) problems.push(`llms.txt: unexpected link ${url}`);
+    }
+  }
+  const match = read("index.html").match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);
+  let data;
+  try {
+    data = JSON.parse(match?.[1] ?? "");
+  } catch {
+    problems.push("index.html: JSON-LD is missing or is not valid JSON");
+    return problems;
+  }
+  const graph = data["@graph"] ?? [];
+  const types = graph.map((node) => node["@type"]).sort().join(",");
+  if (data["@context"] !== "https://schema.org" || types !== "Person,SoftwareApplication,WebSite") {
+    problems.push("index.html: JSON-LD must be a schema.org graph of WebSite, Person and SoftwareApplication");
+  }
+  const text = JSON.stringify(data);
+  if (/aggregateRating|ratingValue|"review"|ratingCount/i.test(text)) problems.push("index.html: JSON-LD must not contain ratings or reviews");
+  const application = graph.find((node) => node["@type"] === "SoftwareApplication") ?? {};
+  if (Boolean(config.appStoreUrl) !== Boolean(application.downloadUrl || application.offers)) {
+    problems.push("index.html: JSON-LD downloadUrl and offers belong only to a build with a real appStoreUrl");
+  }
+  if (application.downloadUrl && application.downloadUrl !== config.appStoreUrl) problems.push("index.html: JSON-LD downloadUrl must match appStoreUrl");
+  return problems;
+}
+
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   try {
-    const problems = checkDeployment();
+    const problems = [...checkDeployment(), ...checkMetadata()];
     if (problems.length) {
       console.error("Not publishing: the built site has unresolved launch requirements.\n");
       for (const problem of problems) console.error(`  ${problem}`);

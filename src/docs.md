@@ -1,6 +1,6 @@
 ---
 layout: page.njk
-title: "Docs · Twine"
+title: "Docs · Twine for Safari on Mac and iPhone"
 description: "Highlight in Safari on Mac and iPhone, sync your library, connect compatible AI tools, and troubleshoot Twine."
 permalink: /docs.html
 nav: docs

@@ -1,6 +1,6 @@
 ---
 layout: page.njk
-title: "Support · Twine"
+title: "Support · Twine for Safari on Mac and iPhone"
 description: "Get help with Twine on Mac or iPhone, report Safari extension problems, or request a feature."
 permalink: /support.html
 ---

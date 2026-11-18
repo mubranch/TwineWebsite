@@ -32,6 +32,9 @@ export default function (eleventyConfig) {
   eleventyConfig.addPlugin(HtmlBasePlugin);
   eleventyConfig.addPassthroughCopy({ "src/static": "/" });
 
+  // JSON for a JSON-LD data block: "<" is escaped so the text can never close the script element.
+  eleventyConfig.addFilter("jsonld", (value) => JSON.stringify(value, null, 2).replace(/</g, "\\u003c"));
+
   // Markdown headings get an id made from their text, so pages can link to a section.
   eleventyConfig.amendLibrary("md", (md) => {
     md.core.ruler.push("heading_ids", ({ tokens }) => {

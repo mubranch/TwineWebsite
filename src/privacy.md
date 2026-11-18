@@ -1,6 +1,6 @@
 ---
 layout: page.njk
-title: "Privacy Policy · Twine"
+title: "Privacy Policy · Twine for Safari on Mac and iPhone"
 description: "How Twine handles your highlights, your devices and this website."
 permalink: /privacy.html
 ---

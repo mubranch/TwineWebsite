@@ -10,6 +10,7 @@ configure({
   addPlugin() {},
   addPassthroughCopy() {},
   amendLibrary() {},
+  addFilter() {},
   addShortcode(name, render) {
     if (name === "shot") shot = render;
   },
