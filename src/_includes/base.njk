@@ -15,6 +15,9 @@
   {%- elif draft or noindex %}
   <meta name="robots" content="noindex">
   {%- endif %}
+  {%- if site.googleSiteVerification and page.url == "/" %}
+  <meta name="google-site-verification" content="{{ site.googleSiteVerification }}">
+  {%- endif %}
   {%- if site.indexable %}
   <link rel="describedby" href="/llms.txt" type="text/markdown">
   {%- endif %}

@@ -23,6 +23,8 @@ export default {
   // Search indexing on by owner decision (24 November 2026), with AI training crawlers blocked in robots.txt.
   // While false, every page carries a robots noindex, nofollow tag and there is no sitemap.
   indexable: true,
+  // Google Search Console ownership token for the URL-prefix property https://mubranch.github.io/TwineWebsite/ (public by design).
+  googleSiteVerification: "Pykb3ScDSBM6f045RHGn4y7_jKAg2eItX0HjYigJVXs",
 
   // Minimum OS versions: keep them the same as the app's.
   macOS: "27",
