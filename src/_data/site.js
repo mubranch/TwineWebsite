@@ -20,7 +20,7 @@ export default {
   // Keeps pricing FAQs and Pro notes in docs/privacy; home-page plan cards are currently omitted.
   pricing: true,
 
-  // Search indexing on by owner decision (24 November 2026), with AI training crawlers blocked in robots.txt.
+  // Search indexing on by owner decision (24 November 2026), with every crawler welcome, AI training included.
   // While false, every page carries a robots noindex, nofollow tag and there is no sitemap.
   indexable: true,
   // Google Search Console ownership token for the URL-prefix property https://mubranch.github.io/TwineWebsite/ (public by design).

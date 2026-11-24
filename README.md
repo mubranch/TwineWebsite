@@ -211,7 +211,7 @@ Put the address in `email` in `src/_data/site.js`.
 - [x] Keep `pricing: true` for the retained pricing FAQs and Pro notes in docs/privacy, including $4.99 once. The owner later removed the home-page plan cards and Pricing navigation link only. This does not independently verify the live IAP price or review status.
 - [ ] In the Twine app, set `privacyPolicy`, `supportURL` and `contactEmail` in `AppLinks.swift` to `<site url>/privacy`, `<site url>/support` and `mailto:<email>`. Use the same two addresses in App Store Connect, with the home page as the marketing URL.
 - [x] Leave analytics off. No website scripts, tracking cookies or third-party assets are added, and the CSP stays unchanged.
-- [x] Owner turned search indexing on at launch (24 November 2026), with AI crawler option 1: search and answer crawlers allowed, training crawlers blocked. `indexable: true`.
+- [x] Owner turned search indexing on at launch (24 November 2026), and chose AI crawler option 2 the same day: every crawler allowed, training included, so assistants learn and cite Twine. `indexable: true`.
 - [ ] Check the final linked App Store product and Pro purchase/restore flow on the release build.
 
 ## App Store badge
@@ -226,7 +226,7 @@ The badge is 48px tall with at least 12px clear space on every side, exceeding t
 
 ## Search indexing
 
-Indexing is on (`indexable: true`, owner decision of 24 November 2026), and `robots.txt` blocks the AI training crawlers (option 1 below). Setting it back to `false` restores the staged behaviour: `indexable: false` in `src/_data/site.js` keeps the whole site out of search results. Every page gets `<meta name="robots" content="noindex, nofollow">`, `robots.txt` has no `Sitemap` line, and no `sitemap.xml` is built. GitHub Pages can't send an `X-Robots-Tag` header, so the meta tag is the mechanism.
+Indexing is on (`indexable: true`, owner decision of 24 November 2026), and `robots.txt` welcomes every crawler, AI training included (option 2 below). `llms-full.txt` publishes the FAQ, Docs, Privacy Policy and Support as one Markdown file, generated from the page sources. On `github.io` crawlers only read `robots.txt` at the host root (`mubranch.github.io/robots.txt`, which does not exist), so the project-path `robots.txt` and its `Sitemap:` line are advisory: submit the sitemap in Google Search Console and Bing Webmaster Tools. Setting it back to `false` restores the staged behaviour: `indexable: false` in `src/_data/site.js` keeps the whole site out of search results. Every page gets `<meta name="robots" content="noindex, nofollow">`, `robots.txt` has no `Sitemap` line, and no `sitemap.xml` is built. GitHub Pages can't send an `X-Robots-Tag` header, so the meta tag is the mechanism.
 
 `robots.txt` deliberately doesn't `Disallow` anything: a crawler blocked by `robots.txt` never fetches the page, so it never sees the `noindex` tag, and the address can still be listed from links elsewhere. Choose `noindex`, not `Disallow`, to stay out of search.
 
@@ -256,7 +256,7 @@ The JSON-LD block is data, not script: `type="application/ld+json"` never execut
 
 **GitHub Pages note:** on `github.io` the file lives at `/TwineWebsite/llms.txt`, not the host root, so a crawler that only checks the root will miss it. The `describedby` link covers pages that are fetched; a custom domain fixes the root.
 
-### AI crawler options for the owner (not applied)
+### AI crawler options (option 2 applied, 24 November 2026)
 
 | Token | Operator and purpose |
 | --- | --- |

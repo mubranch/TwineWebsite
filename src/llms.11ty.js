@@ -25,6 +25,7 @@ ${link("/support", "Support", "Help, bug reports and how to contact the develope
 
 ## Optional
 
+- [Full text](${site.url}/llms-full.txt): The FAQ, Docs, Privacy Policy and Support in one Markdown file
 - [Public feedback](${site.feedbackUrl}): Request a feature or report a problem on GitHub
 `;
   }
