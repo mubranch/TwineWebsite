@@ -9,7 +9,7 @@ socialDescription: "Highlight in Safari. Find it later. Keep it private. Twine f
     <h1 id="hero-title"><span class="line">Everything you highlight in Safari,</span> <span class="hl">in one private library.</span></h1>
     <p class="lede">Mark up the web. Highlight and save what you find in Safari, and Twine marks it again when you return to the page.</p>
     <div class="actions">
-      {% if site.appStoreUrl %}<a class="app-store-badge" href="{{ site.appStoreUrl | escape }}" aria-label="Download for Mac — Free on the Mac App Store"><img src="/mac-app-store-badge.svg" width="156" height="40" alt=""></a>{% else %}<button class="button" type="button" disabled>Coming soon to the App Store</button>{% endif %}
+      {% if site.appStoreUrl %}<a class="app-store-badge" href="{{ site.appStoreUrl | escape }}" aria-label="Download Twine — Free on the App Store"><img src="/app-store-badge.svg" width="120" height="40" alt=""></a>{% else %}<button class="button" type="button" disabled>Coming soon to the App Store</button>{% endif %}
       <a class="button button-quiet" href="#features">Learn more</a>
     </div>
     <p class="fineprint" id="requirements"><span>{% if site.appStoreUrl %}Free to use. <span class="price-summary">Pro is $4.99 once — no subscription.</span>{% else %}Pending App Store approval. <span class="price-summary">Free to use; Pro is $4.99 once.</span>{% endif %}</span><span>Requires macOS {{ site.macOS }} on Mac and iOS {{ site.iOS }} on iPhone.</span></p>
@@ -134,6 +134,6 @@ socialDescription: "Highlight in Safari. Find it later. Keep it private. Twine f
     <img src="/icon-extension.webp" alt="" width="88" height="88" loading="lazy" decoding="async">
     <h2 id="closing-title">Get started</h2>
     <p>Free on Mac and iPhone. No account. Save your first passage with a shortcut on Mac or Safari's page menu on iPhone.</p>
-    {% if site.appStoreUrl %}<a class="button button-dark" href="{{ site.appStoreUrl | escape }}">Download for Mac — Free</a>{% else %}<button class="button button-dark" type="button" disabled aria-label="Download for Mac — Free, pending App Store approval">Download for Mac — Free</button>{% endif %}
+    {% if site.appStoreUrl %}<a class="button button-dark" href="{{ site.appStoreUrl | escape }}">Download Twine — Free</a>{% else %}<button class="button button-dark" type="button" disabled aria-label="Download for Mac — Free, pending App Store approval">Download for Mac — Free</button>{% endif %}
   </div>
 </section>

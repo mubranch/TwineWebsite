@@ -206,7 +206,7 @@ Put the address in `email` in `src/_data/site.js`.
 - [ ] Owner confirms App Store Connect privacy answers against the final binary, Apple's collection definition and any optional support/diagnostic submissions. The manifests alone do not verify a "Data Not Collected" label.
 - [x] Add the screenshots above in light and dark appearances.
 - [x] Recheck `macOS` and `iOS` against `Twine/Twine/Config.xcconfig` at `a5f51e72`: both require version 27.
-- [x] Stage the official conditional Mac App Store badge, accessible name, clear space and launch-copy branches.
+- [x] Stage the official conditional App Store badge (the Mac App Store badge until 24 November 2026), accessible name, clear space and launch-copy branches.
 - [ ] Owner confirms the marketing-artwork license and that the download link is for an app actually available to download, not only a preorder or unavailable listing. Device-render and badge rights are tied to App Store availability.
 - [x] Keep `pricing: true` for the retained pricing FAQs and Pro notes in docs/privacy, including $4.99 once. The owner later removed the home-page plan cards and Pricing navigation link only. This does not independently verify the live IAP price or review status.
 - [ ] In the Twine app, set `privacyPolicy`, `supportURL` and `contactEmail` in `AppLinks.swift` to `<site url>/privacy`, `<site url>/support` and `mailto:<email>`. Use the same two addresses in App Store Connect, with the home page as the marketing URL.
@@ -220,9 +220,9 @@ The hero marker mirrors Twine's renderer at `a5f51e72` (`Twine/TwineExtension/Re
 
 The hero is the sole primary badge placement: Apple's guidance says **one badge per layout**. Header and closing downloads remain text links to the same product; the home-page plan-card download was removed with pricing. With an empty `appStoreUrl`, all three remaining placements show native disabled download buttons and the hero explains that availability follows App Store approval. No dummy link is used. Setting the real URL enables the links and replaces the hero's text button with the official badge.
 
-`src/static/mac-app-store-badge.svg` is the official preferred black Mac badge linked in Apple's current [Marketing Resources download section](https://developer.apple.com/app-store/marketing/guidelines/), from [this Apple-hosted SVG](https://developer.apple.com/app-store/marketing/guidelines/images/badge-download-on-the-mac-app-store.svg). Only inter-element whitespace was removed (12,064 to 11,596 bytes). Artwork paths, colors, lettering, border and proportions are unchanged; no archive is committed.
+`src/static/app-store-badge.svg` is Apple's official black "Download on the App Store" badge (US-UK, RGB), from [this Apple-hosted SVG](https://developer.apple.com/app-store/marketing/guidelines/images/badge-download-on-the-app-store.svg) next to the Mac badge in Apple's [Marketing Resources](https://developer.apple.com/app-store/marketing/guidelines/). The owner chose it on 24 November 2026 because Twine is one purchase for Mac and iPhone; it replaced the Mac App Store badge. Only inter-element whitespace was removed. Artwork paths, colors, lettering, border and proportions are unchanged; no archive is committed.
 
-The badge is 48px tall with at least 12px clear space on every side, exceeding the 40px minimum and meeting the quarter-height rule. It has an explicit link name, retains the site's keyboard-focus outline and uses the same unaltered black artwork in both appearances. The footer conditionally credits the Apple logo and Mac App Store as well as the existing marks. "Mac App Store" matches the Mac download action; general cross-platform purchase copy uses "App Store".
+The badge is 48px tall with at least 12px clear space on every side, exceeding the 40px minimum and meeting the quarter-height rule. It has an explicit link name, retains the site's keyboard-focus outline and uses the same unaltered black artwork in both appearances. The footer conditionally credits the Apple logo alongside the existing marks (App Store is already among them). Download copy says "App Store", because one link serves Mac and iPhone.
 
 ## Search indexing
 

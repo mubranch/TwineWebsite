@@ -5,7 +5,7 @@ import site from "../src/_data/site.js";
 
 const TEXT = new Set([".html", ".xml", ".txt", ".css", ".svg", ".json"]);
 const PAGES = ["index", "docs", "privacy", "support"];
-const BADGE = "mac-app-store-badge.svg";
+const BADGE = "app-store-badge.svg";
 
 function* files(directory) {
   for (const entry of readdirSync(directory, { withFileTypes: true })) {
@@ -52,7 +52,7 @@ export function checkDeployment(config = site, output = "_site") {
   const read = (file) => readFileSync(join(output, file), "utf8");
   const home = read("index.html");
   const badgeLinks = [...home.matchAll(/<a\b[^>]*class="app-store-badge"[^>]*href="([^"]+)"/g)];
-  const badgeImages = [...home.matchAll(/<img\b[^>]*src="[^"]*\/mac-app-store-badge\.svg"/g)];
+  const badgeImages = [...home.matchAll(/<img\b[^>]*src="[^"]*\/app-store-badge\.svg"/g)];
   if (config.appStoreUrl && (badgeLinks.length !== 1 || badgeLinks[0][1].replace(/&amp;/g, "&") !== config.appStoreUrl ||
     badgeImages.length !== 1 || !existsSync(join(output, BADGE)))) {
     problems.push("index.html: needs one official primary badge linked to the configured App Store URL");

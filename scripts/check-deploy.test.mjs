@@ -14,9 +14,9 @@ function fixture(run) {
   const write = (name, value) => writeFileSync(join(directory, name), value);
   const html = (page) => `<link rel="canonical" href="${site.url}/${page === "index" ? "" : page}">`;
   for (const page of ["index", "docs", "privacy", "support"]) write(`${page}.html`, html(page));
-  const home = `${html("index")}<a class="app-store-badge" href="${config.appStoreUrl.replace(/&/g, "&amp;")}"><img src="/TwineWebsite/mac-app-store-badge.svg" alt=""></a>`;
+  const home = `${html("index")}<a class="app-store-badge" href="${config.appStoreUrl.replace(/&/g, "&amp;")}"><img src="/TwineWebsite/app-store-badge.svg" alt=""></a>`;
   write("index.html", home);
-  write("mac-app-store-badge.svg", "<svg></svg>");
+  write("app-store-badge.svg", "<svg></svg>");
   write("robots.txt", `User-agent: *\nAllow: /\nSitemap: ${site.url}/sitemap.xml\n`);
   write("sitemap.xml", ["index", "docs", "privacy", "support"].map((page) => `<loc>${site.url}/${page === "index" ? "" : page}</loc>`).join("\n"));
   try {
