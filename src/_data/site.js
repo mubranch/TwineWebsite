@@ -16,7 +16,7 @@ export default {
   policyDate: "14 November 2026",
 
   // The App Store address. Download buttons are visible but disabled while this is empty.
-  appStoreUrl: "",
+  appStoreUrl: "https://apps.apple.com/app/id6834881576",
   // Keeps pricing FAQs and Pro notes in docs/privacy; home-page plan cards are currently omitted.
   pricing: true,
 
