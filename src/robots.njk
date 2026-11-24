@@ -5,5 +5,19 @@ eleventyExcludeFromCollections: true
 User-agent: *
 Allow: /
 {% if site.indexable %}
+
+# Search and answer crawlers may read the site; AI training crawlers may not (README, AI crawlers, option 1).
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: Applebot-Extended
+Disallow: /
+
 Sitemap: {{ site.url }}/sitemap.xml
 {% endif %}

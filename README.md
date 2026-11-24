@@ -211,7 +211,7 @@ Put the address in `email` in `src/_data/site.js`.
 - [x] Keep `pricing: true` for the retained pricing FAQs and Pro notes in docs/privacy, including $4.99 once. The owner later removed the home-page plan cards and Pricing navigation link only. This does not independently verify the live IAP price or review status.
 - [ ] In the Twine app, set `privacyPolicy`, `supportURL` and `contactEmail` in `AppLinks.swift` to `<site url>/privacy`, `<site url>/support` and `mailto:<email>`. Use the same two addresses in App Store Connect, with the home page as the marketing URL.
 - [x] Leave analytics off. No website scripts, tracking cookies or third-party assets are added, and the CSP stays unchanged.
-- [x] Owner chose to leave search indexing off, including after the App Store link arrives. Keep `indexable: false`; no indexing activation is part of launch.
+- [x] Owner turned search indexing on at launch (24 November 2026), with AI crawler option 1: search and answer crawlers allowed, training crawlers blocked. `indexable: true`.
 - [ ] Check the final linked App Store product and Pro purchase/restore flow on the release build.
 
 ## App Store badge
@@ -224,9 +224,9 @@ The hero is the sole primary badge placement: Apple's guidance says **one badge 
 
 The badge is 48px tall with at least 12px clear space on every side, exceeding the 40px minimum and meeting the quarter-height rule. It has an explicit link name, retains the site's keyboard-focus outline and uses the same unaltered black artwork in both appearances. The footer conditionally credits the Apple logo and Mac App Store as well as the existing marks. "Mac App Store" matches the Mac download action; general cross-platform purchase copy uses "App Store".
 
-## Search indexing stays off
+## Search indexing
 
-`indexable: false` in `src/_data/site.js` keeps the whole site out of search results. Every page gets `<meta name="robots" content="noindex, nofollow">`, `robots.txt` has no `Sitemap` line, and no `sitemap.xml` is built. GitHub Pages can't send an `X-Robots-Tag` header, so the meta tag is the mechanism.
+Indexing is on (`indexable: true`, owner decision of 24 November 2026), and `robots.txt` blocks the AI training crawlers (option 1 below). Setting it back to `false` restores the staged behaviour: `indexable: false` in `src/_data/site.js` keeps the whole site out of search results. Every page gets `<meta name="robots" content="noindex, nofollow">`, `robots.txt` has no `Sitemap` line, and no `sitemap.xml` is built. GitHub Pages can't send an `X-Robots-Tag` header, so the meta tag is the mechanism.
 
 `robots.txt` deliberately doesn't `Disallow` anything: a crawler blocked by `robots.txt` never fetches the page, so it never sees the `noindex` tag, and the address can still be listed from links elsewhere. Choose `noindex`, not `Disallow`, to stay out of search.
 
@@ -285,7 +285,7 @@ Apply a choice by adding the groups to `src/robots.njk` inside the `indexable` b
 
 ### Owner review comes first
 
-The branch leaves `appStoreUrl: ""`, `indexable: false` and `pricing: true`. The owner confirmed the mailbox and **14 November 2026** policy date, kept pricing unchanged, chose to keep search indexing off through launch, and authorized publication of the staged policy. Its review diff is supplied as `app-review-policy.patch`; do not reapply it to a branch that already contains the policy commit. The non-draft policy can be live before the app is released. Global noindex is intentional, including after launch; it is not a policy-draft marker.
+The branch leaves `appStoreUrl: ""`, `indexable: false` and `pricing: true`. The owner confirmed the mailbox and **14 November 2026** policy date, kept pricing unchanged, chose to keep search indexing off through launch, and authorized publication of the staged policy. Its review diff is supplied as `app-review-policy.patch`; do not reapply it to a branch that already contains the policy commit. The non-draft policy can be live before the app is released. Global noindex was intentional through launch; the owner turned indexing on with the App Store link on 24 November 2026.
 
 **If the owner ever turns `indexable` on** (a separate decision, never part of adding the App Store link), these appear together: `sitemap.xml` and the `Sitemap:` line, no `noindex` tags, `llms.txt` and the `describedby` links, and the home-page JSON-LD. Also decide the AI crawler policy above first, then run `npm run check:deploy` (it validates all of them) and check `/llms.txt` and the JSON-LD on the public site. There is **no indexing or activation patch to apply**. The previously supplied indexing patches are withdrawn. Adding the download URL must not change `indexable`.
 
@@ -301,7 +301,7 @@ npm test && npm run build && npm run check:deploy
 git diff --check
 ```
 
-Check the full launch build at 320, 390 and 1440px in light and dark: the official badge, all download links, privacy/support/docs, focus, images and 404; no draft/placeholder copy, overflow, console or CSP errors. Confirm that all pages still have noindex tags, canonical URLs are unchanged, `robots.txt` has no Sitemap line and no `sitemap.xml` is emitted.
+Check the full launch build at 320, 390 and 1440px in light and dark: the official badge, all download links, privacy/support/docs, focus, images and 404; no draft/placeholder copy, overflow, console or CSP errors. Confirm that pages carry no noindex tags, canonical URLs are unchanged, `robots.txt` has the Sitemap line and the training-crawler blocks, and `sitemap.xml`, `llms.txt` and the home-page JSON-LD are emitted.
 
 Only when authorized, commit the real link and push the approved fast-forward release through the existing Pages flow:
 
@@ -313,7 +313,7 @@ gh run list --workflow site.yml --branch main --limit 1
 gh run watch RUN_ID --exit-status
 ```
 
-If main has advanced or the push is rejected, integrate and rerun checks; never force-push. After Pages succeeds, verify the **public** URLs below, badge/product links, policy text, noindex/no-sitemap output, all image appearances and icons. Do not submit a sitemap or enable indexing unless the owner explicitly changes that decision.
+If main has advanced or the push is rejected, integrate and rerun checks; never force-push. After Pages succeeds, verify the **public** URLs below, badge/product links, policy text, robots/sitemap/llms.txt output, all image appearances and icons.
 
 ### App Store Connect URLs
 

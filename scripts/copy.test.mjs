@@ -16,7 +16,7 @@ test("downloads launch without home-page pricing while retaining pricing FAQs an
       mkdirSync(join(directory, "scripts"));
       cpSync("scripts/check-deploy.mjs", join(directory, "scripts/check-deploy.mjs"));
       const data = join(directory, "src/_data/site.js");
-      writeFileSync(data, readFileSync(data, "utf8").replace(/appStoreUrl: "[^"]*"/, `appStoreUrl: "${appStoreUrl}"`));
+      writeFileSync(data, readFileSync(data, "utf8").replace(/appStoreUrl: "[^"]*"/, `appStoreUrl: "${appStoreUrl}"`).replace(/indexable: (?:true|false)/, "indexable: false"));
       execFileSync(process.execPath, [join(root, "node_modules/@11ty/eleventy/cmd.cjs"), "--quiet"], { cwd: directory });
       execFileSync(process.execPath, [join(directory, "scripts/check-deploy.mjs")], { cwd: directory });
       const home = readFileSync(join(directory, "_site/index.html"), "utf8");

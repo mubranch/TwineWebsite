@@ -50,6 +50,10 @@ test("launch rejects invalid store URLs and stale or missing indexing output", (
     write("index.html", home);
     write("robots.txt", "User-agent: *\nDisallow: /\n");
     assert.match(checkDeployment(config, directory).join("\n"), /robots.txt/);
+    write("robots.txt", `User-agent: *\nAllow: /\n\nUser-agent: GPTBot\nUser-agent: *\nDisallow: /\n\nSitemap: ${site.url}/sitemap.xml\n`);
+    assert.match(checkDeployment(config, directory).join("\n"), /robots.txt/);
+    write("robots.txt", `User-agent: *\nAllow: /\n\nUser-agent: GPTBot\nDisallow: /\n\nUser-agent: ClaudeBot\nDisallow: /\n\nSitemap: ${site.url}/sitemap.xml\n`);
+    assert.doesNotMatch(checkDeployment(config, directory).join("\n"), /robots.txt/);
     write("sitemap.xml", `<loc>${site.url}/404</loc>`);
     assert.match(checkDeployment(config, directory).join("\n"), /sitemap.xml/);
     rmSync(join(directory, "sitemap.xml"));

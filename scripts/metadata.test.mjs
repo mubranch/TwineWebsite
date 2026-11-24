@@ -29,7 +29,7 @@ function build(settings, run) {
 }
 
 test("a staged build has complete page metadata and publishes nothing for crawlers", () => {
-  build({}, (output, config) => {
+  build({ indexable: false, appStoreUrl: "" }, (output, config) => {
     assert.deepEqual(checkMetadata(config, output), []);
     const home = readFileSync(join(output, "index.html"), "utf8");
     assert.doesNotMatch(home, /<script|describedby/);
@@ -70,7 +70,7 @@ test("the metadata check fails loudly when structured data or crawler files are 
     assert.ok(checkMetadata(config, output).some((problem) => /"# Twine" heading/.test(problem)));
     assert.ok(checkMetadata({ ...config, appStoreUrl: "" }, output).some((problem) => /downloadUrl and offers/.test(problem)));
   });
-  build({}, (output, config) => {
+  build({ indexable: false, appStoreUrl: "" }, (output, config) => {
     writeFileSync(join(output, "llms.txt"), "# Twine\n");
     assert.ok(checkMetadata(config, output).some((problem) => /must not be published until launch/.test(problem)));
     const docs = join(output, "docs.html");

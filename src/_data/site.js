@@ -20,9 +20,9 @@ export default {
   // Keeps pricing FAQs and Pro notes in docs/privacy; home-page plan cards are currently omitted.
   pricing: true,
 
-  // Search indexing stays off by owner decision, including after the App Store link is set.
+  // Search indexing on by owner decision (24 November 2026), with AI training crawlers blocked in robots.txt.
   // While false, every page carries a robots noindex, nofollow tag and there is no sitemap.
-  indexable: false,
+  indexable: true,
 
   // Minimum OS versions: keep them the same as the app's.
   macOS: "27",

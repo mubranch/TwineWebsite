@@ -72,7 +72,7 @@ export function checkDeployment(config = site, output = "_site") {
     }
   }
   if (config.indexable) {
-    if (!robots.includes(`Sitemap: ${config.url}/sitemap.xml`) || /^Disallow:\s*\/\s*$/im.test(robots)) {
+    if (!robots.includes(`Sitemap: ${config.url}/sitemap.xml`) || blocksEveryone(robots)) {
       problems.push("robots.txt: launch must allow crawling and advertise the canonical sitemap");
     }
     if (!existsSync(join(output, "sitemap.xml"))) problems.push("sitemap.xml: missing from launch build");
@@ -177,4 +177,25 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     console.error(`Can't check _site. Run "npm run build" first. (${error.message})`);
     process.exitCode = 1;
   }
+}
+
+// True when the group for every crawler (User-agent: *) disallows the whole site. Groups for named
+// crawlers, such as the AI training opt-outs, may disallow everything without blocking search.
+function blocksEveryone(robots) {
+  let agents = [];
+  let inRules = false;
+  for (const raw of robots.split(/\r?\n/)) {
+    const line = raw.replace(/#.*/, "").trim();
+    if (!line) continue;
+    const [field, ...rest] = line.split(":");
+    const value = rest.join(":").trim();
+    if (/^user-agent$/i.test(field.trim())) {
+      if (inRules) { agents = []; inRules = false; }
+      agents.push(value);
+    } else {
+      inRules = true;
+      if (/^disallow$/i.test(field.trim()) && value === "/" && agents.includes("*")) return true;
+    }
+  }
+  return false;
 }
