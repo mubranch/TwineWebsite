@@ -2,7 +2,7 @@
 
 The public website for Twine: Home, Docs, Privacy Policy and Support. [Eleventy](https://www.11ty.dev) turns Markdown and a few templates into plain HTML and one stylesheet, and GitHub Actions publishes it to GitHub Pages. The pages load no scripts, fonts, analytics or other third-party content, and a Content-Security-Policy meta tag makes the browser enforce that.
 
-Once published it lives at <https://mubranch.github.io/TwineWebsite/>. Nothing is published until the [deployment check](#publishing) passes.
+It lives at <https://twine.branchischer.com/> (since 24 November 2026; the old <https://mubranch.github.io/TwineWebsite/> address redirects there). Nothing is published until the [deployment check](#publishing) passes.
 
 ## Edit the site
 
@@ -171,7 +171,7 @@ The footer includes one international trademark credit using [Apple's trademark 
 A prelaunch build must stay noindex, with no sitemap or active download badge. A draft policy is permitted in that state, but **is not a final policy suitable for App Review**. The success message distinguishes that state from the fully activated launch checks. These checks cannot approve policy text, verify a mailbox, prove a product is available in the App Store, or verify App Store Connect's privacy answers.
 
 - Pages must deploy from **GitHub Actions**: **Settings → Pages → Build and deployment → Source**. Check it there if a run ever fails because Pages isn't enabled.
-- Until a custom domain is attached the site is at <https://mubranch.github.io/TwineWebsite/>, and every link carries the `/TwineWebsite/` prefix from `url`.
+- The custom domain `twine.branchischer.com` is attached, so `url` has no path and links carry no `/TwineWebsite/` prefix. Before it, the site was at <https://mubranch.github.io/TwineWebsite/>.
 - Don't add self-hosted runners to this public repository: anyone's pull request could then run code on them.
 - Dependabot opens a pull request each month for the pinned actions and the npm packages. Actions are pinned to full commit SHAs, so review those updates before merging.
 - GitHub Pages can't set HTTP headers, so the security policy is a `<meta>` tag, placed first in `<head>` so it covers everything after it. A meta tag can't enforce `frame-ancestors` (other sites could frame these pages), `report-uri` or `sandbox`. The referrer policy is a `<meta name="referrer">` tag. If the site ever sits behind something that can set headers, send the same policy as a header.
@@ -226,7 +226,7 @@ The badge is 48px tall with at least 12px clear space on every side, exceeding t
 
 ## Search indexing
 
-Indexing is on (`indexable: true`, owner decision of 24 November 2026), and `robots.txt` welcomes every crawler, AI training included (option 2 below). `llms-full.txt` publishes the FAQ, Docs, Privacy Policy and Support as one Markdown file, generated from the page sources. On `github.io` crawlers only read `robots.txt` at the host root (`mubranch.github.io/robots.txt`, which does not exist), so the project-path `robots.txt` and its `Sitemap:` line are advisory: submit the sitemap in Google Search Console and Bing Webmaster Tools. Setting it back to `false` restores the staged behaviour: `indexable: false` in `src/_data/site.js` keeps the whole site out of search results. Every page gets `<meta name="robots" content="noindex, nofollow">`, `robots.txt` has no `Sitemap` line, and no `sitemap.xml` is built. GitHub Pages can't send an `X-Robots-Tag` header, so the meta tag is the mechanism.
+Indexing is on (`indexable: true`, owner decision of 24 November 2026), and `robots.txt` welcomes every crawler, AI training included (option 2 below). `llms-full.txt` publishes the FAQ, Docs, Privacy Policy and Support as one Markdown file, generated from the page sources. On `github.io` crawlers only read `robots.txt` at the host root (`mubranch.github.io/robots.txt`, which does not exist), so the project-path `robots.txt` and its `Sitemap:` line are advisory: submit the sitemap in Google Search Console and Bing Webmaster Tools. (This applied to the github.io address; on twine.branchischer.com the root `robots.txt`, `llms.txt` and `Sitemap:` line are read normally.) Setting it back to `false` restores the staged behaviour: `indexable: false` in `src/_data/site.js` keeps the whole site out of search results. Every page gets `<meta name="robots" content="noindex, nofollow">`, `robots.txt` has no `Sitemap` line, and no `sitemap.xml` is built. GitHub Pages can't send an `X-Robots-Tag` header, so the meta tag is the mechanism.
 
 `robots.txt` deliberately doesn't `Disallow` anything: a crawler blocked by `robots.txt` never fetches the page, so it never sees the `noindex` tag, and the address can still be listed from links elsewhere. Choose `noindex`, not `Disallow`, to stay out of search.
 
@@ -319,13 +319,13 @@ If main has advanced or the push is rejected, integrate and rerun checks; never 
 
 | Field | Exact value |
 | --- | --- |
-| Marketing URL | `https://mubranch.github.io/TwineWebsite/` |
-| Support URL | `https://mubranch.github.io/TwineWebsite/support` |
-| Privacy Policy URL | `https://mubranch.github.io/TwineWebsite/privacy` |
+| Marketing URL | `https://twine.branchischer.com/` |
+| Support URL | `https://twine.branchischer.com/support` |
+| Privacy Policy URL | `https://twine.branchischer.com/privacy` |
 | Developer contact | `mailto:mustafa.branch@gmail.com` (owner-confirmed mailbox) |
 | Optional terms | Apple's [standard EULA](https://www.apple.com/legal/internet-services/itunes/dev/stdeula/) applies if no custom EULA is supplied; this one-time IAP is not a subscription. Owner confirms any additional terms. |
 
-Use the exact same privacy/support/mailto values in the app's `Twine/Twine/Settings/AppLinks.swift`. At source revision `a5f51e72`, those three values still point at `example.invalid`; this website does not fix them. The app needs its own change and rebuilt release.
+Use the exact same privacy/support/mailto values in the app's `Twine/Twine/Settings/AppLinks.swift`. Version 1.0 shipped with the github.io addresses, which keep working through GitHub's redirect; move App Store Connect and the app to these values in the next version. At source revision `a5f51e72`, those three values still point at `example.invalid`; this website does not fix them. The app needs its own change and rebuilt release.
 
 Before submission, check the final live policy, monitored support contact, accurate shipped features, final app-side links, App Store privacy answers, IAP attachment/approval and purchase restoration on a device. A website preview does not verify the submitted binary, App Store Connect configuration, CloudKit production schema or clean-install behavior.
 

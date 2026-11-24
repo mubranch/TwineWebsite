@@ -5,8 +5,8 @@ export default {
     "Highlight text in Safari and keep it in a searchable library with a link back to the source. No account. Synced through your private iCloud. Free, with a $4.99 one-time Pro upgrade for local AI access.",
 
   // The address the site is served from, with no trailing slash: GitHub Pages' address until a custom domain is attached, then the domain.
-  // Its path (/TwineWebsite here) prefixes every link, so a domain of its own needs no path at all.
-  url: "https://mubranch.github.io/TwineWebsite",
+  // Its path prefixes every link; twine.branchischer.com (since 24 November 2026) has none. Was https://mubranch.github.io/TwineWebsite, which GitHub now redirects here.
+  url: "https://twine.branchischer.com",
   // Owner-confirmed support mailbox; also used in AppLinks.swift as a mailto: link.
   email: "mustafa.branch@gmail.com",
   feedbackUrl: "https://github.com/mubranch/TwineWebsite/issues/new?template=feedback.yml",

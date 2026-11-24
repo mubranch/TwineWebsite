@@ -7,7 +7,7 @@ body:
         This form creates a **public issue** for app, extension or website feedback.
         Safari on Mac and iPhone is supported. Other browsers aren't supported in this release; requests don't imply a promised release date.
         Don't include private highlights, access tokens, account details or other sensitive information.
-        For private support, use the email address on the [support page](https://mubranch.github.io/TwineWebsite/support).
+        For private support, use the email address on the [support page](https://twine.branchischer.com/support).
   - type: dropdown
     id: kind
     attributes:
