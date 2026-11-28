@@ -11,6 +11,8 @@ Save your first Safari highlight, sync your library, or connect an AI tool.
 
 Twine needs macOS {{ site.macOS }} on Mac or iOS {{ site.iOS }} on iPhone. The app is available in English, German, Spanish, French and Russian.
 
+[Set up on Mac](#on-your-mac) · [Set up on iPhone](#on-your-iphone)
+
 <nav class="toc" aria-label="On this page">
 
 - [Get started](#get-started)

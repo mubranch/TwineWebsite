@@ -47,8 +47,8 @@
       <a class="brand" href="/"><img src="/icon-64.webp?v=blue-app" alt="" width="32" height="32"><span>Twine</span></a>
       <ul class="nav-links" role="list">
         <li><a href="/#features">App</a></li>
-        <li><a href="/#ai-title">MCP</a></li>
-        <li><a href="/#privacy-title">Privacy</a></li>
+        <li><a href="/#ai-title">AI Access</a></li>
+        <li><a href="/privacy"{% if page.url == "/privacy.html" %} aria-current="page"{% endif %}>Privacy</a></li>
         <li><a href="/#faq-title">FAQ</a></li>
         <li><a href="/docs"{% if nav == "docs" %} aria-current="page"{% endif %}>Docs</a></li>
         <li>{% if site.appStoreUrl %}<a class="button button-small" href="{{ site.appStoreUrl | escape }}" aria-label="Download Twine on the App Store">Download</a>{% else %}<button class="button button-small" type="button" disabled aria-label="Download Twine for Mac, not yet available">Download</button>{% endif %}</li>

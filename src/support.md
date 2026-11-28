@@ -16,9 +16,9 @@ Report a problem or request a feature for the app, Safari extension or website. 
 
 Twine is built for Safari on Mac and iPhone. Chrome, other Chromium browsers, and Firefox aren't supported in this release; you can request support for another browser without a promised release date.
 
-<a class="button" href="{{ site.feedbackUrl }}">Send feedback on GitHub</a>
-
 The form opens on GitHub and requires a GitHub account. Submitting it creates a **public issue** in the TwineWebsite repository. Don't include private highlights, access tokens, account details or other sensitive information. For private support, use the email address above instead.
+
+<a class="button" href="{{ site.feedbackUrl }}">Send feedback on GitHub</a>
 
 ## Before you write
 

@@ -7,23 +7,42 @@ socialDescription: "Highlight in Safari. Find it later. Keep it private. Twine f
   <div class="hero-copy">
     <p class="eyebrow">Safari Native</p>
     <h1 id="hero-title"><span class="line">Everything you highlight in Safari,</span> <span class="hl">in one private library.</span></h1>
-    <p class="lede">Mark up the web. Highlight and save what you find in Safari, and Twine marks it again when you return to the page.</p>
+    <p class="lede">Save passages in Safari, find them in Twine, and jump back to the source.</p>
     <div class="actions">
       {% if site.appStoreUrl %}<a class="app-store-badge" href="{{ site.appStoreUrl | escape }}" aria-label="Download Twine — Free on the App Store"><img src="/app-store-badge.svg" width="120" height="40" alt=""></a>{% else %}<button class="button" type="button" disabled>Coming soon to the App Store</button>{% endif %}
-      <a class="button button-quiet" href="#features">Learn more</a>
+      <a class="text-link" href="#features">Learn more</a>
     </div>
-    <p class="fineprint" id="requirements"><span>{% if site.appStoreUrl %}Free to use. <span class="price-summary">Pro is $4.99 once — no subscription.</span>{% else %}Pending App Store approval. <span class="price-summary">Free to use; Pro is $4.99 once.</span>{% endif %}</span><span>Requires macOS {{ site.macOS }} on Mac and iOS {{ site.iOS }} on iPhone.</span></p>
+    <p class="fineprint" id="requirements"><span>{% if not site.appStoreUrl %}Pending App Store approval. {% endif %}<strong>Free:</strong> highlighting, search, iCloud sync and Markdown copy.{% if site.pricing %} <strong>Pro:</strong> local AI Access on Mac and on-device AI context.{% endif %}</span><span>Requires macOS {{ site.macOS }} on Mac and iOS {{ site.iOS }} on iPhone.</span></p>
   </div>
-  <div class="hero-visual">
-    {% shot "hero", "mac", "Safari on a Mac showing an Apple developer documentation page with several yellow Twine highlights and the extension button.", "Safari with the Apple Developer collaboration and sharing page, several yellow Twine highlights and the Twine extension toolbar badge.", true, "Mac · Highlighted page in Safari", 1856, 1214 %}
+  <div class="hero-visual workflow">
+    <figure>
+      <figcaption>Highlight in Safari</figcaption>
+      <picture>
+        <source media="(max-width: 38em) and (prefers-color-scheme: dark)" srcset="/images/workflow-safari-mobile-dark.webp" width="1052" height="212">
+        <source media="(max-width: 38em)" srcset="/images/workflow-safari-mobile-light.webp" width="1052" height="212">
+        <source media="(prefers-color-scheme: dark)" srcset="/images/workflow-safari-dark.webp">
+        <img src="/images/workflow-safari-light.webp" width="1100" height="328" alt="A yellow highlight marks a passage about model training costs on Wikipedia in Safari.">
+      </picture>
+    </figure>
+    <figure>
+      <figcaption>Find it in Twine</figcaption>
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="/images/workflow-saved-dark.webp">
+        <img src="/images/workflow-saved-light.webp" width="1128" height="500" alt="The same highlighted passage saved in Twine on iPhone.">
+      </picture>
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="/images/workflow-source-dark.webp">
+        <img src="/images/workflow-source-light.webp" width="1128" height="218" alt="Twine keeps a link to the original Wikipedia article.">
+      </picture>
+    </figure>
   </div>
 </section>
 
 <section class="proof" aria-label="Twine at a glance">
   <ul role="list">
     <li><strong>Available on Mac and iPhone</strong><span>Highlights reappear on all your devices</span></li>
-    <li><strong>Privacy first</strong><span>No trackers or developer-run analytics.</span></li>
-    <li><strong>AI is optional</strong><span>Buy Pro once and never pay again</span></li>
+    <li><strong><a class="text-link" href="#privacy-title">Privacy first</a></strong><span>No trackers or developer-run analytics.</span></li>
+    <li><strong>AI is optional</strong><span>{% if site.pricing %}Pro is $4.99 once — no subscription.{% else %}Off by default.{% endif %}</span></li>
   </ul>
 </section>
 
@@ -45,9 +64,9 @@ socialDescription: "Highlight in Safari. Find it later. Keep it private. Twine f
 
   <section class="feature feature-ai" aria-labelledby="ai-title">
     <div class="copy">
-      <p class="eyebrow">Twine Pro</p>
+      <p class="eyebrow">Optional · Mac only · Off by default</p>
       <h2 id="ai-title">Give AI tools access - through a local, read-only connection.</h2>
-      <p>Ground your writing, research, or studying in the information you found worth keeping. AI Access allows any MCP compatible harness to read, source, and answer based on the information you've vetted.</p>
+      <p>With Twine Pro, let compatible AI tools read the highlights you’ve saved for your writing, research or studying.</p>
       <ul class="checks" role="list">
         <li><span><strong>Local.</strong> Twine runs the connection on your Mac. Your library isn't uploaded to a developer-run server.</span></li>
         <li><span><strong>Read-only.</strong> AI tools can search and read. They cannot add, edit, or delete through this connection.</span></li>

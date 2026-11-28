@@ -48,7 +48,7 @@ Keep the voice plainspoken, calm and specific, following the voice definition in
 
 Position Twine as **a private highlight library for Safari on Mac and iPhone**, following the owner's “Twine — Website Copy” document. Keep its voice and punctuation; the previous web-knowledge-base positioning is superseded. The hero is “Everything you highlight in Safari, in one private library.” Metadata and social text follow the same positioning. The proof strip is static, semantic HTML. The owner removed the home-page comparison section; its styles remain available for reuse.
 
-Keep section spacing and reading widths consistent. On narrow screens the navigation has a dedicated brand/download row and five links: App, MCP, Privacy, FAQ and Docs. The two feature sections (the companion app with the iPhone Duo, then MCP with the Mac library) use the same copy-and-image layout, alternating sides. Privacy flows into the retained FAQ, then the closing panel, without empty comparison or pricing slots. The home-page pricing include is omitted; its reusable template, CSS and assets remain. Keep `pricing: true` so pricing FAQs and Pro notes in docs/privacy remain visible. All of this remains CSS-only.
+Keep section spacing and reading widths consistent. On narrow screens the navigation has a dedicated brand/download row and five links: App, AI Access, Privacy, FAQ and Docs. Header Privacy opens the policy; the home-page proof strip links to the privacy section. The two feature sections (the companion app with the iPhone Duo, then MCP with the Mac library) use the same copy-and-image layout, alternating sides. Privacy flows into the retained FAQ, then the closing panel, without empty comparison or pricing slots. The home-page pricing include is omitted; its reusable template, CSS and assets remain. Keep `pricing: true` so pricing FAQs and Pro notes in docs/privacy remain visible. All of this remains CSS-only.
 
 Copy claims were rechecked against `mubranch/Twine` main at `79742387a5732591c46d6566f85b8bf2887642b1`. Safari capture works on Mac and iPhone; iPhone uploads pending highlights when Twine opens. Chromium/Firefox packaging exists and is Pro-gated, but `BrowserExtensionIdentity.chromeExtensionID` remains empty and browser setup stays hidden. Home, docs, support and feedback consistently say other browsers aren't supported in this release, without a Coming soon promise. The app targets iPhone, not iPad.
 
@@ -66,7 +66,7 @@ GitHub recognizes issue forms only after their YAML configuration lands on the r
 
 ## Screenshots
 
-The home page uses three supplied light and dark product captures, not recordings or staged chat demos. The on-device context section is no longer displayed; its iPhone capture is retained as a product reference and shortcode test fixture. This is a presentation change, not removal of the Pro feature described in FAQ and docs. Full-resolution, lossless assets live in `src/static/images/` as `<name>-light.webp` and `<name>-dark.webp`. A `picture` element chooses the appearance with `prefers-color-scheme: dark`; `srcset` chooses one suitable resolution without downloading both appearances. Explicit dimensions reserve space before loading.
+The home page uses supplied light and dark product captures, not recordings or staged chat demos. The on-device context section is no longer displayed; its iPhone capture is a product reference and shortcode test fixture, and supplies the hero’s saved-highlight and source details. This is a presentation change, not removal of the Pro feature described in FAQ and docs. Full-resolution, lossless assets live in `src/static/images/` as `<name>-light.webp` and `<name>-dark.webp`. A `picture` element chooses the appearance with `prefers-color-scheme: dark`; `srcset` chooses one suitable resolution without downloading both appearances. Explicit dimensions reserve space before loading.
 
 The CSS-drawn hardware has been replaced with the official Apple PNG artwork, encoded losslessly with its transparency intact: iPhone 18 Pro in Black, iPhone Duo in Night Sky with its Inner Open Landscape display, and one 13-inch MacBook Air M5 in Silver for both wide Mac slots. The iPhone 18 pack is the source, not an unofficial "18s" illustration. The portrait Mac settings capture keeps its existing compact window treatment.
 
@@ -78,12 +78,12 @@ Below **400 CSS px**, the Air artwork is not shown or downloaded: each Mac captu
 
 | Page slot or reference | Layout / asset name / dimensions | Included screen |
 | --- | --- | --- |
-| Hero | MacBook Air M5 · `hero` · 1856 × 1214 | Safari showing Apple Developer documentation with several yellow Twine highlights and the Twine extension toolbar badge. Trimmed to the window, filling the Air screen. |
+| Previous hero (reference) | MacBook Air M5 · `hero` · 1856 × 1214 | Safari showing Apple Developer documentation with several yellow Twine highlights and the Twine extension toolbar badge. Trimmed to the window, filling the Air screen. |
 | One app for your highlights on Mac and iPhone. | iPhone Duo · `library-duo` · 2000 × 1407 | One authentic landscape capture: a saved highlight's details with its Hugging Face source and actions on the left, the same passage highlighted in Safari on the right. Shows an in-app "Get Twine Pro" banner. |
 | Give AI tools access - through a local, read-only connection. | MacBook Air M5 · `capture` · 2000 × 1299 | The Twine library on a Mac desktop with its website sidebar, highlights list and one selected passage. It shows the library, not AI Access settings. |
 | On-device context reference (not displayed on the home page) | iPhone 18 Pro · `context` · 1206 × 2622 | The highlight's details with its completed on-device AI context explanation and source. Retained for product documentation and shortcode tests. |
 
-The hero is a real light/dark pair of Safari inside the official MacBook Air M5 frame. Only the transparent margin and drop shadow around the Safari window were trimmed (1856 × 1214 px); every opaque pixel is unchanged and no content is cropped. Faint shadow remnants in the four rounded corners were flattened onto the adjacent window edge colour. No desktop, Dock or menu bar is invented. The desktop library capture keeps the Mac menu bar from the supplied screenshot; it shows no Dock, which Apple's desktop-display guidance asks for. Unused reference assets: `capture-article-*` (Safari article), `capture-library-*` (earlier library capture), `library-list-duo-*` (earlier Duo list capture) and `ai-access-*` (AI Access settings, no longer displayed).
+The previous hero is a real light/dark pair of Safari inside the official MacBook Air M5 frame. Only the transparent margin and drop shadow around the Safari window were trimmed (1856 × 1214 px); every opaque pixel is unchanged and no content is cropped. Faint shadow remnants in the four rounded corners were flattened onto the adjacent window edge colour. No desktop, Dock or menu bar is invented. The desktop library capture keeps the Mac menu bar from the supplied screenshot; it shows no Dock, which Apple's desktop-display guidance asks for. Other reference assets: `capture-library-*` (earlier library capture), `library-list-duo-*` (earlier Duo list capture) and `ai-access-*` (AI Access settings, no longer displayed).
 
 The Apple Developer documentation is Apple-owned third-party content. The owner must confirm rights and marketing-review risk before publication: using it as a product screenshot must not suggest endorsement or association with Apple, and a neutral public page would avoid this concern.
 
@@ -93,9 +93,16 @@ For replacements, use starter or public content only; conceal access tokens, per
 
 Keep the exact base-name workflow: give replacement originals names such as `hero-light.png` and `hero-dark.png`, then run the optimizer below. It writes the matching WebP files automatically. The shortcode also accepts unthemed `<name>.webp`, `.png` or `.jpg` and shows a labelled, device-free placeholder when a capture is missing. WebP takes precedence, so regenerate it after replacing an original.
 
-Optional `<name>-mobile-light` (or `<name>-mobile`) and `<name>-mobile-dark` captures still replace the main capture below 40em. Dark mode does not fall back to a light-only mobile variant. Such captures must retain the same subject, proportions and hardware fit; no alternate crops are used by the current site.
+Optional `<name>-mobile-light` (or `<name>-mobile`) and `<name>-mobile-dark` captures still replace the main capture below 40em. Dark mode does not fall back to a light-only mobile variant. Such captures must retain the same subject, proportions and hardware fit. The frameless hero example is separate: its `workflow-*` WebP crops show one Wikipedia passage marked in Safari and the same saved passage and source in Twine on iPhone. The mobile Safari crop omits surrounding context to keep the highlighted text readable. The iPhone details are two separate crops of the same capture, not a recreated screen.
 
-Each `shot` call supplies its base name, frame (`mac`, `phone`, `duo` or `window`), alt text, missing-capture brief, eager-loading flag, caption, width and height. Dimensions must match the actual capture and are required for a hardware frame. The hero is eager with high fetch priority; below-fold captures, renders and the closing icon are lazy. Device artwork has empty alt text; the single product capture retains its descriptive alt text.
+| Hero crop | Light/dark source (in `src/static/images/`) | Crop (left, top, width, height) |
+| --- | --- | --- |
+| `workflow-safari` | `capture-article` | `16, 464, 1100, 328` |
+| `workflow-safari-mobile` | `capture-article` | `36, 578, 1052, 212` |
+| `workflow-saved` | `context` | `39, 444, 1128, 500` |
+| `workflow-source` | `context` | `39, 2298, 1128, 218` |
+
+Each `shot` call supplies its base name, frame (`mac`, `phone`, `duo` or `window`), alt text, missing-capture brief, eager-loading flag, caption, width and height. Dimensions must match the actual capture and are required for a hardware frame. The hero details load eagerly; below-fold captures, renders and the closing icon are lazy. Device artwork has empty alt text; the single product capture retains its descriptive alt text.
 
 ### Regenerate lossless images
 
